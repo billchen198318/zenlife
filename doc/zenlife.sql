@@ -1037,342 +1037,6 @@ LOCK TABLES `act_ru_variable` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `comm_qrtz_blob_triggers`
---
-
-DROP TABLE IF EXISTS `comm_qrtz_blob_triggers`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `comm_qrtz_blob_triggers` (
-  `SCHED_NAME` varchar(120) NOT NULL,
-  `TRIGGER_NAME` varchar(200) NOT NULL,
-  `TRIGGER_GROUP` varchar(200) NOT NULL,
-  `BLOB_DATA` blob,
-  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
-  KEY `SCHED_NAME` (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
-  CONSTRAINT `comm_qrtz_blob_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `comm_qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `comm_qrtz_blob_triggers`
---
-
-LOCK TABLES `comm_qrtz_blob_triggers` WRITE;
-/*!40000 ALTER TABLE `comm_qrtz_blob_triggers` DISABLE KEYS */;
-/*!40000 ALTER TABLE `comm_qrtz_blob_triggers` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `comm_qrtz_calendars`
---
-
-DROP TABLE IF EXISTS `comm_qrtz_calendars`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `comm_qrtz_calendars` (
-  `SCHED_NAME` varchar(120) NOT NULL,
-  `CALENDAR_NAME` varchar(200) NOT NULL,
-  `CALENDAR` blob NOT NULL,
-  PRIMARY KEY (`SCHED_NAME`,`CALENDAR_NAME`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `comm_qrtz_calendars`
---
-
-LOCK TABLES `comm_qrtz_calendars` WRITE;
-/*!40000 ALTER TABLE `comm_qrtz_calendars` DISABLE KEYS */;
-/*!40000 ALTER TABLE `comm_qrtz_calendars` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `comm_qrtz_cron_triggers`
---
-
-DROP TABLE IF EXISTS `comm_qrtz_cron_triggers`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `comm_qrtz_cron_triggers` (
-  `SCHED_NAME` varchar(120) NOT NULL,
-  `TRIGGER_NAME` varchar(200) NOT NULL,
-  `TRIGGER_GROUP` varchar(200) NOT NULL,
-  `CRON_EXPRESSION` varchar(120) NOT NULL,
-  `TIME_ZONE_ID` varchar(80) DEFAULT NULL,
-  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
-  CONSTRAINT `comm_qrtz_cron_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `comm_qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `comm_qrtz_cron_triggers`
---
-
-LOCK TABLES `comm_qrtz_cron_triggers` WRITE;
-/*!40000 ALTER TABLE `comm_qrtz_cron_triggers` DISABLE KEYS */;
-/*!40000 ALTER TABLE `comm_qrtz_cron_triggers` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `comm_qrtz_fired_triggers`
---
-
-DROP TABLE IF EXISTS `comm_qrtz_fired_triggers`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `comm_qrtz_fired_triggers` (
-  `SCHED_NAME` varchar(120) NOT NULL,
-  `ENTRY_ID` varchar(95) NOT NULL,
-  `TRIGGER_NAME` varchar(200) NOT NULL,
-  `TRIGGER_GROUP` varchar(200) NOT NULL,
-  `INSTANCE_NAME` varchar(200) NOT NULL,
-  `FIRED_TIME` bigint(13) NOT NULL,
-  `SCHED_TIME` bigint(13) NOT NULL,
-  `PRIORITY` int(11) NOT NULL,
-  `STATE` varchar(16) NOT NULL,
-  `JOB_NAME` varchar(200) DEFAULT NULL,
-  `JOB_GROUP` varchar(200) DEFAULT NULL,
-  `IS_NONCONCURRENT` varchar(1) DEFAULT NULL,
-  `REQUESTS_RECOVERY` varchar(1) DEFAULT NULL,
-  PRIMARY KEY (`SCHED_NAME`,`ENTRY_ID`),
-  KEY `IDX_COMM_QRTZ_FT_TRIG_INST_NAME` (`SCHED_NAME`,`INSTANCE_NAME`),
-  KEY `IDX_COMM_QRTZ_FT_INST_JOB_REQ_RCVRY` (`SCHED_NAME`,`INSTANCE_NAME`,`REQUESTS_RECOVERY`),
-  KEY `IDX_COMM_QRTZ_FT_J_G` (`SCHED_NAME`,`JOB_NAME`,`JOB_GROUP`),
-  KEY `IDX_COMM_QRTZ_FT_JG` (`SCHED_NAME`,`JOB_GROUP`),
-  KEY `IDX_COMM_QRTZ_FT_T_G` (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
-  KEY `IDX_COMM_QRTZ_FT_TG` (`SCHED_NAME`,`TRIGGER_GROUP`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `comm_qrtz_fired_triggers`
---
-
-LOCK TABLES `comm_qrtz_fired_triggers` WRITE;
-/*!40000 ALTER TABLE `comm_qrtz_fired_triggers` DISABLE KEYS */;
-/*!40000 ALTER TABLE `comm_qrtz_fired_triggers` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `comm_qrtz_job_details`
---
-
-DROP TABLE IF EXISTS `comm_qrtz_job_details`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `comm_qrtz_job_details` (
-  `SCHED_NAME` varchar(120) NOT NULL,
-  `JOB_NAME` varchar(200) NOT NULL,
-  `JOB_GROUP` varchar(200) NOT NULL,
-  `DESCRIPTION` varchar(250) DEFAULT NULL,
-  `JOB_CLASS_NAME` varchar(250) NOT NULL,
-  `IS_DURABLE` varchar(1) NOT NULL,
-  `IS_NONCONCURRENT` varchar(1) NOT NULL,
-  `IS_UPDATE_DATA` varchar(1) NOT NULL,
-  `REQUESTS_RECOVERY` varchar(1) NOT NULL,
-  `JOB_DATA` blob,
-  PRIMARY KEY (`SCHED_NAME`,`JOB_NAME`,`JOB_GROUP`),
-  KEY `IDX_COMM_QRTZ_J_REQ_RECOVERY` (`SCHED_NAME`,`REQUESTS_RECOVERY`),
-  KEY `IDX_COMM_QRTZ_J_GRP` (`SCHED_NAME`,`JOB_GROUP`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `comm_qrtz_job_details`
---
-
-LOCK TABLES `comm_qrtz_job_details` WRITE;
-/*!40000 ALTER TABLE `comm_qrtz_job_details` DISABLE KEYS */;
-/*!40000 ALTER TABLE `comm_qrtz_job_details` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `comm_qrtz_locks`
---
-
-DROP TABLE IF EXISTS `comm_qrtz_locks`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `comm_qrtz_locks` (
-  `SCHED_NAME` varchar(120) NOT NULL,
-  `LOCK_NAME` varchar(40) NOT NULL,
-  PRIMARY KEY (`SCHED_NAME`,`LOCK_NAME`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `comm_qrtz_locks`
---
-
-LOCK TABLES `comm_qrtz_locks` WRITE;
-/*!40000 ALTER TABLE `comm_qrtz_locks` DISABLE KEYS */;
-/*!40000 ALTER TABLE `comm_qrtz_locks` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `comm_qrtz_paused_trigger_grps`
---
-
-DROP TABLE IF EXISTS `comm_qrtz_paused_trigger_grps`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `comm_qrtz_paused_trigger_grps` (
-  `SCHED_NAME` varchar(120) NOT NULL,
-  `TRIGGER_GROUP` varchar(200) NOT NULL,
-  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_GROUP`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `comm_qrtz_paused_trigger_grps`
---
-
-LOCK TABLES `comm_qrtz_paused_trigger_grps` WRITE;
-/*!40000 ALTER TABLE `comm_qrtz_paused_trigger_grps` DISABLE KEYS */;
-/*!40000 ALTER TABLE `comm_qrtz_paused_trigger_grps` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `comm_qrtz_scheduler_state`
---
-
-DROP TABLE IF EXISTS `comm_qrtz_scheduler_state`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `comm_qrtz_scheduler_state` (
-  `SCHED_NAME` varchar(120) NOT NULL,
-  `INSTANCE_NAME` varchar(200) NOT NULL,
-  `LAST_CHECKIN_TIME` bigint(13) NOT NULL,
-  `CHECKIN_INTERVAL` bigint(13) NOT NULL,
-  PRIMARY KEY (`SCHED_NAME`,`INSTANCE_NAME`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `comm_qrtz_scheduler_state`
---
-
-LOCK TABLES `comm_qrtz_scheduler_state` WRITE;
-/*!40000 ALTER TABLE `comm_qrtz_scheduler_state` DISABLE KEYS */;
-/*!40000 ALTER TABLE `comm_qrtz_scheduler_state` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `comm_qrtz_simple_triggers`
---
-
-DROP TABLE IF EXISTS `comm_qrtz_simple_triggers`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `comm_qrtz_simple_triggers` (
-  `SCHED_NAME` varchar(120) NOT NULL,
-  `TRIGGER_NAME` varchar(200) NOT NULL,
-  `TRIGGER_GROUP` varchar(200) NOT NULL,
-  `REPEAT_COUNT` bigint(7) NOT NULL,
-  `REPEAT_INTERVAL` bigint(12) NOT NULL,
-  `TIMES_TRIGGERED` bigint(10) NOT NULL,
-  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
-  CONSTRAINT `comm_qrtz_simple_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `comm_qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `comm_qrtz_simple_triggers`
---
-
-LOCK TABLES `comm_qrtz_simple_triggers` WRITE;
-/*!40000 ALTER TABLE `comm_qrtz_simple_triggers` DISABLE KEYS */;
-/*!40000 ALTER TABLE `comm_qrtz_simple_triggers` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `comm_qrtz_simprop_triggers`
---
-
-DROP TABLE IF EXISTS `comm_qrtz_simprop_triggers`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `comm_qrtz_simprop_triggers` (
-  `SCHED_NAME` varchar(120) NOT NULL,
-  `TRIGGER_NAME` varchar(200) NOT NULL,
-  `TRIGGER_GROUP` varchar(200) NOT NULL,
-  `STR_PROP_1` varchar(512) DEFAULT NULL,
-  `STR_PROP_2` varchar(512) DEFAULT NULL,
-  `STR_PROP_3` varchar(512) DEFAULT NULL,
-  `INT_PROP_1` int(11) DEFAULT NULL,
-  `INT_PROP_2` int(11) DEFAULT NULL,
-  `LONG_PROP_1` bigint(20) DEFAULT NULL,
-  `LONG_PROP_2` bigint(20) DEFAULT NULL,
-  `DEC_PROP_1` decimal(13,4) DEFAULT NULL,
-  `DEC_PROP_2` decimal(13,4) DEFAULT NULL,
-  `BOOL_PROP_1` varchar(1) DEFAULT NULL,
-  `BOOL_PROP_2` varchar(1) DEFAULT NULL,
-  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
-  CONSTRAINT `comm_qrtz_simprop_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `comm_qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `comm_qrtz_simprop_triggers`
---
-
-LOCK TABLES `comm_qrtz_simprop_triggers` WRITE;
-/*!40000 ALTER TABLE `comm_qrtz_simprop_triggers` DISABLE KEYS */;
-/*!40000 ALTER TABLE `comm_qrtz_simprop_triggers` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `comm_qrtz_triggers`
---
-
-DROP TABLE IF EXISTS `comm_qrtz_triggers`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `comm_qrtz_triggers` (
-  `SCHED_NAME` varchar(120) NOT NULL,
-  `TRIGGER_NAME` varchar(200) NOT NULL,
-  `TRIGGER_GROUP` varchar(200) NOT NULL,
-  `JOB_NAME` varchar(200) NOT NULL,
-  `JOB_GROUP` varchar(200) NOT NULL,
-  `DESCRIPTION` varchar(250) DEFAULT NULL,
-  `NEXT_FIRE_TIME` bigint(13) DEFAULT NULL,
-  `PREV_FIRE_TIME` bigint(13) DEFAULT NULL,
-  `PRIORITY` int(11) DEFAULT NULL,
-  `TRIGGER_STATE` varchar(16) NOT NULL,
-  `TRIGGER_TYPE` varchar(8) NOT NULL,
-  `START_TIME` bigint(13) NOT NULL,
-  `END_TIME` bigint(13) DEFAULT NULL,
-  `CALENDAR_NAME` varchar(200) DEFAULT NULL,
-  `MISFIRE_INSTR` smallint(2) DEFAULT NULL,
-  `JOB_DATA` blob,
-  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
-  KEY `IDX_COMM_QRTZ_T_J` (`SCHED_NAME`,`JOB_NAME`,`JOB_GROUP`),
-  KEY `IDX_COMM_QRTZ_T_JG` (`SCHED_NAME`,`JOB_GROUP`),
-  KEY `IDX_COMM_QRTZ_T_C` (`SCHED_NAME`,`CALENDAR_NAME`),
-  KEY `IDX_COMM_QRTZ_T_G` (`SCHED_NAME`,`TRIGGER_GROUP`),
-  KEY `IDX_COMM_QRTZ_T_STATE` (`SCHED_NAME`,`TRIGGER_STATE`),
-  KEY `IDX_COMM_QRTZ_T_N_STATE` (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`,`TRIGGER_STATE`),
-  KEY `IDX_COMM_QRTZ_T_N_G_STATE` (`SCHED_NAME`,`TRIGGER_GROUP`,`TRIGGER_STATE`),
-  KEY `IDX_COMM_QRTZ_T_NEXT_FIRE_TIME` (`SCHED_NAME`,`NEXT_FIRE_TIME`),
-  KEY `IDX_COMM_QRTZ_T_NFT_ST` (`SCHED_NAME`,`TRIGGER_STATE`,`NEXT_FIRE_TIME`),
-  KEY `IDX_COMM_QRTZ_T_NFT_MISFIRE` (`SCHED_NAME`,`MISFIRE_INSTR`,`NEXT_FIRE_TIME`),
-  KEY `IDX_COMM_QRTZ_T_NFT_ST_MISFIRE` (`SCHED_NAME`,`MISFIRE_INSTR`,`NEXT_FIRE_TIME`,`TRIGGER_STATE`),
-  KEY `IDX_COMM_QRTZ_T_NFT_ST_MISFIRE_GRP` (`SCHED_NAME`,`MISFIRE_INSTR`,`NEXT_FIRE_TIME`,`TRIGGER_GROUP`,`TRIGGER_STATE`),
-  CONSTRAINT `comm_qrtz_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `JOB_NAME`, `JOB_GROUP`) REFERENCES `comm_qrtz_job_details` (`SCHED_NAME`, `JOB_NAME`, `JOB_GROUP`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `comm_qrtz_triggers`
---
-
-LOCK TABLES `comm_qrtz_triggers` WRITE;
-/*!40000 ALTER TABLE `comm_qrtz_triggers` DISABLE KEYS */;
-/*!40000 ALTER TABLE `comm_qrtz_triggers` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `qrtz_blob_triggers`
 --
 
@@ -2901,6 +2565,172 @@ LOCK TABLES `tb_user_role` WRITE;
 INSERT INTO `tb_user_role` VALUES ('1c62cf70-ca6b-4243-8aa9-49b555024c45','COMMON01','steven','','admin','2017-05-10 14:19:58',NULL,NULL),('9243c7de-43b1-46ef-ac4b-2620697f319e','admin','admin','Administrator','admin','2014-09-23 00:00:00',NULL,NULL),('bd7bf78c-d84b-4524-8273-273f883d30b5','COMMON01','tester','','admin','2017-05-10 11:01:50',NULL,NULL),('da0c0462-4bf7-417b-99da-fc2e378a5ccc','COMMON01','tiffany','','admin','2017-05-10 11:01:43',NULL,NULL);
 /*!40000 ALTER TABLE `tb_user_role` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `zl_chronic`
+--
+
+DROP TABLE IF EXISTS `zl_chronic`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `zl_chronic` (
+  `OID` char(36) NOT NULL,
+  `ID` varchar(10) NOT NULL,
+  `NAME` varchar(200) NOT NULL,
+  `DESCRIPTION` varchar(500) NOT NULL,
+  `CUESRID` varchar(24) NOT NULL,
+  `CDATE` datetime NOT NULL,
+  `UUSERID` varchar(24) DEFAULT NULL,
+  `UDATE` datetime DEFAULT NULL,
+  PRIMARY KEY (`OID`),
+  UNIQUE KEY `UK_1` (`ID`),
+  KEY `IDX_1` (`ID`),
+  KEY `IDX_2` (`NAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `zl_chronic`
+--
+
+LOCK TABLES `zl_chronic` WRITE;
+/*!40000 ALTER TABLE `zl_chronic` DISABLE KEYS */;
+/*!40000 ALTER TABLE `zl_chronic` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `zl_person`
+--
+
+DROP TABLE IF EXISTS `zl_person`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `zl_person` (
+  `OID` char(36) NOT NULL,
+  `ID` varchar(24) NOT NULL,
+  `PASSWORD` varchar(255) NOT NULL,
+  `NAME` varchar(100) NOT NULL,
+  `PHONE` varchar(10) NOT NULL,
+  `TEL` varchar(15) DEFAULT NULL,
+  `MAIL` varchar(200) DEFAULT NULL,
+  `VALID_FLAG` varchar(1) NOT NULL DEFAULT 'Y',
+  `CUSERID` varchar(24) NOT NULL,
+  `CDATE` datetime NOT NULL,
+  `UUSERID` varchar(24) DEFAULT NULL,
+  `UDATE` datetime DEFAULT NULL,
+  PRIMARY KEY (`OID`),
+  UNIQUE KEY `UK_1` (`ID`),
+  KEY `IDX_1` (`ID`),
+  KEY `IDX_2` (`NAME`),
+  KEY `IDX_3` (`PHONE`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `zl_person`
+--
+
+LOCK TABLES `zl_person` WRITE;
+/*!40000 ALTER TABLE `zl_person` DISABLE KEYS */;
+/*!40000 ALTER TABLE `zl_person` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `zl_person_chronic`
+--
+
+DROP TABLE IF EXISTS `zl_person_chronic`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `zl_person_chronic` (
+  `OID` char(36) NOT NULL,
+  `ID` varchar(24) NOT NULL,
+  `CID` varchar(10) NOT NULL,
+  `CUSERID` varchar(24) NOT NULL,
+  `CDATE` datetime NOT NULL,
+  `UUSERID` varchar(24) DEFAULT NULL,
+  `UDATE` datetime DEFAULT NULL,
+  PRIMARY KEY (`OID`),
+  KEY `ID` (`ID`,`CID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `zl_person_chronic`
+--
+
+LOCK TABLES `zl_person_chronic` WRITE;
+/*!40000 ALTER TABLE `zl_person_chronic` DISABLE KEYS */;
+/*!40000 ALTER TABLE `zl_person_chronic` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `zl_person_profile`
+--
+
+DROP TABLE IF EXISTS `zl_person_profile`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `zl_person_profile` (
+  `OID` char(36) NOT NULL,
+  `ID` varchar(24) NOT NULL,
+  `BIRTHDAY_YEAR` varchar(4) NOT NULL,
+  `BIRTHDAY_MONTH` varchar(2) NOT NULL,
+  `BIRTHDAY_DAY` varchar(2) NOT NULL,
+  `HEIGHT` varchar(3) DEFAULT NULL,
+  `WEIGHT` varchar(3) DEFAULT NULL,
+  `GENDER` varchar(2) NOT NULL,
+  `ADDRESS` varchar(500) DEFAULT NULL,
+  `CUSERID` varchar(24) NOT NULL,
+  `CDATE` datetime NOT NULL,
+  `UUSERID` varchar(24) DEFAULT NULL,
+  `UDATE` datetime DEFAULT NULL,
+  PRIMARY KEY (`OID`),
+  UNIQUE KEY `UK_1` (`ID`),
+  KEY `IDX_1` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `zl_person_profile`
+--
+
+LOCK TABLES `zl_person_profile` WRITE;
+/*!40000 ALTER TABLE `zl_person_profile` DISABLE KEYS */;
+/*!40000 ALTER TABLE `zl_person_profile` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `zl_person_urgent_contact`
+--
+
+DROP TABLE IF EXISTS `zl_person_urgent_contact`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `zl_person_urgent_contact` (
+  `OID` char(36) NOT NULL,
+  `ID` varchar(24) NOT NULL,
+  `NAME` varchar(100) NOT NULL,
+  `PHONE` varchar(10) NOT NULL,
+  `TEL` varchar(15) DEFAULT NULL,
+  `CUSERID` varchar(24) NOT NULL,
+  `CDATE` datetime NOT NULL,
+  `UUSERID` varchar(24) DEFAULT NULL,
+  `UDATE` datetime DEFAULT NULL,
+  PRIMARY KEY (`OID`),
+  KEY `IDX_1` (`ID`),
+  KEY `IDX_2` (`NAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `zl_person_urgent_contact`
+--
+
+LOCK TABLES `zl_person_urgent_contact` WRITE;
+/*!40000 ALTER TABLE `zl_person_urgent_contact` DISABLE KEYS */;
+/*!40000 ALTER TABLE `zl_person_urgent_contact` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -2911,4 +2741,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-06  9:40:41
+-- Dump completed on 2017-11-06 15:47:29
