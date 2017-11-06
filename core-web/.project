@@ -5,7 +5,6 @@
 	<projects>
 		<project>core-lib</project>
 		<project>core-base</project>
-		<project>zenlife-base</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

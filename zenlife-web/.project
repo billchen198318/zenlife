@@ -4,7 +4,6 @@
 	<comment></comment>
 	<projects>
 		<project>core-lib</project>
-		<project>zenlife-base</project>
 		<project>core-base</project>
 	</projects>
 	<buildSpec>
