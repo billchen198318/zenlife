@@ -1,5 +1,5 @@
 /* 
- * Copyright 2012-2017 qifu of copyright Chen Xin Nien
+ * Copyright 2012-2017 ZenLife of copyright Chen Xin Nien
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,6 +37,9 @@ public class LoginAction extends BaseController {
 	
 	private void fillErrorMessage(HttpServletRequest request, HttpServletResponse response) {
 		Object errObj = request.getAttribute(org.apache.shiro.web.filter.authc.FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
+		if ("org.qifu.sys.InvalidAccountException".equals(errObj)) {
+			request.setAttribute(Constants.PAGE_MESSAGE, "無效的帳戶.");
+		}
 		if ("org.qifu.sys.IncorrectCaptchaException".equals(errObj)) {
 			request.setAttribute(Constants.PAGE_MESSAGE, "驗證碼錯誤.");
 		}		

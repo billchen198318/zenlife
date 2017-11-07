@@ -1,5 +1,5 @@
 /* 
- * Copyright 2012-2017 qifu of copyright Chen Xin Nien
+ * Copyright 2012-2017 ZenLife of copyright Chen Xin Nien
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,14 +36,16 @@ import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.apache.shiro.web.util.WebUtils;
+import org.qifu.base.AppContext;
 import org.qifu.base.Constants;
 import org.qifu.base.model.YesNo;
 import org.qifu.base.sys.UserAccountHttpSessionSupport;
+import org.qifu.po.ZlPerson;
 import org.qifu.sys.GreenStepBaseUsernamePasswordToken;
 import org.qifu.sys.IncorrectCaptchaException;
 import org.qifu.sys.ShiroLoginSupport;
-import org.qifu.util.SimpleUtils;
-import org.qifu.vo.AccountVO;
+
+import com.zenlife.service.IPersonService;
 
 public class ZenLifeBaseFormAuthenticationFilter extends FormAuthenticationFilter {
 	protected static Logger logger = Logger.getLogger(ZenLifeBaseFormAuthenticationFilter.class);	
@@ -76,7 +78,7 @@ public class ZenLifeBaseFormAuthenticationFilter extends FormAuthenticationFilte
 		char pwd[] = null;
 		try {
 			ShiroLoginSupport loginSupport = new ShiroLoginSupport();
-			pwd = loginSupport.getAccountService().tranPassword(password).toCharArray();
+			pwd = loginSupport.getAccountService().tranPassword(password).toCharArray(); // 只用來取轉過的密碼值
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -108,14 +110,26 @@ public class ZenLifeBaseFormAuthenticationFilter extends FormAuthenticationFilte
 		try {
 			this.doCaptchaValidate((HttpServletRequest)request, token);
 			
-			ShiroLoginSupport loginSupport = new ShiroLoginSupport();
-			AccountVO account = loginSupport.queryUserValidate(token.getUsername());
+			if (StringUtils.isBlank(token.getUsername())) {
+				throw new AuthenticationException("請輸入帳戶!");
+			}
+			if (token.getPassword() == null || token.getPassword().length < 1) {
+				throw new AuthenticationException("請輸入密碼!");
+			}			
+			@SuppressWarnings("unchecked")
+			IPersonService<ZlPerson, String> personService = (IPersonService<ZlPerson, String>) AppContext.getBean("zenlife.service.PersonService");
+			ZlPerson person = new ZlPerson();
+			person.setId( token.getUsername() );
+			person = personService.findByEntityUK( person );
+			if (null == person || !YesNo.YES.equals(person.getValidFlag())) {
+				throw new AuthenticationException("無效的帳戶!");
+			}
 			
 			Subject subject = this.getSubject(request, response);
 			subject.login(token);
 			
 			// set session
-			this.setUserSession((HttpServletRequest)request, (HttpServletResponse)response, account);
+			this.setUserSession((HttpServletRequest)request, (HttpServletResponse)response, token.getUsername());
 			return this.onLoginSuccess(token, subject, request, response);			
 		} catch (AuthenticationException e) {
 			// clear session	
@@ -142,9 +156,9 @@ public class ZenLifeBaseFormAuthenticationFilter extends FormAuthenticationFilte
 		return false;
 	}
 	
-	private void setUserSession(HttpServletRequest request, HttpServletResponse response, AccountVO account) throws Exception {		
-		UserAccountHttpSessionSupport.create(request, account, "en");
-		UserAccountHttpSessionSupport.createSysCurrentId(request, SimpleUtils.getRandomUUIDStr());
+	private void setUserSession(HttpServletRequest request, HttpServletResponse response, String personId) throws Exception {		
+		request.getSession().setAttribute(Constants.SESS_ACCOUNT, personId);
+		request.getSession().setAttribute(Constants.SESS_LANG, "en");		
 	}
 	
     protected boolean isAjaxRequest(HttpServletRequest request) {

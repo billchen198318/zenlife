@@ -10,7 +10,7 @@
     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
     
-    <import resource="classpath*:applicationContext/applicationContext-BSC-STANDARD-BEANS.xml" />
-    <import resource="classpath*:applicationContext/applicationContext-BSC-STANDARD-EXT-BEANS.xml" />
+    <import resource="classpath*:applicationContext/applicationContext-ZENLIFE-STANDARD-BEANS.xml" />
+    <import resource="classpath*:applicationContext/applicationContext-ZENLIFE-STANDARD-EXT-BEANS.xml" />
     
 </beans>    

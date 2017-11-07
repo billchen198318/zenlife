@@ -15,27 +15,13 @@
  		<property name="cacheManager" ref="ehcache"/>
  	</bean> 
  	
-	<bean id="greenStepBaseAuthorizingRealm" class="org.qifu.sys.GreenStepBaseAuthorizingRealm"> 
-   		<property name="accountService" ref="core.service.AccountService"/>
-   		<property name="userRoleService" ref="core.service.UserRoleService"/>
-   		<property name="rolePermissionService" ref="core.service.RolePermissionService"/>
-   		<property name="cacheManager" ref="shiroCacheManager"/>
-   		<!--  
-  		<property name="credentialsMatcher">
-  			<bean class="org.apache.shiro.authc.credential.PasswordMatcher">
-  				<property name="passwordService" ref="passwordService"/>
-            </bean>
-		</property>
-		-->   		
+	<bean id="zenLifeBaseAuthorizingRealm" class="com.zenlife.sys.ZenLifeBaseAuthorizingRealm"> 
+   		<property name="cacheManager" ref="shiroCacheManager"/>	
    	</bean> 
    	
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-		<property name="realm" ref="greenStepBaseAuthorizingRealm"/> 
+		<property name="realm" ref="zenLifeBaseAuthorizingRealm"/> 
 	</bean>
-	
-	<!--
-	<bean id="passwordService" class="org.apache.shiro.authc.credential.DefaultPasswordService"></bean>	
-	-->
 	
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/> 
 	
@@ -51,15 +37,6 @@
 	
 	<!-- Enable Shiro Annotations for Spring-configured beans.  Only run after -->
 	<!-- the lifecycleBeanProcessor has run: -->
-	
-	<!-- old -->
-	<!-- 
-	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>
-	-->
-	<!-- new -->
-	<!--  
-	<aop:aspectj-autoproxy proxy-target-class="true"/>
-	-->
 	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
 	    <property name="securityManager" ref="securityManager"/>
 	</bean>	
@@ -69,9 +46,6 @@
 		<property name="passwordParam" value="password"/>
 		<property name="captchaParam" value="captcha"/>
 		<property name="rememberMeParam" value="rememberme"/>
-		<!--  
-		<property name="accountService" ref="core.service.AccountService"/>
-		-->
 	</bean>		
 	
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean"> 
