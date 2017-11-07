@@ -48,6 +48,7 @@
         	<mvc:exclude-mapping path="/bootbox*"/>
         	<mvc:exclude-mapping path="/bootstrap-4.0.0-alpha.6*"/>
         	<mvc:exclude-mapping path="/bootstrap-4*"/>
+        	<mvc:exclude-mapping path="/popper-js*"/>
         	<mvc:exclude-mapping path="/images*"/>
         	<mvc:exclude-mapping path="/icons*"/>
         	<mvc:exclude-mapping path="/jquery*"/>
@@ -65,6 +66,7 @@
         	<mvc:exclude-mapping path="/bootbox*"/>
         	<mvc:exclude-mapping path="/bootstrap-4.0.0-alpha.6*"/>
         	<mvc:exclude-mapping path="/bootstrap-4*"/>
+        	<mvc:exclude-mapping path="/popper-js*"/>
         	<mvc:exclude-mapping path="/images*"/>
         	<mvc:exclude-mapping path="/icons*"/>
         	<mvc:exclude-mapping path="/jquery*"/>
@@ -86,6 +88,7 @@
         	<mvc:exclude-mapping path="/bootbox*"/>
         	<mvc:exclude-mapping path="/bootstrap-4.0.0-alpha.6*"/>
         	<mvc:exclude-mapping path="/bootstrap-4*"/>
+        	<mvc:exclude-mapping path="/popper-js*"/>
         	<mvc:exclude-mapping path="/images*"/>
         	<mvc:exclude-mapping path="/icons*"/>
         	<mvc:exclude-mapping path="/jquery*"/>
@@ -107,6 +110,7 @@
         	<mvc:exclude-mapping path="/bootbox*"/>
         	<mvc:exclude-mapping path="/bootstrap-4.0.0-alpha.6*"/>
         	<mvc:exclude-mapping path="/bootstrap-4*"/>
+        	<mvc:exclude-mapping path="/popper-js*"/>
         	<mvc:exclude-mapping path="/images*"/>
         	<mvc:exclude-mapping path="/icons*"/>
         	<mvc:exclude-mapping path="/jquery*"/>

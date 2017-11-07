@@ -108,6 +108,7 @@
          		/bootbox/**=anon
          		/bootstrap-4.0.0-alpha.6/**=anon
          		/bootstrap-4/**=anon
+         		/popper-js/**=anon
          		/jquery/**=anon
          		/jquery-bootstrap-scrolling-tabs/**=anon
          		/font-awesome/**=anon
