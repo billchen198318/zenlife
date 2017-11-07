@@ -2612,7 +2612,7 @@ CREATE TABLE `zl_person` (
   `NAME` varchar(100) NOT NULL,
   `PHONE` varchar(10) NOT NULL,
   `TEL` varchar(15) DEFAULT NULL,
-  `MAIL` varchar(200) DEFAULT NULL,
+  `MAIL` varchar(200) NOT NULL,
   `VALID_FLAG` varchar(1) NOT NULL DEFAULT 'Y',
   `CUSERID` varchar(24) NOT NULL,
   `CDATE` datetime NOT NULL,
@@ -2741,4 +2741,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-06 15:47:29
+-- Dump completed on 2017-11-07  9:28:53
