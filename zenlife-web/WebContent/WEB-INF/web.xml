@@ -18,21 +18,7 @@
   	<listener>
    		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
   	</listener>
-  	
-  	
-  	<!-- Custom -->  
-	<listener>
-		<listener-class>org.qifu.base.sys.WebSystemServletContextListener</listener-class>
-	</listener>  		
-	<listener>
-		<listener-class>org.qifu.base.sys.WebSystemHttpSessionListener</listener-class>
-	</listener>  
 	  	
-	<!-- 共用的ServletContextListener -->
-	<listener>
-		<listener-class>org.qifu.sys.WebSystemCtxBeanSupportListener</listener-class>
-	</listener>    	
-  	
   	
 	<!-- lazy loading enabled in spring -->
 	<filter>
@@ -141,7 +127,7 @@
     	<init-param>
       		<description>The characters that will create the kaptcha. </description>
       		<param-name>kaptcha.textproducer.char.string</param-name>
-      		<param-value>ABCDEFGHIJKLMNOPQRSTUVWXYZ</param-value><!-- ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -->
+      		<param-value>ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz</param-value><!-- ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -->
     	</init-param>
     	<init-param>
       		<description>The number of characters to display. </description>
@@ -193,64 +179,5 @@
     	<servlet-name>kaptcha</servlet-name>
     	<url-pattern>/kaptcha.jpg</url-pattern>
   	</servlet-mapping>	
-  	
-  	
- 	<!-- Apache CXF -->	 
- 	<!-- 先rem掉, 暫時沒有要用 -->
- 	<!--  
-	<servlet>
-		<servlet-name>CXFServlet</servlet-name>		
-		<servlet-class>org.qifu.sys.PublishingCXFServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	
-	<servlet-mapping>
-		<servlet-name>CXFServlet</servlet-name>
-		<url-pattern>/services/*</url-pattern>
-	</servlet-mapping>	
-	
-	<servlet>
-		<servlet-name>StopOrReloadCXFServlet</servlet-name>		
-		<servlet-class>org.qifu.sys.StopOrReloadCXFServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>	
-	
-	<servlet-mapping>
-		<servlet-name>StopOrReloadCXFServlet</servlet-name>
-		<url-pattern>/config-services/*</url-pattern>
-	</servlet-mapping>	
-	-->
-	
-	<!-- Camel servlet -->
-	<!-- 先rem掉, 暫時沒有要用 -->
-	<!--  
-	<servlet>
-		<servlet-name>CamelServlet</servlet-name>
-		<servlet-class>org.apache.camel.component.servlet.CamelHttpTransportServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	-->
-	
-	<!-- Camel servlet mapping -->
-	<!-- 先rem掉, 暫時沒有要用 -->
-	<!--  
-	<servlet-mapping>
-		<servlet-name>CamelServlet</servlet-name>
-		<url-pattern>/camel/*</url-pattern>
-	</servlet-mapping>		
-	-->  	
-  	
-	<!-- Hessian webService -->
-	<!--  
-	<servlet>  
-    	<servlet-name>Hessian</servlet-name>  
-    	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>  
-		<load-on-startup>1</load-on-startup>  
-	</servlet>      
-	<servlet-mapping>  
-		<servlet-name>Hessian</servlet-name>  
-		<url-pattern>/hessian/*</url-pattern>  
-	</servlet-mapping> 	
-	-->
 	  	    
 </web-app>

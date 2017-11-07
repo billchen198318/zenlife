@@ -141,7 +141,7 @@
     	<init-param>
       		<description>The characters that will create the kaptcha. </description>
       		<param-name>kaptcha.textproducer.char.string</param-name>
-      		<param-value>ABCDEFGHIJKLMNOPQRSTUVWXYZ</param-value><!-- ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -->
+      		<param-value>ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz</param-value><!-- ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -->
     	</init-param>
     	<init-param>
       		<description>The number of characters to display. </description>

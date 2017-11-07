@@ -38,7 +38,8 @@
 	
 	
 	<mvc:interceptors>
-	
+		
+		<!-- 
     	<mvc:interceptor>  
         	<mvc:mapping path="/**"/>
         	<mvc:exclude-mapping path="/"/>  
@@ -60,6 +61,7 @@
         	<mvc:exclude-mapping path="/css*"/>
         	<bean class="org.qifu.base.interceptor.LoginHandlerInterceptor"/>
     	</mvc:interceptor>
+    	-->
     	
     	<mvc:interceptor>  
         	<mvc:mapping path="/**"/>
@@ -79,6 +81,7 @@
         	<bean class="org.qifu.base.interceptor.NoCacheHeaderInterceptor"/>
     	</mvc:interceptor>
     	
+    	<!-- 
     	<mvc:interceptor>  
         	<mvc:mapping path="/**"/>
         	<mvc:exclude-mapping path="/"/>  
@@ -122,7 +125,8 @@
         	<mvc:exclude-mapping path="/css*"/>        	  
         	<bean class="org.qifu.base.interceptor.QueryParamInspectInterceptor"/>
     	</mvc:interceptor>
-    	    	
+    	-->    	
+    	
 	</mvc:interceptors>  	
 	
 	
