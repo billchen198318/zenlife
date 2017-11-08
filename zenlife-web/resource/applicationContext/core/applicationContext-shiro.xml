@@ -67,6 +67,7 @@
          		/index.do*=authc
          		/configJs.do*=anon
          		/vCode.do*=anon
+         		/register.do*=anon
          		/*.do=authc         		
          		
          		
