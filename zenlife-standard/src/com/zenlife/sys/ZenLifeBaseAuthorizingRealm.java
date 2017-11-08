@@ -31,6 +31,7 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.qifu.base.AppContext;
+import org.qifu.base.Constants;
 import org.qifu.base.exception.ServiceException;
 import org.qifu.base.model.YesNo;
 import org.qifu.po.ZlPerson;
@@ -42,8 +43,8 @@ public class ZenLifeBaseAuthorizingRealm extends AuthorizingRealm {
 	
 	private SimpleAuthorizationInfo getSimpleAuthorizationInfo(String username) throws Exception {
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-		info.addRole("*"); // ZenLife 目前不需要
-		info.addStringPermission("*"); // ZenLife 目前不需要
+		info.addRole( Constants.SUPER_ROLE_ALL ); // ZenLife 目前不需要
+		info.addStringPermission( Constants.SUPER_PERMISSION ); // ZenLife 目前不需要
 		return info;		
 	}	
 
