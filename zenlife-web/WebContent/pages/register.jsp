@@ -14,7 +14,7 @@ String uuidStr = SimpleUtils.getRandomUUIDStr();
 <!DOCTYPE html>
 <html>
 <head>
-<title>qifu</title>
+<title>ZenLife - 禪生活保健</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -30,7 +30,7 @@ String uuidStr = SimpleUtils.getRandomUUIDStr();
 
 var msgFields = new Object();
 msgFields['id'] 			= 'id';
-msgFields['pwd1'] 			= 'pwd1';
+msgFields['password'] 		= 'pwd1';
 msgFields['pwd2'] 			= 'pwd2';
 msgFields['vcode']			= 'vcode';
 msgFields['mail']			= 'mail';
@@ -112,7 +112,6 @@ function cancelSave() {
 		</div>
 	</div>			
 </div>
-<br/>
 <div class="form-group" id="form-group2">
 	<div class="row">
 		<div class="col-xs-6 col-md-6 col-lg-6">
@@ -120,7 +119,6 @@ function cancelSave() {
 		</div>
 	</div>
 </div>
-<br/>
 <div class="form-group" id="form-group3">
 	<div class="row">
 		<div class="col-xs-6 col-md-6 col-lg-6">
@@ -143,9 +141,6 @@ function cancelSave() {
 
 </form>
 
-
-<br>
-
 <div class="row">
 	<div class="col-xs-6 col-md-6 col-lg-6">
 		<q:button id="btnSave" label="確認"
@@ -153,7 +148,7 @@ function cancelSave() {
 			xhrParameter="
 			{
 				'id'			:	$('#id').val(),
-				'pwd1'			:	$('#pwd1').val(),
+				'password'		:	$('#pwd1').val(),
 				'pwd2'			:	$('#pwd2').val(),
 				'vcode'			:	$('#vcode').val(),
 				'mail'			:	$('#mail').val(),

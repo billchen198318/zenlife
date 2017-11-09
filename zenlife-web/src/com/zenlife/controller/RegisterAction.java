@@ -23,6 +23,7 @@ package com.zenlife.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.qifu.base.controller.BaseController;
 import org.qifu.base.exception.AuthorityException;
 import org.qifu.base.exception.ControllerException;
@@ -37,6 +38,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+
+import com.zenlife.base.ZenLifeConstants;
 
 @EnableWebMvc
 @Controller
@@ -57,19 +60,25 @@ public class RegisterAction extends BaseController {
 		return mv;
 	}
 	
-	private void checkFieldsForParam(DefaultControllerJsonResultObj<ZlPerson> result, ZlPerson person, String retyPwd) throws ControllerException, Exception {
-		/*
+	private void checkFieldsForParam(DefaultControllerJsonResultObj<ZlPerson> result, ZlPerson person, String sessVCode, String vcode, String retyPwd) throws ControllerException, Exception {
 		this.getCheckControllerFieldHandler(result)
-		.testField("templateVar", templateParam, "@org.apache.commons.lang3.StringUtils@isBlank(templateVar)", "Template variable is blank!")
-		.testField("objectVar", templateParam, "@org.apache.commons.lang3.StringUtils@isBlank(objectVar)", "Object variable is blank!")
-		.testField("templateVar", templateParam, "!@org.qifu.util.SimpleUtils@checkBeTrueOf_azAZ09(templateVar)", "Template variable only normal character!")
-		.testField("objectVar", templateParam, "!@org.qifu.util.SimpleUtils@checkBeTrueOf_azAZ09(objectVar)", "Object variable only normal character!")
+		.testField("vcode", StringUtils.isBlank(vcode), "驗證碼必須填寫")
+		.testField("vcode", !super.defaultString(sessVCode).equals(vcode), "驗證碼錯誤")
+		.testField("id", person, "@org.apache.commons.lang3.StringUtils@isBlank(id)", "身份證字號或自然人號必須填寫")
+		.testField("id", person, "!@org.qifu.util.SimpleUtils@checkBeTrueOf_azAZ09(id)", "身份證字號或自然人號必須是一般字元A~Z,a~z,0~9")
+		.testField("id", person, "@org.apache.commons.lang3.StringUtils@defaultString(id).trim().length()<8", "身份證字號或自然人號長度必須大於8碼")
+		.testField("password", person, "@org.apache.commons.lang3.StringUtils@isBlank(password)", "密碼必須填寫")
+		.testField("password", person, "!@org.qifu.util.SimpleUtils@checkBeTrueOf_azAZ09(password)", "密碼必須是一般字元A~Z,a~z,0~9")
+		.testField("password", !super.defaultString(person.getPassword()).equals(retyPwd), "密碼與密碼(驗證)必須一樣")
+		.testField("password", person, "@org.apache.commons.lang3.StringUtils@defaultString(password).trim().length()<4", "密碼長度必須大於4碼")
+		.testField("mail", person, "@org.apache.commons.lang3.StringUtils@isBlank(mail)", "電子信箱必須填寫")
+		.testField("name", person, "@org.apache.commons.lang3.StringUtils@isBlank(name)", "名稱必須填寫")
+		.testField("phone", person, "@org.apache.commons.lang3.StringUtils@isBlank(phone)", "手機號碼必須填寫")
 		.throwMessage();
-		*/
 	}	
 	
-	private void save(DefaultControllerJsonResultObj<ZlPerson> result, ZlPerson person, String retyPwd) throws AuthorityException, ControllerException, ServiceException, Exception {
-		this.checkFieldsForParam(result, person, retyPwd);
+	private void save(DefaultControllerJsonResultObj<ZlPerson> result, ZlPerson person, String sessVCode, String vcode, String retyPwd) throws AuthorityException, ControllerException, ServiceException, Exception {
+		this.checkFieldsForParam(result, person, sessVCode, vcode, retyPwd);
 		
 	}
 	
@@ -88,7 +97,12 @@ public class RegisterAction extends BaseController {
 		result.setIsAuthorize( YesNo.YES );
 		result.setMessage("請重新操作");
 		try {
-			this.save(result, person, request.getParameter("pwd2"));
+			this.save(
+					result, 
+					person, 
+					(String)request.getSession().getAttribute( ZenLifeConstants.SESS_VCODE ), 
+					request.getParameter("vcode"), 
+					request.getParameter("pwd2"));
 		} catch (AuthorityException | ServiceException | ControllerException e) {
 			result.setMessage( e.getMessage().toString() );			
 		} catch (Exception e) {
