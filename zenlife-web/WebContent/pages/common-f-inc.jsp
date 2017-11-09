@@ -12,6 +12,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="<%=basePath%>/bootstrap-4/js/bootstrap.js?ver=${jsVerBuild}" crossorigin="anonymous"></script>
 <script src="./bootbox/bootbox.js?ver=${jsVerBuild}" crossorigin="anonymous"></script>
 
+<link rel="stylesheet" href="./toastr/toastr.min.css?ver=${jsVerBuild}" crossorigin="anonymous">
+<script src="./toastr/toastr.min.js?ver=${jsVerBuild}" crossorigin="anonymous"></script>
+
 <script src="<%=basePath%>/configJs.do?ver=${jsVerBuild}" crossorigin="anonymous"></script>
 
 <script src="<%=basePath%>/js/f.js?ver=${jsVerBuild}" crossorigin="anonymous"></script>
