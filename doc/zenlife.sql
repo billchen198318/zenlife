@@ -2632,6 +2632,7 @@ CREATE TABLE `zl_person` (
 
 LOCK TABLES `zl_person` WRITE;
 /*!40000 ALTER TABLE `zl_person` DISABLE KEYS */;
+INSERT INTO `zl_person` VALUES ('0','admin','b7f1acbdc67d3b2a68d36a5d7a29b228','陳無名','0917862777','0800956956','chen.xin.nien@gmail.com','Y','admin','2017-11-09 15:04:18',NULL,NULL);
 /*!40000 ALTER TABLE `zl_person` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2741,4 +2742,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-07  9:28:53
+-- Dump completed on 2017-11-09 15:04:42

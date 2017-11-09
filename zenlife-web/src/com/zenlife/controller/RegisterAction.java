@@ -21,6 +21,7 @@
  */
 package com.zenlife.controller;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
@@ -30,8 +31,11 @@ import org.qifu.base.exception.ControllerException;
 import org.qifu.base.exception.ServiceException;
 import org.qifu.base.model.ControllerMethodAuthority;
 import org.qifu.base.model.DefaultControllerJsonResultObj;
+import org.qifu.base.model.DefaultResult;
 import org.qifu.base.model.YesNo;
 import org.qifu.po.ZlPerson;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -40,11 +44,25 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.zenlife.base.ZenLifeConstants;
+import com.zenlife.service.logic.IPersonLogicService;
 
 @EnableWebMvc
 @Controller
 public class RegisterAction extends BaseController {
 	
+	private IPersonLogicService personLogicService;
+	
+	public IPersonLogicService getPersonLogicService() {
+		return personLogicService;
+	}
+
+	@Autowired
+	@Resource(name="zenlife.service.logic.FePersonLogicService")
+	@Required	
+	public void setPersonLogicService(IPersonLogicService personLogicService) {
+		this.personLogicService = personLogicService;
+	}
+
 	@ControllerMethodAuthority(check = false, programId = "ZENLIFE_FE_9998Q")
 	@RequestMapping(value = "/register.do", method = RequestMethod.GET)
 	public ModelAndView index(HttpServletRequest request) {
@@ -79,7 +97,14 @@ public class RegisterAction extends BaseController {
 	
 	private void save(DefaultControllerJsonResultObj<ZlPerson> result, ZlPerson person, String sessVCode, String vcode, String retyPwd) throws AuthorityException, ControllerException, ServiceException, Exception {
 		this.checkFieldsForParam(result, person, sessVCode, vcode, retyPwd);
-		
+		DefaultResult<ZlPerson> cResult = this.personLogicService.createForFrontEnd(person);
+		if ( cResult.getValue() != null ) {
+			ZlPerson resObj = cResult.getValue();
+			resObj.setPassword("");
+			result.setValue( resObj );
+			result.setSuccess( YES );
+		}
+		result.setMessage( cResult.getSystemMessage().getValue() );		
 	}
 	
 	@ControllerMethodAuthority(check = false, programId = "ZENLIFE_FE_9997Q")

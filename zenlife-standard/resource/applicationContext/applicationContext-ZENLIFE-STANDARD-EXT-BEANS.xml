@@ -10,8 +10,6 @@
     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
     
-    <!-- 
-    <import resource="classpath*:applicationContext/zenlife/standard/ext/applicationContext-ext-test.xml" />
-    -->
+    <import resource="classpath*:applicationContext/zenlife/standard/ext/applicationContext-ext-person.xml" />
     
 </beans>    

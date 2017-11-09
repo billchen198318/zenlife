@@ -54,12 +54,16 @@ function saveSuccess(data) {
 		return;
 	}
 	parent.toastrInfo( data.message );
-	clearSave();
+	bootbox.alert({ 
+		  size: "small",
+		  title: "會員建立完成",
+		  message: "請至您的電子信箱: " + data.value.mail + " 收取驗證信連結<br>如無收到確認信連結，請連絡鐘先生: 0800-956-956", 
+		  callback: function(){ window.location = "./index.do"; }
+	});	
 }
 
 function refreshVcodeUrl() {
-	var nStr = Math.random().toString(36).substring(2);
-	$("#vcode-image").attr('src', './vCode.do?n='+nStr);
+	$("#vcode-image").attr('src', './vCode.do?n='+guid());
 }
 
 function clearSave() {
