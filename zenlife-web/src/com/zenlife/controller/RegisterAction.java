@@ -95,7 +95,7 @@ public class RegisterAction extends BaseController {
 		.throwMessage();
 	}	
 	
-	private void save(DefaultControllerJsonResultObj<ZlPerson> result, ZlPerson person, String sessVCode, String vcode, String retyPwd) throws AuthorityException, ControllerException, ServiceException, Exception {
+	private void save(DefaultControllerJsonResultObj<ZlPerson> result, HttpServletRequest request, ZlPerson person, String sessVCode, String vcode, String retyPwd) throws AuthorityException, ControllerException, ServiceException, Exception {
 		this.checkFieldsForParam(result, person, sessVCode, vcode, retyPwd);
 		DefaultResult<ZlPerson> cResult = this.personLogicService.createForFrontEnd(person);
 		if ( cResult.getValue() != null ) {
@@ -104,6 +104,7 @@ public class RegisterAction extends BaseController {
 			result.setValue( resObj );
 			result.setSuccess( YES );
 		}
+		
 		result.setMessage( cResult.getSystemMessage().getValue() );		
 	}
 	
@@ -124,6 +125,7 @@ public class RegisterAction extends BaseController {
 		try {
 			this.save(
 					result, 
+					request,
 					person, 
 					(String)request.getSession().getAttribute( ZenLifeConstants.SESS_VCODE ), 
 					request.getParameter("vcode"), 

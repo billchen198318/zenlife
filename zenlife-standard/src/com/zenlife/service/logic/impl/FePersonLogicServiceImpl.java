@@ -137,7 +137,7 @@ public class FePersonLogicServiceImpl extends CoreBaseLogicService implements IP
 		person.setOid( this.generateOid() );
 		person.setCuserid("admin");
 		person.setCdate(new Date());
-		person.setValidFlag(YesNo.NO);
+		person.setValidFlag(YesNo.YES); // 使用者都是老人, 沒法叫他們很麻煩的驗證了
 		person.setPassword( this.getAccountService().tranPassword(person.getPassword()) );
 		ZlPerson insertEntity = this.personService.save(person);
 		if (insertEntity!=null && insertEntity.getOid()!=null ) {
