@@ -18,17 +18,7 @@ String uuidStr = SimpleUtils.getRandomUUIDStr();
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" href="./tether/tether.min.css?ver=${jsVerBuild}" crossorigin="anonymous">
-<script type="text/javascript" src="./tether/tether.min.js?ver=${jsVerBuild}"></script>
-<script type="text/javascript" src="./popper-js/umd/popper.min.js?ver=${jsVerBuild}"></script>
-<script type="text/javascript" src="./jquery/jquery-3.1.1.min.js?ver=${jsVerBuild}"></script>
-<link rel="stylesheet" href="./bootstrap-4/css/bootstrap.css?ver=${jsVerBuild}" crossorigin="anonymous">
-<link href="./font-awesome/css/font-awesome.min.css?ver=${jsVerBuild}" rel="stylesheet" type="text/css" />
-<script src="./bootstrap-4/js/bootstrap.js?ver=${jsVerBuild}" crossorigin="anonymous"></script>
-<script src="./bootbox/bootbox.js?ver=${jsVerBuild}" crossorigin="anonymous"></script>
-
-<link rel="stylesheet" href="./toastr/toastr.min.css?ver=${jsVerBuild}" crossorigin="anonymous">
-<script src="./toastr/toastr.min.js?ver=${jsVerBuild}" crossorigin="anonymous"></script>
+<jsp:include page="./common-f-inc.jsp"></jsp:include>
 
 
 <style type="text/css">
@@ -37,6 +27,35 @@ String uuidStr = SimpleUtils.getRandomUUIDStr();
 </style>
 
 <script type="text/javascript">
+
+var msgFields = new Object();
+msgFields['id'] 			= 'id';
+msgFields['pwd1'] 			= 'pwd1';
+msgFields['pwd2'] 			= 'pwd2';
+msgFields['vcode']			= 'vcode';
+msgFields['mail']			= 'mail';
+msgFields['name']			= 'name';
+msgFields['phone']			= 'phone';
+
+var formGroups = new Object();
+formGroups['id'] 			= 'form-group1';
+formGroups['pwd1'] 			= 'form-group1';
+formGroups['pwd2'] 			= 'form-group1';
+formGroups['vcode'] 		= 'form-group1';
+formGroups['mail'] 			= 'form-group2';
+formGroups['name'] 			= 'form-group3';
+formGroups['phone'] 		= 'form-group3';
+
+function saveSuccess(data) {
+	clearWarningMessageField(formGroups, msgFields);
+	if ( _qifu_success_flag != data.success ) {
+		parent.toastrWarning( data.message );
+		setWarningMessageField(formGroups, msgFields, data.checkFields);
+		return;
+	}
+	parent.toastrInfo( data.message );
+	clearSave();
+}
 
 function refreshVcodeUrl() {
 	var nStr = Math.random().toString(36).substring(2);
@@ -70,14 +89,14 @@ function cancelSave() {
 	<div class="row">
 		<div class="col-xs-6 col-md-6 col-lg-6">
 		    <label for="pwd1">密碼</label>&nbsp;<font color="RED">*</font>
-		    <input type="password" class="form-control" id="pwd1" placeholder="請輸入密碼">			
+		    <input type="password" class="form-control" id="pwd1" name="pwd1" placeholder="請輸入密碼">			
 		    <div class="form-control-feedback" id="pwd1-feedback"></div>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-xs-6 col-md-6 col-lg-6">
 		    <label for="pwd1">密碼(驗證)</label>&nbsp;<font color="RED">*</font>
-		    <input type="password" class="form-control" id="pwd1" placeholder="請輸入密碼(驗證)">
+		    <input type="password" class="form-control" id="pwd2" name="pwd2" placeholder="請輸入密碼(驗證)">
 		    <div class="form-control-feedback" id="pwd2-feedback"></div>					
 		</div>
 	</div>
@@ -87,7 +106,7 @@ function cancelSave() {
 		    <label for="vcode">驗證碼</label>&nbsp;<font color="RED">*</font> &nbsp;&nbsp; <img id="vcode-image" alt="vcode-image" src="./vCode.do?n=<%=uuidStr%>"> 
 		    <button type="button" class="btn btn-info btn-sm" onclick="refreshVcodeUrl()">更換驗證碼</button>
 		    
-		    <input type="text" class="form-control" id="vcode" placeholder="請輸入 驗證碼">
+		    <input type="text" class="form-control" id="vcode" name="vcode" placeholder="請輸入 驗證碼">
 		    <div class="form-control-feedback" id="vcode-feedback"></div>			
 			
 		</div>
@@ -130,10 +149,17 @@ function cancelSave() {
 <div class="row">
 	<div class="col-xs-6 col-md-6 col-lg-6">
 		<q:button id="btnSave" label="確認"
-			xhrUrl="./registrSave.do"
+			xhrUrl="./registerSaveJson.do"
 			xhrParameter="
 			{
-				
+				'id'			:	$('#id').val(),
+				'pwd1'			:	$('#pwd1').val(),
+				'pwd2'			:	$('#pwd2').val(),
+				'vcode'			:	$('#vcode').val(),
+				'mail'			:	$('#mail').val(),
+				'name'			:	$('#name').val(),
+				'phone'			:	$('#phone').val(),
+				'tel'			:	$('#tel').val()	
 			}
 			"
 			onclick="btnSave();"

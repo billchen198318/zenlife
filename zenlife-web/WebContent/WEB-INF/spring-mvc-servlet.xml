@@ -48,6 +48,7 @@
         	<mvc:exclude-mapping path="/configJs.do"/>
         	<mvc:exclude-mapping path="/vCode.do"/>
         	<mvc:exclude-mapping path="/register.do"/>
+        	<mvc:exclude-mapping path="/registerSaveJson.do"/>
         	<mvc:exclude-mapping path="/bootbox*"/>
         	<mvc:exclude-mapping path="/bootstrap-4.0.0-alpha.6*"/>
         	<mvc:exclude-mapping path="/bootstrap-4*"/>

@@ -68,6 +68,7 @@
          		/configJs.do*=anon
          		/vCode.do*=anon
          		/register.do*=anon
+         		/registerSaveJson.do*=anon
          		/*.do=authc         		
          		
          		
