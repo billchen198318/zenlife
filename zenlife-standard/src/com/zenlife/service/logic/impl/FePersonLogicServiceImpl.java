@@ -51,7 +51,7 @@ import com.zenlife.service.IPersonChronicService;
 import com.zenlife.service.IPersonProfileService;
 import com.zenlife.service.IPersonService;
 import com.zenlife.service.IPersonUrgentContactService;
-import com.zenlife.service.logic.IPersonLogicService;
+import com.zenlife.service.logic.IFePersonLogicService;
 
 /**
  * 給前台 register 用的版本, 不要check權限, 要自己填入 CUSERID, CDATE
@@ -59,7 +59,7 @@ import com.zenlife.service.logic.IPersonLogicService;
 @ServiceAuthority(check=false)
 @Service("zenlife.service.logic.FePersonLogicService")
 @Transactional(propagation=Propagation.REQUIRED, readOnly=true)
-public class FePersonLogicServiceImpl extends CoreBaseLogicService implements IPersonLogicService {
+public class FePersonLogicServiceImpl extends CoreBaseLogicService implements IFePersonLogicService {
 	protected Logger logger=Logger.getLogger(FePersonLogicServiceImpl.class);
 	
 	private IPersonService<ZlPerson, String> personService;
@@ -125,7 +125,7 @@ public class FePersonLogicServiceImpl extends CoreBaseLogicService implements IP
 			readOnly=false,
 			rollbackFor={RuntimeException.class, IOException.class, Exception.class} )	
 	@Override
-	public DefaultResult<ZlPerson> createForFrontEnd(ZlPerson person) throws ServiceException, Exception {
+	public DefaultResult<ZlPerson> create(ZlPerson person) throws ServiceException, Exception {
 		if (null == person) {
 			throw new ServiceException(SysMessageUtil.get(SysMsgConstants.PARAMS_BLANK));
 		}

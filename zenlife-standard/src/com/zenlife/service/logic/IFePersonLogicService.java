@@ -25,8 +25,8 @@ import org.qifu.base.exception.ServiceException;
 import org.qifu.base.model.DefaultResult;
 import org.qifu.po.ZlPerson;
 
-public interface IPersonLogicService {
+public interface IFePersonLogicService {
 	
-	public DefaultResult<ZlPerson> createForFrontEnd(ZlPerson person) throws ServiceException, Exception;
+	public DefaultResult<ZlPerson> create(ZlPerson person) throws ServiceException, Exception;
 
 }

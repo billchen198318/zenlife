@@ -44,25 +44,25 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.zenlife.base.ZenLifeConstants;
-import com.zenlife.service.logic.IPersonLogicService;
+import com.zenlife.service.logic.IFePersonLogicService;
 
 @EnableWebMvc
 @Controller
 public class RegisterAction extends BaseController {
 	
-	private IPersonLogicService personLogicService;
+	private IFePersonLogicService fePersonLogicService;
 	
-	public IPersonLogicService getPersonLogicService() {
-		return personLogicService;
+	public IFePersonLogicService getFePersonLogicService() {
+		return fePersonLogicService;
 	}
-
+	
 	@Autowired
 	@Resource(name="zenlife.service.logic.FePersonLogicService")
 	@Required	
-	public void setPersonLogicService(IPersonLogicService personLogicService) {
-		this.personLogicService = personLogicService;
+	public void setFePersonLogicService(IFePersonLogicService fePersonLogicService) {
+		this.fePersonLogicService = fePersonLogicService;
 	}
-
+	
 	@ControllerMethodAuthority(check = false, programId = "ZENLIFE_FE_9998Q")
 	@RequestMapping(value = "/register.do", method = RequestMethod.GET)
 	public ModelAndView index(HttpServletRequest request) {
@@ -97,7 +97,7 @@ public class RegisterAction extends BaseController {
 	
 	private void save(DefaultControllerJsonResultObj<ZlPerson> result, HttpServletRequest request, ZlPerson person, String sessVCode, String vcode, String retyPwd) throws AuthorityException, ControllerException, ServiceException, Exception {
 		this.checkFieldsForParam(result, person, sessVCode, vcode, retyPwd);
-		DefaultResult<ZlPerson> cResult = this.personLogicService.createForFrontEnd(person);
+		DefaultResult<ZlPerson> cResult = this.fePersonLogicService.create(person);
 		if ( cResult.getValue() != null ) {
 			ZlPerson resObj = cResult.getValue();
 			resObj.setPassword("");
