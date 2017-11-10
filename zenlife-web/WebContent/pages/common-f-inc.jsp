@@ -20,3 +20,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="<%=basePath%>/js/f.js?ver=${jsVerBuild}" crossorigin="anonymous"></script>
 
 <script src="<%=basePath%>/js/m.js?ver=${jsVerBuild}" crossorigin="anonymous"></script>
+
+<script>
+bootbox.setLocale('zh_TW');
+</script>

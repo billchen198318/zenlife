@@ -17,7 +17,7 @@ function guid() {
 
 function logoutEvent() {
 	bootbox.confirm(
-			"Logout! are you sure?", 
+			"您確定登出嗎?", 
 			function(result){ 
 				if (!result) {
 					return;
