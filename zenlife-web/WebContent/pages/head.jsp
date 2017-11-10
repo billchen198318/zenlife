@@ -31,7 +31,10 @@
           </li>        
           <li class="nav-item">
             <a class="nav-link" href="#" onclick=""><b>保健商品</b></a>
-          </li>                  
+          </li>      
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick=""><b>個人資料</b></a>
+          </li>                        
           <li class="nav-item">
             <a class="nav-link" href="#" onclick=""><b>關於</b></a>
           </li>
