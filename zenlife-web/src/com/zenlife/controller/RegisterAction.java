@@ -25,6 +25,9 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
+import org.qifu.base.Constants;
 import org.qifu.base.controller.BaseController;
 import org.qifu.base.exception.AuthorityException;
 import org.qifu.base.exception.ControllerException;
@@ -34,6 +37,8 @@ import org.qifu.base.model.DefaultControllerJsonResultObj;
 import org.qifu.base.model.DefaultResult;
 import org.qifu.base.model.YesNo;
 import org.qifu.po.ZlPerson;
+import org.qifu.sys.GreenStepBaseFormAuthenticationFilter;
+import org.qifu.sys.GreenStepBaseUsernamePasswordToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
@@ -95,16 +100,35 @@ public class RegisterAction extends BaseController {
 		.throwMessage();
 	}	
 	
+	// ZenLife 使用者取向都是老人家, 沒法叫他們在一直驗證帳戶有效性了.
+	private void forceLoginForRegisterSuccess(HttpServletRequest request, ZlPerson person) throws ControllerException, Exception {
+		request.getSession().setAttribute(GreenStepBaseFormAuthenticationFilter.DEFAULT_CAPTCHA_PARAM, "1111");
+		GreenStepBaseUsernamePasswordToken token = new GreenStepBaseUsernamePasswordToken();
+		token.setCaptcha( "1111" );
+		token.setUsername( person.getId() );
+		token.setPassword( person.getPassword().toCharArray() );
+		Subject subject = SecurityUtils.getSubject();
+		subject.login(token);
+		request.getSession().setAttribute(Constants.SESS_ACCOUNT, person.getId());
+		request.getSession().setAttribute(Constants.SESS_LANG, "en");			
+	}
+	
 	private void save(DefaultControllerJsonResultObj<ZlPerson> result, HttpServletRequest request, ZlPerson person, String sessVCode, String vcode, String retyPwd) throws AuthorityException, ControllerException, ServiceException, Exception {
 		this.checkFieldsForParam(result, person, sessVCode, vcode, retyPwd);
 		DefaultResult<ZlPerson> cResult = this.fePersonLogicService.create(person);
 		if ( cResult.getValue() != null ) {
-			ZlPerson resObj = cResult.getValue();
-			resObj.setPassword("");
+			/**
+			 * 這邊因為有開 openView Session 所以回傳obj 拿新new出來的, 因為如果拿 result.value回傳, 要把 person.password 設為空白才回傳(不因該把password又傳到前端), 
+			 * 如果把 cResult.getValue.password設為空白, 這樣在創建完帳戶後自動登入的時後 ZenLifeBaseAuthorizingRealm 抓出的 ZlPerson -> personService.findByEntityUK 它的 password 會為空值
+			 */
+			ZlPerson resObj = new ZlPerson();
+			resObj.setId( cResult.getValue().getId() );
+			resObj.setName( cResult.getValue().getName() );
+			resObj.setMail( cResult.getValue().getMail() );
 			result.setValue( resObj );
 			result.setSuccess( YES );
+			this.forceLoginForRegisterSuccess(request, cResult.getValue());
 		}
-		
 		result.setMessage( cResult.getSystemMessage().getValue() );		
 	}
 	

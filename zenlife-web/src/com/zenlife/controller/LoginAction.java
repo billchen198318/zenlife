@@ -32,6 +32,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.zenlife.base.ZenLifeConstants;
+
 @Controller
 public class LoginAction extends BaseController {
 	
@@ -69,6 +71,9 @@ public class LoginAction extends BaseController {
 	public String logout(HttpServletRequest request, HttpSession session) {
 		request.setAttribute("loginCaptchaCodeEnable", this.getLoginCaptchaCodeEnable());
 		SecurityUtils.getSubject().logout();
+		request.getSession().removeAttribute( Constants.SESS_ACCOUNT );
+		request.getSession().removeAttribute( Constants.SESS_LANG );
+		request.getSession().removeAttribute( ZenLifeConstants.SESS_VCODE );
 		return PAGE_SYS_LOGIN;
 	}
 	
