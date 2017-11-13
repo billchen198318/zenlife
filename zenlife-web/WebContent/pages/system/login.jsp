@@ -107,7 +107,7 @@ function confirmAcceptLaw() {
       </div>
       <div class="modal-body">
 		  <div class="form-group">
-		    <textarea class="form-control" id="exampleTextarea" rows="25">
+		    <textarea class="form-control" id="exampleTextarea" rows="15" cols="85">
 若您為未滿二十歲之未成年人，則應請您的父母或監護人閱讀、了解並同意本服務條款之所有內容及其後之修改變更，方得使用本服務。當您使用本服務時，即推定您的父母或監護人已閱讀、了解並同意接受本服務條款之所有內容及其後之修改變更。
 隱私權保護政策
 本會相當重視隱私權的保護。關於您的會員註冊以及其他特定資料，將依本服務「隱私權保護政策」保護與規範。您了解並同意當您使用本服務時，本服務可依據「隱私權保護政策」之規範進行您個人資料的蒐集與利用，如線上活動及網路調查等。
