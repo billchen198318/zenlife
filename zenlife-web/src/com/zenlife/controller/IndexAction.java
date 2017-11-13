@@ -37,12 +37,15 @@ public class IndexAction extends BaseController {
 	@RequestMapping(value = "/index.do", method = RequestMethod.GET)
 	public ModelAndView index(HttpServletRequest request) {
 		String viewName = PAGE_SYS_ERROR;
+		String c = "";
 		ModelAndView mv = this.getDefaultModelAndView();
 		try {
+			c = request.getParameter("c");
 			viewName = "index";
 		} catch (Exception e) {
 			this.getExceptionPage(e, request);
 		}
+		mv.addObject("c", super.defaultString(c));
 		mv.setViewName(viewName);
 		return mv;
 	}

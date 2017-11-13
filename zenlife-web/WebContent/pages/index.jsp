@@ -20,6 +20,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <style type="text/css">
 
+.faq .section p.quetn a, .faq .section p.quetn a:hover {
+    text-decoration:underline;
+    font-weight:bold
+}
 
 </style>
 
@@ -75,6 +79,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </div>    
 </div>
 
+<br/>
+<br/>
+<br/>
 <br/>
 <br/>
 <br/>
