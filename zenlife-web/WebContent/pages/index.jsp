@@ -37,67 +37,47 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 <!-- ############################################################################################################### -->
 	
-<div class="card-columns">
+<div class="card-deck">
   <div class="card">
-    <img class="card-img-top img-fluid" src="./images/logo3.png" alt="Card image cap">
+    <img class="card-img-top" src="./images/001.jpg" alt="Card image cap">
     <div class="card-block">
-      <h4 class="card-title">Card title that wraps to a new line</h4>
-      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      <h4 class="card-title">生活課堂</h4>
+      <p class="card-text">提供您生活保健知識，與說醫門生活課程內容.</p>
     </div>
-  </div>
-  <div class="card p-3">
-    <blockquote class="card-block card-blockquote">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-      <footer>
-        <small class="text-muted">
-          Someone famous in <cite title="Source Title">Source Title</cite>
-        </small>
-      </footer>
-    </blockquote>
   </div>
   <div class="card">
-    <img class="card-img-top img-fluid" src="./images/logo3.png" alt="Card image cap">
+    <img class="card-img-top" src="./images/002.jpg" alt="Card image cap">
     <div class="card-block">
-      <h4 class="card-title">Card title</h4>
-      <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      <h4 class="card-title">血壓</h4>
+      <p class="card-text">輸入您寫壓測量資料，將會以圖表化方式為您呈現血壓走勢圖表.</p>
     </div>
-  </div>
-  <div class="card card-inverse card-primary p-3 text-center">
-    <blockquote class="card-blockquote">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat.</p>
-      <footer>
-        <small>
-          Someone famous in <cite title="Source Title">Source Title</cite>
-        </small>
-      </footer>
-    </blockquote>
-  </div>
-  <div class="card text-center">
-    <div class="card-block">
-      <h4 class="card-title">Card title</h4>
-      <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    </div>
-  </div>
-  <div class="card p-3 text-right">
-    <blockquote class="card-blockquote">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-      <footer>
-        <small class="text-muted">
-          Someone famous in <cite title="Source Title">Source Title</cite>
-        </small>
-      </footer>
-    </blockquote>
   </div>
   <div class="card">
+    <img class="card-img-top" src="./images/003.jpg" alt="Card image cap">
     <div class="card-block">
-      <h4 class="card-title">Card title</h4>
-      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      <h4 class="card-title">血糖</h4>
+      <p class="card-text">輸入您個人血糖資訊，將會以圖表化方式為您呈現血堂走勢圖表.</p>
     </div>
   </div>
+  <div class="card">
+    <img class="card-img-top" src="./images/004.jpg" alt="Card image cap">
+    <div class="card-block">
+      <h4 class="card-title">保健商品</h4>
+      <p class="card-text">購買說醫門保健商品，留下您的通訊方式，我們將為您提供服務.</p>
+    </div>
+  </div>
+  <div class="card">
+    <img class="card-img-top" src="./images/005.png" alt="Card image cap">
+    <div class="card-block">
+      <h4 class="card-title">個人資料</h4>
+      <p class="card-text">維護您的個人資料.</p>
+    </div>
+  </div>    
 </div>
+
+<br/>
+<br/>
+<br/>
 	
 <!-- ############################################################################################################### -->
 	

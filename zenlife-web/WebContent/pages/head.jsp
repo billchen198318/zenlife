@@ -25,10 +25,7 @@
           </li>                              
           <li class="nav-item">
             <a class="nav-link" href="#" onclick=""><b>血糖</b></a>
-          </li>                
-          <li class="nav-item">
-            <a class="nav-link" href="#" onclick=""><b>BMI</b></a>
-          </li>        
+          </li>                    
           <li class="nav-item">
             <a class="nav-link" href="#" onclick=""><b>保健商品</b></a>
           </li>      
