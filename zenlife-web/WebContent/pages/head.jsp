@@ -18,6 +18,9 @@
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
+            <a class="nav-link" href="#" onclick=""><b>首頁</b></a>
+          </li>              
+          <li class="nav-item">
             <a class="nav-link" href="#" onclick=""><b>生活課堂</b></a>
           </li>      
           <li class="nav-item">
