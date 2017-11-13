@@ -2599,6 +2599,72 @@ LOCK TABLES `zl_chronic` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `zl_course`
+--
+
+DROP TABLE IF EXISTS `zl_course`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `zl_course` (
+  `OID` char(36) NOT NULL,
+  `ID` varchar(20) NOT NULL,
+  `TITLE` varchar(100) NOT NULL,
+  `CONTENT` text,
+  `SHOW_FLAG` varchar(1) NOT NULL DEFAULT 'Y',
+  `CUSERID` varchar(24) NOT NULL,
+  `CDATE` datetime NOT NULL,
+  `UUSERID` varchar(24) DEFAULT NULL,
+  `UDATE` datetime DEFAULT NULL,
+  PRIMARY KEY (`OID`),
+  UNIQUE KEY `UK_1` (`ID`),
+  KEY `IDX_1` (`TITLE`),
+  KEY `IDX_2` (`SHOW_FLAG`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `zl_course`
+--
+
+LOCK TABLES `zl_course` WRITE;
+/*!40000 ALTER TABLE `zl_course` DISABLE KEYS */;
+/*!40000 ALTER TABLE `zl_course` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `zl_course_read`
+--
+
+DROP TABLE IF EXISTS `zl_course_read`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `zl_course_read` (
+  `OID` char(36) NOT NULL,
+  `PERSON_ID` varchar(24) NOT NULL,
+  `COURSE_ID` varchar(24) NOT NULL,
+  `READ_FLAG` varchar(1) NOT NULL DEFAULT 'N',
+  `CUSERID` varchar(24) NOT NULL,
+  `CDATE` datetime NOT NULL,
+  `UUSERID` varchar(24) DEFAULT NULL,
+  `UDATE` datetime DEFAULT NULL,
+  PRIMARY KEY (`OID`),
+  UNIQUE KEY `UK_1` (`PERSON_ID`,`COURSE_ID`),
+  KEY `IDX_1` (`PERSON_ID`),
+  KEY `IDX_2` (`COURSE_ID`),
+  KEY `IDX_3` (`READ_FLAG`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `zl_course_read`
+--
+
+LOCK TABLES `zl_course_read` WRITE;
+/*!40000 ALTER TABLE `zl_course_read` DISABLE KEYS */;
+/*!40000 ALTER TABLE `zl_course_read` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `zl_person`
 --
 
@@ -2632,7 +2698,7 @@ CREATE TABLE `zl_person` (
 
 LOCK TABLES `zl_person` WRITE;
 /*!40000 ALTER TABLE `zl_person` DISABLE KEYS */;
-INSERT INTO `zl_person` VALUES ('0','admin','b7f1acbdc67d3b2a68d36a5d7a29b228','陳無名','0917862777','0800956956','chen.xin.nien@gmail.com','Y','admin','2017-11-09 15:04:18',NULL,NULL);
+INSERT INTO `zl_person` VALUES ('0','admin','b7f1acbdc67d3b2a68d36a5d7a29b228','陳無名','0917862777','0800956956','chen.xin.nien@gmail.com','Y','admin','2017-11-09 15:04:18',NULL,NULL),('0c50d200-c5c2-11e7-8b2e-058d906b7272','A123456789','ce353caa50000cd2b9a7c1853474fc2c','王永慶','0800555111','','aaa@aaa.org','Y','admin','2017-11-10 10:51:28',NULL,NULL);
 /*!40000 ALTER TABLE `zl_person` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2742,4 +2808,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-09 15:04:42
+-- Dump completed on 2017-11-13 18:04:47
