@@ -11,50 +11,50 @@ String c = (String)request.getParameter("c");
   <a class="navbar-brand" href="./index.do?c=1">
   	<table class="rounded">
   		<tr>
-  			<td align="center" <% if ("1".equals(c)) { %> bgcolor="#ffffff" <% } %> class="rounded-top"><img src="./images/computer.png" border="0"></td>
+  			<td align="center" <% if ("1".equals(c)) { %> bgcolor="#717880" <% } %> class="rounded-top"><img src="./images/computer.png" border="0"></td>
   		</tr>
   		<tr>
-  			<td align="center" <% if ("1".equals(c)) { %> bgcolor="#ffffff" <% } %> class="rounded-bottom"><font <% if (!"1".equals(c)) { %> color="#f2f2f2" <% } %> >首頁</font></td>
+  			<td align="center" <% if ("1".equals(c)) { %> bgcolor="#717880" <% } %> class="rounded-bottom"><font color="#f2f2f2">首頁</font></td>
   		</tr>  		
   	</table>
   </a>
   <a class="navbar-brand" href="#">
   	<table class="rounded">
   		<tr>
-  			<td align="center" <% if ("2".equals(c)) { %> bgcolor="#ffffff" <% } %> class="rounded-top"><img src="./images/accessories-dictionary.png" border="0"></td>
+  			<td align="center" <% if ("2".equals(c)) { %> bgcolor="#717880" <% } %> class="rounded-top"><img src="./images/accessories-dictionary.png" border="0"></td>
   		</tr>
   		<tr>
-  			<td align="center" <% if ("2".equals(c)) { %> bgcolor="#ffffff" <% } %> class="rounded-bottom"><font <% if (!"2".equals(c)) { %> color="#f2f2f2" <% } %> >課程</font></td>
+  			<td align="center" <% if ("2".equals(c)) { %> bgcolor="#717880" <% } %> class="rounded-bottom"><font color="#f2f2f2">課程</font></td>
   		</tr>  		
   	</table>
   </a>
   <a class="navbar-brand" href="#">
   	<table class="rounded">
   		<tr>
-  			<td align="center" <% if ("3".equals(c)) { %> bgcolor="#ffffff" <% } %> class="rounded-top"><img src="./images/applications-office.png" border="0"></td>
+  			<td align="center" <% if ("3".equals(c)) { %> bgcolor="#717880" <% } %> class="rounded-top"><img src="./images/applications-office.png" border="0"></td>
   		</tr>
   		<tr>
-  			<td align="center" <% if ("3".equals(c)) { %> bgcolor="#ffffff" <% } %> class="rounded-bottom"><font <% if (!"3".equals(c)) { %> color="#f2f2f2"  <% } %> >血壓</font></td>
+  			<td align="center" <% if ("3".equals(c)) { %> bgcolor="#717880" <% } %> class="rounded-bottom"><font color="#f2f2f2">血壓</font></td>
   		</tr>  		
   	</table>
   </a>  
   <a class="navbar-brand" href="#">
   	<table class="rounded">
   		<tr>
-  			<td align="center" <% if ("4".equals(c)) { %> bgcolor="#ffffff" <% } %> class="rounded-top"><img src="./images/contact-new.png" border="0"></td>
+  			<td align="center" <% if ("4".equals(c)) { %> bgcolor="#717880" <% } %> class="rounded-top"><img src="./images/contact-new.png" border="0"></td>
   		</tr>
   		<tr>
-  			<td align="center" <% if ("4".equals(c)) { %> bgcolor="#ffffff" <% } %> class="rounded-bottom"><font <% if (!"4".equals(c)) { %> color="#f2f2f2"  <% } %> >履歷</font></td>
+  			<td align="center" <% if ("4".equals(c)) { %> bgcolor="#717880" <% } %> class="rounded-bottom"><font color="#f2f2f2">履歷</font></td>
   		</tr>  		
   	</table>
   </a>  
   <a class="navbar-brand" href="tel:0800956956">
   	<table class="rounded">
   		<tr>
-  			<td align="center" <% if ("5".equals(c)) { %> bgcolor="#ffffff" <% } %> class="rounded-top"><img src="./images/call-start.png" border="0"></td>
+  			<td align="center" <% if ("5".equals(c)) { %> bgcolor="#717880" <% } %> class="rounded-top"><img src="./images/call-start.png" border="0"></td>
   		</tr>
   		<tr>
-  			<td align="center" <% if ("5".equals(c)) { %> bgcolor="#ffffff" <% } %> class="rounded-bottom"><font <% if (!"5".equals(c)) { %> color="#f2f2f2"  <% } %> >聯絡</font></td>
+  			<td align="center" <% if ("5".equals(c)) { %> bgcolor="#717880" <% } %> class="rounded-bottom"><font color="#f2f2f2">聯絡</font></td>
   		</tr>  		
   	</table>
   </a>   
