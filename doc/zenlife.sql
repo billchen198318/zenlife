@@ -2567,6 +2567,40 @@ INSERT INTO `tb_user_role` VALUES ('1c62cf70-ca6b-4243-8aa9-49b555024c45','COMMO
 UNLOCK TABLES;
 
 --
+-- Table structure for table `zl_blood_pressure`
+--
+
+DROP TABLE IF EXISTS `zl_blood_pressure`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `zl_blood_pressure` (
+  `OID` char(36) NOT NULL,
+  `PERSON_ID` varchar(24) NOT NULL,
+  `LOG_DATE` varchar(8) NOT NULL,
+  `SBP` int(3) NOT NULL DEFAULT '0',
+  `DBP` int(3) NOT NULL DEFAULT '0',
+  `FULSE` int(3) NOT NULL DEFAULT '0',
+  `CUSERID` varchar(24) NOT NULL,
+  `CDATE` datetime NOT NULL,
+  `UUSERID` varchar(24) DEFAULT NULL,
+  `UDATE` datetime DEFAULT NULL,
+  PRIMARY KEY (`OID`),
+  UNIQUE KEY `UK_1` (`PERSON_ID`,`LOG_DATE`),
+  KEY `IDX_1` (`PERSON_ID`),
+  KEY `IDX_2` (`LOG_DATE`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `zl_blood_pressure`
+--
+
+LOCK TABLES `zl_blood_pressure` WRITE;
+/*!40000 ALTER TABLE `zl_blood_pressure` DISABLE KEYS */;
+/*!40000 ALTER TABLE `zl_blood_pressure` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `zl_chronic`
 --
 
@@ -2808,4 +2842,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-14 13:55:51
+-- Dump completed on 2017-11-14 15:24:57
