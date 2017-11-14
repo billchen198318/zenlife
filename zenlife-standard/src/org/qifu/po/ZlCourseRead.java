@@ -25,7 +25,6 @@ public class ZlCourseRead extends BaseEntity<String> implements java.io.Serializ
 	private String oid;
 	private String personId;
 	private String courseId;
-	private String readFlag;
 	private String cuserid;
 	private Date cdate;
 	private String uuserid;
@@ -61,15 +60,6 @@ public class ZlCourseRead extends BaseEntity<String> implements java.io.Serializ
 	
 	public void setCourseId(String courseId) {
 		this.courseId = courseId;
-	}
-	
-	@Column(name="READ_FLAG")
-	public String getReadFlag() {
-		return readFlag;
-	}
-	
-	public void setReadFlag(String readFlag) {
-		this.readFlag = readFlag;
 	}
 	
 	@Override

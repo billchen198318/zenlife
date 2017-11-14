@@ -21,10 +21,17 @@
  */
 package com.zenlife.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.qifu.base.SysMessageUtil;
+import org.qifu.base.SysMsgConstants;
 import org.qifu.base.dao.IBaseDAO;
+import org.qifu.base.exception.ServiceException;
+import org.qifu.base.model.DefaultResult;
+import org.qifu.base.model.SystemMessage;
 import org.qifu.base.service.SimpleService;
 import org.qifu.po.ZlCourse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +67,18 @@ public class CourseServiceImpl extends SimpleService<ZlCourse, String> implement
 	@Override
 	protected IBaseDAO<ZlCourse, String> getBaseDataAccessObject() {
 		return this.courseDAO;
+	}
+
+	@Override
+	public DefaultResult<List<ZlCourse>> findCourseForShow() throws ServiceException, Exception {
+		DefaultResult<List<ZlCourse>> result = new DefaultResult<List<ZlCourse>>();
+		List<ZlCourse> courseList = this.courseDAO.findCourseForShow();
+		if (courseList!=null && courseList.size()>0) {
+			result.setValue(courseList);
+		} else {
+			result.setSystemMessage( new SystemMessage(SysMessageUtil.get(SysMsgConstants.SEARCH_NO_DATA)) );
+		}
+		return result;
 	}
 	
 }

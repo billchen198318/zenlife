@@ -42,7 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!-- ############################################################################################################### -->
 	
 <div class="card-deck">
-  <div class="card mb-3 text-center">
+  <div class="card mb-3 text-center" onclick="window.location='./course.do';">
     <img class="card-img-top" src="./images/001.jpg" alt="Card image cap">
     <div class="card-block">
       <h4 class="card-title">生活課堂</h4>

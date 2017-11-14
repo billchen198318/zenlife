@@ -19,31 +19,14 @@
  * contact: chen.xin.nien@gmail.com
  * 
  */
-package com.zenlife.dao.impl;
+package com.zenlife.service.logic;
 
-import java.util.List;
-
-import org.qifu.base.dao.BaseDAO;
-import org.qifu.base.model.YesNo;
+import org.qifu.base.exception.ServiceException;
+import org.qifu.base.model.DefaultResult;
 import org.qifu.po.ZlCourse;
-import org.springframework.stereotype.Repository;
 
-import com.zenlife.dao.ICourseDAO;
-
-@Repository("zenlife.dao.CourseDAO")
-public class CourseDAOImpl extends BaseDAO<ZlCourse, String> implements ICourseDAO<ZlCourse, String> {
+public interface ICourseLogicService {
 	
-	public CourseDAOImpl() {
-		super();
-	}
-	
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<ZlCourse> findCourseForShow() throws Exception {
-		return this.getCurrentSession().createQuery("SELECT new org.qifu.po.ZlCourse(m.oid, m.id, m.title, m.description, m.showFlag, m.cuserid, m.cdate) FROM ZlCourse m WHERE m.showFlag = :showFlag ORDER BY m.id DESC")
-				.setString("showFlag", YesNo.YES)
-				.setMaxResults(100)
-				.list();
-	}
+	public DefaultResult<ZlCourse> createReadLogAndGetCourse(String courseOid) throws ServiceException, Exception;
 	
 }

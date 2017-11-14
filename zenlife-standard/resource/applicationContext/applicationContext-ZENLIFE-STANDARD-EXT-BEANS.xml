@@ -11,5 +11,6 @@
     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
     
     <import resource="classpath*:applicationContext/zenlife/standard/ext/applicationContext-ext-person.xml" />
+    <import resource="classpath*:applicationContext/zenlife/standard/ext/applicationContext-ext-course.xml" />
     
 </beans>    

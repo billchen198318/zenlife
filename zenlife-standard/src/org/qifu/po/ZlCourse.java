@@ -26,10 +26,43 @@ public class ZlCourse extends BaseEntity<String> implements java.io.Serializable
 	private String id;
 	private String title;
 	private String content;
+	private String description;
+	private String showFlag;
 	private String cuserid;
 	private Date cdate;
 	private String uuserid;
 	private Date udate;		
+	
+	public ZlCourse() {
+		super();
+	}		
+	
+	public ZlCourse(String oid, String id, String title, String description, String showFlag, String cuserid,
+			Date cdate) {
+		super();
+		this.oid = oid;
+		this.id = id;
+		this.title = title;
+		this.description = description;
+		this.showFlag = showFlag;
+		this.cuserid = cuserid;
+		this.cdate = cdate;
+	}
+
+	public ZlCourse(String oid, String id, String title, String content, String description, String showFlag,
+			String cuserid, Date cdate, String uuserid, Date udate) {
+		super();
+		this.oid = oid;
+		this.id = id;
+		this.title = title;
+		this.content = content;
+		this.description = description;
+		this.showFlag = showFlag;
+		this.cuserid = cuserid;
+		this.cdate = cdate;
+		this.uuserid = uuserid;
+		this.udate = udate;
+	}
 	
 	@Override
 	@Id
@@ -69,6 +102,24 @@ public class ZlCourse extends BaseEntity<String> implements java.io.Serializable
 	
 	public void setContent(String content) {
 		this.content = content;
+	}
+	
+	@Column(name="DESCRIPTION")
+	public String getDescription() {
+		return description;
+	}
+	
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	@Column(name="SHOW_FLAG")
+	public String getShowFlag() {
+		return showFlag;
+	}
+	
+	public void setShowFlag(String showFlag) {
+		this.showFlag = showFlag;
 	}
 	
 	@Override

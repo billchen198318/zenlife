@@ -21,9 +21,13 @@
  */
 package com.zenlife.dao;
 
+import java.util.List;
+
 import org.qifu.base.dao.IBaseDAO;
 import org.qifu.po.ZlCourse;
 
 public interface ICourseDAO<T extends java.io.Serializable, PK extends java.io.Serializable> extends IBaseDAO<ZlCourse, String> {
+	
+	public List<T> findCourseForShow() throws Exception;
 
 }

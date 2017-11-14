@@ -21,8 +21,15 @@
  */
 package com.zenlife.service;
 
+import java.util.List;
+
+import org.qifu.base.exception.ServiceException;
+import org.qifu.base.model.DefaultResult;
 import org.qifu.base.service.ISimpleService;
+import org.qifu.po.ZlCourse;
 
 public interface ICourseService<E extends java.io.Serializable, PK extends java.io.Serializable> extends ISimpleService<E, PK> {
+	
+	public DefaultResult<List<ZlCourse>> findCourseForShow() throws ServiceException, Exception;
 
 }
