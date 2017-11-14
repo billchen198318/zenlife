@@ -15,5 +15,7 @@
     <import resource="classpath*:applicationContext/zenlife/standard/applicationContext-person.xml" />
     <import resource="classpath*:applicationContext/zenlife/standard/applicationContext-personProfile.xml" />
     <import resource="classpath*:applicationContext/zenlife/standard/applicationContext-personUrgentContact.xml" />
+    <import resource="classpath*:applicationContext/zenlife/standard/applicationContext-course.xml" />
+    <import resource="classpath*:applicationContext/zenlife/standard/applicationContext-courseRead.xml" />
     
 </beans>    

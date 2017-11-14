@@ -23,6 +23,6 @@ package com.zenlife.service;
 
 import org.qifu.base.service.ISimpleService;
 
-public interface IZlCourseReadService<E extends java.io.Serializable, PK extends java.io.Serializable> extends ISimpleService<E, PK> {
+public interface ICourseService<E extends java.io.Serializable, PK extends java.io.Serializable> extends ISimpleService<E, PK> {
 
 }
