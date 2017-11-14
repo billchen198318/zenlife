@@ -2609,7 +2609,8 @@ CREATE TABLE `zl_course` (
   `OID` char(36) NOT NULL,
   `ID` varchar(20) NOT NULL,
   `TITLE` varchar(100) NOT NULL,
-  `CONTENT` text,
+  `CONTENT` text NOT NULL,
+  `DESCRIPTION` varchar(500) NOT NULL,
   `SHOW_FLAG` varchar(1) NOT NULL DEFAULT 'Y',
   `CUSERID` varchar(24) NOT NULL,
   `CDATE` datetime NOT NULL,
@@ -2628,6 +2629,7 @@ CREATE TABLE `zl_course` (
 
 LOCK TABLES `zl_course` WRITE;
 /*!40000 ALTER TABLE `zl_course` DISABLE KEYS */;
+INSERT INTO `zl_course` VALUES ('37bcf152-f8e5-4166-bc93-56b763c4d5d0','T20171114002','人生苦短','<b>【1112】卡提諾狂新聞 #090</b>\r\n<br/>\r\n1112】卡提諾狂新聞 #090 期<br/>\r\n<br/>\r\n※ 一直咧修來修去修來修去<br/>\r\n※ 狗臉也能開手機嗎？<br/>\r\n※ 夾夾夾夾你個大傻幣<br/>\r\n※ 唐納先生逛亞洲大觀園<br/>\r\n※ 小時不讀書長大當...<br/>\r\n<br/>\r\n按讚加入卡提諾狂新聞粉絲團 ！搶先收到第一手狂訊<br/>\r\nhttps://www.facebook.com/crazyck101/ <br/>\r\niPhone裝APP https://goo.gl/wbDRJp<br/>\r\nAndroid裝APP https://goo.gl/zJjCjU<br/>\r\n卡提諾狂新聞網站 https://goo.gl/VXz5v2<br/>\r\n卡提諾狂新聞Youtube https://goo.gl/2edkKf<br/>\r\n\r\n<div class=\"embed-responsive embed-responsive-4by3\">\r\n  <iframe class=\"embed-responsive-item\" src=\"https://www.youtube.com/embed/M3ovvCIN8ok?rel=0\" allowfullscreen></iframe>\r\n</div>\r\n','卡提諾狂新聞 #090','Y','admin','2017-11-14 10:51:13',NULL,NULL),('f9021ed1-0da2-4eda-a20f-e69f70219b3c','T20171114001','測試用教學，看看風景!','2017年11月3日、紅葉が真っ盛りとなった小川村や大坊峠から見る雪化粧した北アルプスの絶景、\r\n11月2日に撮影した信仰と伝説の戸隠山など信州の里山の秋景色を作品にしました。\r\n音楽は＜甘茶の音楽工房＞さんの楽曲を使用させて頂きました。\r\n\r\n<div class=\"embed-responsive embed-responsive-4by3\">\r\n  <iframe class=\"embed-responsive-item\" src=\"https://www.youtube.com/embed/1C0ild-G4lA?rel=0\" allowfullscreen></iframe>\r\n</div>\r\n\r\n\r\n','紅葉が美しい小川村から戸隠山 大望峠に・4K撮影','Y','admin','2017-11-14 10:46:40',NULL,NULL);
 /*!40000 ALTER TABLE `zl_course` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2642,7 +2644,6 @@ CREATE TABLE `zl_course_read` (
   `OID` char(36) NOT NULL,
   `PERSON_ID` varchar(24) NOT NULL,
   `COURSE_ID` varchar(24) NOT NULL,
-  `READ_FLAG` varchar(1) NOT NULL DEFAULT 'N',
   `CUSERID` varchar(24) NOT NULL,
   `CDATE` datetime NOT NULL,
   `UUSERID` varchar(24) DEFAULT NULL,
@@ -2650,8 +2651,7 @@ CREATE TABLE `zl_course_read` (
   PRIMARY KEY (`OID`),
   UNIQUE KEY `UK_1` (`PERSON_ID`,`COURSE_ID`),
   KEY `IDX_1` (`PERSON_ID`),
-  KEY `IDX_2` (`COURSE_ID`),
-  KEY `IDX_3` (`READ_FLAG`)
+  KEY `IDX_2` (`COURSE_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -2808,4 +2808,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-13 18:04:47
+-- Dump completed on 2017-11-14 13:55:51
