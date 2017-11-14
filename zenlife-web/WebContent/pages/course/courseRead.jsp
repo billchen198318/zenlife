@@ -37,7 +37,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
 <body>
-	<jsp:include page="../head.jsp"></jsp:include>
+	<jsp:include page="../head.jsp">
+		<jsp:param name="backUrl" value="./course.do"/>
+	</jsp:include>
 	
 <!-- ############################################################################################################### -->
 
