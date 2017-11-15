@@ -16,7 +16,7 @@ import org.qifu.base.model.EntityUK;
 @Table(
 		name="zl_blood_pressure", 
 		uniqueConstraints = { 
-				@UniqueConstraint( columnNames = {"PERSON_ID", "LOG_DATE"} ) 
+				@UniqueConstraint( columnNames = {"PERSON_ID", "LOG_DATE", "TIME_PERIOD"} ) 
 		} 
 )
 public class ZlBloodPressure extends BaseEntity<String> implements java.io.Serializable {
@@ -94,6 +94,7 @@ public class ZlBloodPressure extends BaseEntity<String> implements java.io.Seria
 		this.fulse = fulse;
 	}
 	
+	@EntityUK(name="timePeriod")
 	@Column(name="TIME_PERIOD")
 	public String getTimePeriod() {
 		return timePeriod;
