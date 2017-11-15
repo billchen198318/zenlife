@@ -59,7 +59,7 @@ function saveSuccess(data) {
 }
 
 function clearSave() {
-	
+	$("#bloodPressureForm").trigger('reset');
 }
 
 function cancelSave() {
