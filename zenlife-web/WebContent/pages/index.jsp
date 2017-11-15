@@ -40,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<jsp:include page="./head.jsp"></jsp:include>
 	
 <!-- ############################################################################################################### -->
-	
+<div class="container">	
 <div class="card-deck">
   <div class="card mb-3 text-center" onclick="window.location='./course.do';">
     <img class="card-img-top" src="./images/001.jpg" alt="Card image cap">
@@ -80,7 +80,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
   </div>    
 </div>
-
+</div>
 <br/>
 <br/>
 <br/>
