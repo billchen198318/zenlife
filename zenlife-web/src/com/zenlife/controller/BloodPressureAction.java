@@ -21,6 +21,8 @@
  */
 package com.zenlife.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -60,6 +62,11 @@ public class BloodPressureAction extends BaseController {
 	public void setBloodPressureService(IBloodPressureService<ZlBloodPressure, String> bloodPressureService) {
 		this.bloodPressureService = bloodPressureService;
 	}
+	
+	private List<ZlBloodPressure> findForLast7Record() throws ServiceException, Exception {
+		DefaultResult<List<ZlBloodPressure>> result = this.bloodPressureService.findForLast7Record(this.getAccountId());
+		return result.getValue();
+	}	
 
 	@ControllerMethodAuthority(check = true, programId = "ZENLIFE_FE_0003Q")
 	@RequestMapping(value = "/bloodPressure.do", method = RequestMethod.GET)
@@ -69,7 +76,7 @@ public class BloodPressureAction extends BaseController {
 		ModelAndView mv = this.getDefaultModelAndView();
 		try {
 			c = request.getParameter("c");
-			
+			mv.addObject("bloodPressureList", this.findForLast7Record());
 			viewName = "blood-pressure/blood-pressure-home";
 		} catch (AuthorityException e) {
 			viewName = this.getAuthorityExceptionPage(e, request);

@@ -21,9 +21,13 @@
  */
 package com.zenlife.dao;
 
+import java.util.List;
+
 import org.qifu.base.dao.IBaseDAO;
 import org.qifu.po.ZlBloodPressure;
 
 public interface IBloodPressureDAO<T extends java.io.Serializable, PK extends java.io.Serializable> extends IBaseDAO<ZlBloodPressure, String> {
+	
+	public List<ZlBloodPressure> findForLast7Record(String personId) throws Exception;
 
 }

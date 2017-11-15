@@ -21,10 +21,18 @@
  */
 package com.zenlife.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+import org.qifu.base.SysMessageUtil;
+import org.qifu.base.SysMsgConstants;
 import org.qifu.base.dao.IBaseDAO;
+import org.qifu.base.exception.ServiceException;
+import org.qifu.base.model.DefaultResult;
+import org.qifu.base.model.SystemMessage;
 import org.qifu.base.service.SimpleService;
 import org.qifu.po.ZlBloodPressure;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +68,21 @@ public class BloodPressureServiceImpl extends SimpleService<ZlBloodPressure, Str
 	@Override
 	protected IBaseDAO<ZlBloodPressure, String> getBaseDataAccessObject() {
 		return this.bloodPressureDAO;
+	}
+
+	@Override
+	public DefaultResult<List<ZlBloodPressure>> findForLast7Record(String personId) throws ServiceException, Exception {
+		if (StringUtils.isBlank(personId)) {
+			throw new ServiceException( SysMessageUtil.get(SysMsgConstants.PARAMS_BLANK) );
+		}
+		DefaultResult<List<ZlBloodPressure>> result = new DefaultResult<List<ZlBloodPressure>>();
+		List<ZlBloodPressure> bloodPressureList = this.bloodPressureDAO.findForLast7Record(personId);
+		if (null != bloodPressureList && bloodPressureList.size()>0) {
+			result.setValue(bloodPressureList);
+		} else {
+			result.setSystemMessage( new SystemMessage(SysMessageUtil.get(SysMsgConstants.SEARCH_NO_DATA)) );
+		}
+		return result;
 	}
 
 }

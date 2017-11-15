@@ -21,6 +21,8 @@
  */
 package com.zenlife.dao.impl;
 
+import java.util.List;
+
 import org.qifu.base.dao.BaseDAO;
 import org.qifu.po.ZlBloodPressure;
 import org.springframework.stereotype.Repository;
@@ -34,4 +36,13 @@ public class BloodPressureDAOImpl extends BaseDAO<ZlBloodPressure, String> imple
 		super();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ZlBloodPressure> findForLast7Record(String personId) throws Exception {
+		return this.getCurrentSession().createQuery("FROM ZlBloodPressure WHERE personId = :personId ORDER BY logDate, timePeriod ASC")
+				.setString("personId", personId)
+				.setMaxResults(7)
+				.list();
+	}
+	
 }
