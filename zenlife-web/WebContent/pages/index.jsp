@@ -49,7 +49,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <p class="card-text">提供您生活保健知識，與說醫門生活課程內容.</p>
     </div>
   </div>
-  <div class="card mb-3 text-center">
+  <div class="card mb-3 text-center" onclick="window.location='./bloodPressure.do';">
     <img class="card-img-top" src="./images/002.jpg" alt="Card image cap">
     <div class="card-block">
       <h4 class="card-title">血壓</h4>

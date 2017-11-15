@@ -28,7 +28,7 @@ String c = (String)request.getParameter("c");
   		</tr>  		
   	</table>
   </a>
-  <a class="navbar-brand" href="#">
+  <a class="navbar-brand" href="./bloodPressure.do?c=3">
   	<table class="rounded">
   		<tr>
   			<td align="center" <% if ("3".equals(c)) { %> bgcolor="#717880" <% } %> class="rounded-top"><img src="./images/applications-office.png" border="0"></td>

@@ -129,7 +129,7 @@ public class CourseAction extends BaseController {
 		try {
 			c = request.getParameter("c");
 			mv.addObject("courseList", this.findCourseList());
-			viewName = "course/courseHome";
+			viewName = "course/course-home";
 		} catch (AuthorityException e) {
 			viewName = this.getAuthorityExceptionPage(e, request);
 		} catch (ServiceException | ControllerException e) {
@@ -151,7 +151,7 @@ public class CourseAction extends BaseController {
 		try {
 			c = request.getParameter("c");
 			mv.addObject("course", this.fetchCourse(course));
-			viewName = "course/courseRead";
+			viewName = "course/course-read";
 		} catch (AuthorityException e) {
 			viewName = this.getAuthorityExceptionPage(e, request);
 		} catch (ServiceException | ControllerException e) {

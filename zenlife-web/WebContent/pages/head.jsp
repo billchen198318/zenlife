@@ -37,7 +37,7 @@ String backUrl = (String) request.getParameter("backUrl");
             <a class="nav-link" href="./course.do" onclick=""><b>生活課堂</b></a>
           </li>      
           <li class="nav-item">
-            <a class="nav-link" href="#" onclick=""><b>血壓</b></a>
+            <a class="nav-link" href="./bloodPressure.do" onclick=""><b>血壓</b></a>
           </li>                              
           <li class="nav-item">
             <a class="nav-link" href="#" onclick=""><b>血糖</b></a>
