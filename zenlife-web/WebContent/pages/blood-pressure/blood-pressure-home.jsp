@@ -93,7 +93,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         },	    
 	    yAxis: {
 	        title: {
-	            text: '血壓SDP/DBP/PULSE'
+	            text: '血壓 ( SBP/DBP/PULSE )'
 	        },
 	        plotLines: [{
 	            value: 0,
@@ -112,7 +112,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    },
 	    series: [
 			{
-		        name: 'SDP',
+		        name: 'SBP',
 		        data: [
 						<c:forEach items="${bloodPressureList}" var="item" varStatus="myIndex">
 						${item.sbp}<q:if test=" ${myIndex.index+1} < bloodPressureList.size ">,</q:if>
@@ -144,7 +144,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  <thead class="thead-inverse">
 	    <tr>
 	      <th>日期</th>
-	      <th>SDP</th>
+	      <th>SBP</th>
 	      <th>DBP</th>
 	      <th>PULSE</th>
 	    </tr>
