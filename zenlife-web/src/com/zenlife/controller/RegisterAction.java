@@ -134,7 +134,7 @@ public class RegisterAction extends BaseController {
 	
 	@ControllerMethodAuthority(check = false, programId = "ZENLIFE_FE_9997Q")
 	@RequestMapping(value = "/registerSaveJson.do", produces = "application/json")
-	public @ResponseBody DefaultControllerJsonResultObj<ZlPerson> save(HttpServletRequest request, ZlPerson person) {
+	public @ResponseBody DefaultControllerJsonResultObj<ZlPerson> doSave(HttpServletRequest request, ZlPerson person) {
 		DefaultControllerJsonResultObj<ZlPerson> result = this.getDefaultJsonResult("ZENLIFE_FE_9997Q");
 		// 因為是 register所以不要check login/authorize了
 		/*

@@ -30,6 +30,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <script type="text/javascript">
 
+var msgFields = new Object();
+msgFields['sbp'] 			= 'sbp';
+msgFields['dbp'] 			= 'dbp';
+msgFields['pulse'] 			= 'pulse';
+msgFields['logDate']		= 'logDate';
+
+var formGroups = new Object();
+formGroups['sbp'] 			= 'form-group1';
+formGroups['dbp'] 			= 'form-group1';
+formGroups['pulse'] 		= 'form-group1';
+formGroups['logDate'] 		= 'form-group2';
+
+function saveSuccess(data) {
+	clearWarningMessageField(formGroups, msgFields);
+	if ( _qifu_success_flag != data.success ) {
+		parent.toastrWarning( data.message );
+		setWarningMessageField(formGroups, msgFields, data.checkFields);
+		return;
+	}
+	parent.toastrInfo( data.message );
+	bootbox.alert({ 
+		  size: "small",
+		  title: "血壓資料輸入完成",
+		  message: "返回查詢血壓資料記錄", 
+		  callback: function(){ window.location = "./bloodPressure.do"; }
+	});	
+}
+
 function clearSave() {
 	
 }
@@ -79,7 +107,7 @@ function cancelSave() {
 		</div>
 		<div class="row">
 			<div class="col-xs-6 col-md-6 col-lg-6">
-			    <select class="form-control" id="exampleSelect1">
+			    <select class="form-control" id="timePeriod" name="timePeriod">
 			      <option value="1">1 - 凌晨(00 ~ 06)</option>
 			      <option value="2">2 - 上午(06 ~ 12)</option>
 			      <option value="3">3 - 下午(12 ~ 18)</option>
@@ -103,7 +131,12 @@ function cancelSave() {
 			xhrUrl="./bloodPressureSaveJson.do"
 			xhrParameter="
 			{
-
+				'sbpStr'		: 	$('#sbp').val(),
+				'dbpStr'		: 	$('#dbp').val(),
+				'pulseStr'		: 	$('#pulse').val(),
+				'logDate'		: 	$('#logDate').val(),
+				'timePeriod'	: 	$('#timePeriod').val(),
+				'description'	:	$('#description').val()
 			}
 			"
 			onclick="btnSave();"
