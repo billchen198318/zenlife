@@ -42,7 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</jsp:include>
 	
 <!-- ############################################################################################################### -->
-
+<div class="container">
 <q:if test=" null != course ">
 		<div class="card mb-3 text-center">
 		  <div class="card-block">
@@ -63,7 +63,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  </div>
 	</div>
 </q:else>
-	
+</div>	
 
 
 <br/>

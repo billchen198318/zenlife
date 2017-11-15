@@ -43,7 +43,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 <!-- ############################################################################################################### -->
 
-<button type="button" class="btn btn-info" onclick="window.location='./bloodPressureInput.do';">自行輸入血壓資料</button>
+<h5><span class="badge badge-primary" onclick="window.location='./bloodPressureInput.do';">&#8658;&nbsp;自行輸入血壓資料</span></h5>
+
+
 	
 
 

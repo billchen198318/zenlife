@@ -42,12 +42,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</jsp:include>
 	
 <!-- ############################################################################################################### -->
-
+<div class="container">
 <q:if test=" null != courseList && courseList.size > 0 ">
 	<c:forEach items="${courseList}" var="item" varStatus="myIndex">
 		<div class="card mb-3 text-center">
 		  <div class="card-header">
-		    <q:if test=" \"Y\" == item.read "><span class="badge badge-info">已讀</span></q:if><q:else><span class="badge badge-warning">未讀</span></q:else>
+		    <q:if test=" \"Y\" == item.read "><h5><span class="badge badge-info">已讀</span></h5></q:if><q:else><h5><span class="badge badge-warning">未讀</span></h5></q:else>
 		  </div>
 		  <div class="card-block">
 		    <h4 class="card-title">${item.course.title}</h4>
@@ -73,7 +73,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 </q:else>
 	
-
+</div>
 
 <br/>
 <br/>

@@ -30,6 +30,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <script type="text/javascript">
 
+function clearSave() {
+	
+}
+
+function cancelSave() {
+	window.location = './bloodPressure.do';
+}
+
 </script>
 
 
@@ -42,54 +50,72 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</jsp:include>
 	
 <!-- ############################################################################################################### -->
+<div class="container">
 <form name="bloodPressureForm" id="bloodPressureForm" action="" method="post">
-<!--  
-<div class="form-group" id="form-group1">
-	<div class="row">
-		<div class="col-xs-6 col-md-6 col-lg-6">
-			<q:textbox name="sbp" value="" id="sbp" label="收縮壓(SBP)" requiredFlag="Y" maxlength="3" placeholder="請輸入收縮壓(SBP)"></q:textbox>
+	<div class="form-group" id="form-group1">
+		<div class="row">
+			<div class="col-xs-6 col-md-6 col-lg-6">
+				<q:textbox name="sbp" value="" id="sbp" label="收縮壓(SBP)" requiredFlag="Y" maxlength="3" placeholder="請輸入收縮壓(SBP)"></q:textbox>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-6 col-md-6 col-lg-6">
+				<q:textbox name="dbp" value="" id="dbp" label="舒張壓(DBP)" requiredFlag="Y" maxlength="3" placeholder="請輸入舒張壓(DBP)"></q:textbox>
+			</div>
+		</div>	
+		<div class="row">
+			<div class="col-xs-6 col-md-6 col-lg-6">
+				<q:textbox name="pulse" value="" id="pulse" label="脈搏(PULSE)" requiredFlag="Y" maxlength="3" placeholder="請輸入脈搏(PULSE)"></q:textbox>
+			</div>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-xs-6 col-md-6 col-lg-6">
-			<q:textbox name="dbp" value="" id="dbp" label="舒張壓(DBP)" requiredFlag="Y" maxlength="3" placeholder="請輸入舒張壓(DBP)"></q:textbox>
+	<div class="form-group" id="form-group2">
+		<div class="row">
+			<div class="col-xs-6 col-md-6 col-lg-6">
+				<label for="logDate"> 日期 &nbsp;<font color="RED">*</font></label>
+				<input  class="form-control" type="date" value="" id="logDate" name="logDate"/>
+				<div class="form-control-feedback" id="logDate-feedback"></div>
+			</div>
 		</div>
+		<div class="row">
+			<div class="col-xs-6 col-md-6 col-lg-6">
+			    <select class="form-control" id="exampleSelect1">
+			      <option value="1">1 - 凌晨(00 ~ 06)</option>
+			      <option value="2">2 - 上午(06 ~ 12)</option>
+			      <option value="3">3 - 下午(12 ~ 18)</option>
+			      <option value="4">4 - 晚間(18 ~ 24)</option>
+			    </select>			
+			</div>
+		</div>		
 	</div>	
-	<div class="row">
-		<div class="col-xs-6 col-md-6 col-lg-6">
-			<q:textbox name="pulse" value="" id="pulse" label="脈搏(PULSE)" requiredFlag="Y" maxlength="3" placeholder="請輸入脈搏(PULSE)"></q:textbox>
-		</div>
+	<div class="form-group" id="form-group3">
+		<div class="row">
+			<div class="col-xs-6 col-md-6 col-lg-6">
+				<q:textarea name="description" value="" id="description" label="備註欄" rows="1" placeholder="備註"></q:textarea>
+			</div>
+		</div>	
 	</div>
-</div>		
-
-<div class="form-group" id="form-group2">
-	<div class="row">
-		<div class="col-xs-6 col-md-6 col-lg-6">
-			<label for="logDate"> 日期 &nbsp;<font color="RED">*</font></label>
-			<input  class="form-control" type="date" value="" id="logDate" name="logDate"/>
-			<div class="form-control-feedback" id="logDate-feedback"></div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-xs-6 col-md-6 col-lg-6">
-		    <select class="form-control" id="exampleSelect1">
-		      <option value="1">1 - 凌晨(00 ~ 06)</option>
-		      <option value="2">2 - 上午(06 ~ 12)</option>
-		      <option value="3">3 - 下午(12 ~ 18)</option>
-		      <option value="4">4 - 晚間(18 ~ 24)</option>
-		    </select>			
-		</div>
-	</div>		
-</div>	
-<div class="form-group" id="form-group3">
-	<div class="row">
-		<div class="col-xs-6 col-md-6 col-lg-6">
-			<q:textarea name="description" value="" id="description" label="備註欄" rows="3" placeholder="備註"></q:textarea>
-		</div>
-	</div>	
-</div>
--->
 </form>	
+
+<div class="row">
+	<div class="col-xs-6 col-md-6 col-lg-6">
+		<q:button id="btnSave" label="確認"
+			xhrUrl="./bloodPressureSaveJson.do"
+			xhrParameter="
+			{
+
+			}
+			"
+			onclick="btnSave();"
+			loadFunction="saveSuccess(data);"
+			errorFunction="clearSave();">
+		</q:button>
+		<q:button id="btnClear" label="清除" onclick="clearSave();" cssClass="btn btn-info"></q:button>
+		<q:button id="btnCancel" label="取消" onclick="cancelSave();" cssClass="btn btn-secondary"></q:button>
+	</div>
+</div>
+
+</div>
 
 <br/>
 <br/>
