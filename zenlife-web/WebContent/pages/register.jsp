@@ -80,7 +80,7 @@ function cancelSave() {
 
 <body>
 
-
+<div class="container">
 <form name="registerForm" id="registerForm" action="" method="post">
 <div><img src="./images/logo2.png" width="48" height="48" border="0"/>&nbsp;&nbsp;&nbsp;<b><font color="#041431">ZenLife - 禪生活保健</font></b></div>
 <br/>
@@ -107,8 +107,8 @@ function cancelSave() {
 	<div class="row">
 		<div class="col-xs-6 col-md-6 col-lg-6">
 		
-		    <label for="vcode">驗證碼</label>&nbsp;<font color="RED">*</font> &nbsp;&nbsp; <img id="vcode-image" alt="vcode-image" src="./vCode.do?n=<%=uuidStr%>"> 
-		    <button type="button" class="btn btn-info btn-sm" onclick="refreshVcodeUrl()">更換驗證碼</button>
+		    <label for="vcode">驗證碼</label>&nbsp;<font color="RED">*</font> &nbsp;&nbsp; <img id="vcode-image" alt="vcode-image" src="./vCode.do?n=<%=uuidStr%>">
+		    <span class="badge badge-info" onclick="refreshVcodeUrl()">更換驗證碼</span> 
 		    
 		    <input type="text" class="form-control" id="vcode" name="vcode" placeholder="請輸入 驗證碼">
 		    <div class="form-control-feedback" id="vcode-feedback"></div>			
@@ -168,6 +168,8 @@ function cancelSave() {
 		<q:button id="btnClear" label="清除" onclick="clearSave();" cssClass="btn btn-info"></q:button>
 		<q:button id="btnCancel" label="取消" onclick="cancelSave();" cssClass="btn btn-secondary"></q:button>
 	</div>
+</div>
+
 </div>
 
     <br/>
