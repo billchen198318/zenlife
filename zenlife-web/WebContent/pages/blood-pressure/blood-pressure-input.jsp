@@ -1,0 +1,104 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="q" uri="http://www.qifu.org/controller/tag" %>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+
+%>
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>ZenLife - 禪生活保健</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<jsp:include page="../common-f-inc.jsp"></jsp:include>
+
+
+<style type="text/css">
+
+.faq .section p.quetn a, .faq .section p.quetn a:hover {
+    text-decoration:underline;
+    font-weight:bold
+}
+
+</style>
+
+
+<script type="text/javascript">
+
+</script>
+
+
+</head>
+
+
+<body>
+	<jsp:include page="../head.jsp">
+		<jsp:param name="backUrl" value="./bloodPressure.do"/>
+	</jsp:include>
+	
+<!-- ############################################################################################################### -->
+<form name="bloodPressureForm" id="bloodPressureForm" action="" method="post">
+<!--  
+<div class="form-group" id="form-group1">
+	<div class="row">
+		<div class="col-xs-6 col-md-6 col-lg-6">
+			<q:textbox name="sbp" value="" id="sbp" label="收縮壓(SBP)" requiredFlag="Y" maxlength="3" placeholder="請輸入收縮壓(SBP)"></q:textbox>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-6 col-md-6 col-lg-6">
+			<q:textbox name="dbp" value="" id="dbp" label="舒張壓(DBP)" requiredFlag="Y" maxlength="3" placeholder="請輸入舒張壓(DBP)"></q:textbox>
+		</div>
+	</div>	
+	<div class="row">
+		<div class="col-xs-6 col-md-6 col-lg-6">
+			<q:textbox name="pulse" value="" id="pulse" label="脈搏(PULSE)" requiredFlag="Y" maxlength="3" placeholder="請輸入脈搏(PULSE)"></q:textbox>
+		</div>
+	</div>
+</div>		
+
+<div class="form-group" id="form-group2">
+	<div class="row">
+		<div class="col-xs-6 col-md-6 col-lg-6">
+			<label for="logDate"> 日期 &nbsp;<font color="RED">*</font></label>
+			<input  class="form-control" type="date" value="" id="logDate" name="logDate"/>
+			<div class="form-control-feedback" id="logDate-feedback"></div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-6 col-md-6 col-lg-6">
+		    <select class="form-control" id="exampleSelect1">
+		      <option value="1">1 - 凌晨(00 ~ 06)</option>
+		      <option value="2">2 - 上午(06 ~ 12)</option>
+		      <option value="3">3 - 下午(12 ~ 18)</option>
+		      <option value="4">4 - 晚間(18 ~ 24)</option>
+		    </select>			
+		</div>
+	</div>		
+</div>	
+<div class="form-group" id="form-group3">
+	<div class="row">
+		<div class="col-xs-6 col-md-6 col-lg-6">
+			<q:textarea name="description" value="" id="description" label="備註欄" rows="3" placeholder="備註"></q:textarea>
+		</div>
+	</div>	
+</div>
+-->
+</form>	
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+	
+<!-- ############################################################################################################### -->
+	
+	<jsp:include page="../foot.jsp"></jsp:include>
+</body>

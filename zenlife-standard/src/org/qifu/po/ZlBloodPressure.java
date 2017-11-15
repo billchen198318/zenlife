@@ -27,7 +27,7 @@ public class ZlBloodPressure extends BaseEntity<String> implements java.io.Seria
 	private String logDate;
 	private int sbp;
 	private int dbp;
-	private int fulse;
+	private int pulse;
 	private String timePeriod;
 	private String description;
 	private String cuserid;
@@ -85,13 +85,13 @@ public class ZlBloodPressure extends BaseEntity<String> implements java.io.Seria
 		this.dbp = dbp;
 	}
 	
-	@Column(name="FULSE")
-	public int getFulse() {
-		return fulse;
+	@Column(name="PULSE")
+	public int getPulse() {
+		return pulse;
 	}
 	
-	public void setFulse(int fulse) {
-		this.fulse = fulse;
+	public void setPulse(int pulse) {
+		this.pulse = pulse;
 	}
 	
 	@EntityUK(name="timePeriod")

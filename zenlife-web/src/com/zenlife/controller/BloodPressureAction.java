@@ -59,5 +59,27 @@ public class BloodPressureAction extends BaseController {
 		mv.setViewName(viewName);
 		return mv;
 	}	
+	
+	@ControllerMethodAuthority(check = true, programId = "ZENLIFE_FE_0003Q")
+	@RequestMapping(value = "/bloodPressureInput.do", method = RequestMethod.GET)
+	public ModelAndView bloodPressureInput(HttpServletRequest request) {
+		String viewName = PAGE_SYS_ERROR;
+		String c = "";
+		ModelAndView mv = this.getDefaultModelAndView();
+		try {
+			c = request.getParameter("c");
+			
+			viewName = "blood-pressure/blood-pressure-input";
+		} catch (AuthorityException e) {
+			viewName = this.getAuthorityExceptionPage(e, request);
+		} catch (ServiceException | ControllerException e) {
+			viewName = this.getServiceOrControllerExceptionPage(e, request);
+		} catch (Exception e) {
+			this.getExceptionPage(e, request);
+		}
+		mv.addObject("c", super.defaultString(c));
+		mv.setViewName(viewName);
+		return mv;
+	}		
 
 }
