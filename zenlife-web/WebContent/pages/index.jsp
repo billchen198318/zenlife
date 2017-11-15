@@ -56,6 +56,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <p class="card-text">輸入您寫壓測量資料，將會以圖表化方式為您呈現血壓走勢圖表.</p>
     </div>
   </div>
+  <!--  
   <div class="card mb-3 text-center">
     <img class="card-img-top" src="./images/003.jpg" alt="Card image cap">
     <div class="card-block">
@@ -63,6 +64,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <p class="card-text">輸入您個人血糖資訊，將會以圖表化方式為您呈現血堂走勢圖表.</p>
     </div>
   </div>
+  -->
   <div class="card mb-3 text-center">
     <img class="card-img-top" src="./images/004.jpg" alt="Card image cap">
     <div class="card-block">

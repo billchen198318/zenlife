@@ -38,10 +38,12 @@ String backUrl = (String) request.getParameter("backUrl");
           </li>      
           <li class="nav-item">
             <a class="nav-link" href="./bloodPressure.do" onclick=""><b>血壓</b></a>
-          </li>                              
+          </li>                  
+          <!--              
           <li class="nav-item">
             <a class="nav-link" href="#" onclick=""><b>血糖</b></a>
-          </li>                    
+          </li> 
+          -->                   
           <li class="nav-item">
             <a class="nav-link" href="#" onclick=""><b>保健商品</b></a>
           </li>      
