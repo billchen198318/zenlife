@@ -19,8 +19,25 @@
    		<property name="cacheManager" ref="shiroCacheManager"/>	
    	</bean> 
    	
+	<bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+	    <constructor-arg value="sid"/>
+	    <property name="httpOnly" value="true"/>
+	    <property name="maxAge" value="-1"/>
+	</bean>   	
+	<bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+	    <constructor-arg value="rememberMe"/>
+	    <property name="httpOnly" value="true"/>
+	    <property name="maxAge" value="2592000"/><!-- 30天 -->
+	</bean>   	
+   	
+	<bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+	    <property name="cipherKey" value="#{T(org.apache.shiro.codec.Base64).decode('4AvVhmFLUs0KTA3Kprsdag==')}"/>
+		<property name="cookie" ref="rememberMeCookie"/>
+	</bean>   	
+	   	
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="realm" ref="zenLifeBaseAuthorizingRealm"/> 
+		<property name="rememberMeManager" ref="rememberMeManager"/>
 	</bean>
 	
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/> 
@@ -69,6 +86,7 @@
          		/vCode.do*=anon
          		/register.do*=anon
          		/registerSaveJson.do*=anon
+         		/doTestJson.do*=anon
          		/*.do=authc         		
          		
          		

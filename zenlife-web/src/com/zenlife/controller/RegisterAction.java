@@ -23,11 +23,9 @@ package com.zenlife.controller;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
-import org.qifu.base.Constants;
 import org.qifu.base.controller.BaseController;
 import org.qifu.base.exception.AuthorityException;
 import org.qifu.base.exception.ControllerException;
@@ -37,8 +35,6 @@ import org.qifu.base.model.DefaultControllerJsonResultObj;
 import org.qifu.base.model.DefaultResult;
 import org.qifu.base.model.YesNo;
 import org.qifu.po.ZlPerson;
-import org.qifu.sys.GreenStepBaseFormAuthenticationFilter;
-import org.qifu.sys.GreenStepBaseUsernamePasswordToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
@@ -50,6 +46,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.zenlife.base.ZenLifeConstants;
 import com.zenlife.service.logic.IFePersonLogicService;
+import com.zenlife.sys.ZenLifeShiroLoginSupport;
 
 @EnableWebMvc
 @Controller
@@ -100,20 +97,7 @@ public class RegisterAction extends BaseController {
 		.throwMessage();
 	}	
 	
-	// ZenLife 使用者取向都是老人家, 沒法叫他們在一直驗證帳戶有效性了.
-	private void forceLoginForRegisterSuccess(HttpServletRequest request, ZlPerson person) throws ControllerException, Exception {
-		request.getSession().setAttribute(GreenStepBaseFormAuthenticationFilter.DEFAULT_CAPTCHA_PARAM, "1111");
-		GreenStepBaseUsernamePasswordToken token = new GreenStepBaseUsernamePasswordToken();
-		token.setCaptcha( "1111" );
-		token.setUsername( person.getId() );
-		token.setPassword( person.getPassword().toCharArray() );
-		Subject subject = SecurityUtils.getSubject();
-		subject.login(token);
-		request.getSession().setAttribute(Constants.SESS_ACCOUNT, person.getId());
-		request.getSession().setAttribute(Constants.SESS_LANG, "en");			
-	}
-	
-	private void save(DefaultControllerJsonResultObj<ZlPerson> result, HttpServletRequest request, ZlPerson person, String sessVCode, String vcode, String retyPwd) throws AuthorityException, ControllerException, ServiceException, Exception {
+	private void save(DefaultControllerJsonResultObj<ZlPerson> result, HttpServletRequest request, HttpServletResponse response, ZlPerson person, String sessVCode, String vcode, String retyPwd) throws AuthorityException, ControllerException, ServiceException, Exception {
 		this.checkFieldsForParam(result, person, sessVCode, vcode, retyPwd);
 		DefaultResult<ZlPerson> cResult = this.fePersonLogicService.create(person);
 		if ( cResult.getValue() != null ) {
@@ -126,15 +110,16 @@ public class RegisterAction extends BaseController {
 			resObj.setName( cResult.getValue().getName() );
 			resObj.setMail( cResult.getValue().getMail() );
 			result.setValue( resObj );
-			result.setSuccess( YES );
-			this.forceLoginForRegisterSuccess(request, cResult.getValue());
+			result.setSuccess( YES );			
+			ZenLifeShiroLoginSupport loginSupport = new ZenLifeShiroLoginSupport();
+			loginSupport.forceCreateLoginSubject(request, response, cResult.getValue().getId(), "1111");
 		}
 		result.setMessage( cResult.getSystemMessage().getValue() );		
 	}
 	
 	@ControllerMethodAuthority(check = false, programId = "ZENLIFE_FE_9997Q")
 	@RequestMapping(value = "/registerSaveJson.do", produces = "application/json")
-	public @ResponseBody DefaultControllerJsonResultObj<ZlPerson> doSave(HttpServletRequest request, ZlPerson person) {
+	public @ResponseBody DefaultControllerJsonResultObj<ZlPerson> doSave(HttpServletRequest request, HttpServletResponse response, ZlPerson person) {
 		DefaultControllerJsonResultObj<ZlPerson> result = this.getDefaultJsonResult("ZENLIFE_FE_9997Q");
 		// 因為是 register所以不要check login/authorize了
 		/*
@@ -150,6 +135,7 @@ public class RegisterAction extends BaseController {
 			this.save(
 					result, 
 					request,
+					response,
 					person, 
 					(String)request.getSession().getAttribute( ZenLifeConstants.SESS_VCODE ), 
 					request.getParameter("vcode"), 

@@ -73,7 +73,7 @@ public class ZenLifeBaseFormAuthenticationFilter extends FormAuthenticationFilte
 		String password = StringUtils.defaultString(this.getPassword(request));
 		String captcha = StringUtils.defaultString(this.getCaptcha(request));
 		//boolean rememberMe = StringUtils.defaultString(isRememberMe(request));
-		boolean rememberMe = false;
+		boolean rememberMe = true;
 		String host = StringUtils.defaultString(getHost(request));
 		char pwd[] = null;
 		try {
@@ -165,7 +165,19 @@ public class ZenLifeBaseFormAuthenticationFilter extends FormAuthenticationFilte
     	return "XMLHttpRequest".equalsIgnoreCase( request.getHeader("X-Requested-With") );
     }
     
-    protected void redirectToLogin(ServletRequest request, ServletResponse response) throws IOException {  	
+	protected void redirectToLogin(ServletRequest request, ServletResponse response) throws IOException {
+    	Subject subject = this.getSubject(request, response);
+    	if (subject.isRemembered()) {
+    		ZenLifeShiroLoginSupport loginSupport = new ZenLifeShiroLoginSupport();
+    		try {
+				loginSupport.forceCreateLoginSubject((HttpServletRequest)request, (HttpServletResponse)response, (String)subject.getPrincipal(), "1111");
+				WebUtils.issueRedirect(request, response, "/index.do");
+				return;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+    	}
+    	
     	if (isAjaxRequest((HttpServletRequest)request)) {
     		response.setCharacterEncoding( Constants.BASE_ENCODING );
     		response.setContentType("application/json");
