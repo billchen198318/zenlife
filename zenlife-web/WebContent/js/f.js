@@ -26,11 +26,7 @@ function()
 };
 
 function xhrSendParameter(xhrUrl, jsonParam, successFn, errorFn, selfPleaseWaitShow) {
-	if (null == selfPleaseWaitShow || _qifu_success_flag != selfPleaseWaitShow) {
-		parent.showPleaseWait();
-	} else {
-		showPleaseWait();
-	}
+	showPleaseWait();
 	$.ajax({
 		type : _qifu_jqXhrType,
 	    url : xhrUrl,
@@ -68,11 +64,7 @@ function xhrSendParameter(xhrUrl, jsonParam, successFn, errorFn, selfPleaseWaitS
 }
 
 function xhrSendForm(xhrUrl, formId, successFn, errorFn, selfPleaseWaitShow) {
-	if (null == selfPleaseWaitShow || _qifu_success_flag != selfPleaseWaitShow) {
-		parent.showPleaseWait();
-	} else {
-		showPleaseWait();
-	}
+	showPleaseWait();
 	$.ajax({
 		type : _qifu_jqXhrType,
 	    url : xhrUrl,
