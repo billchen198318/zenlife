@@ -55,11 +55,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <div class="container">
 
-<h5><span class="badge badge-primary" onclick="window.location='./bloodPressureInput.do';"><img alt="自行輸入" src="./images/accessories-text-editor.png" border="0">&nbsp;自行輸入血壓資料</span></h5>
+<div class="row">
+	<div class="col">
+		<h5><span class="badge badge-primary" onclick="window.location='./bloodPressureInput.do';"><img alt="自行輸入" src="./images/accessories-text-editor.png" border="0">&nbsp;輸入血壓資料</span></h5>
+	</div>
+	<div class="col">
+		<q:if test=" null != bloodPressureList && bloodPressureList.size>0 ">
+		<h5><span class="badge badge-primary" onclick="window.location='./bloodPressureList.do';"><img alt="血壓記錄" src="./images/document-properties.png" border="0">&nbsp;血壓記錄資料</span></h5>
+		</q:if>				
+	</div>				
+</div>
 
 <q:if test=" null == bloodPressureList || bloodPressureList.size<1 ">
 	<div class="alert alert-info" role="alert">
-	  <strong>注意</strong> 由於您未輸入血壓資料，所以無法呈現血壓資訊，您可以點選上方的 <strong>"自行輸入血壓資料"</strong> 進行血壓資訊輸入。
+	  <strong>注意</strong> 由於您未輸入血壓資料，所以無法呈現血壓資訊，您可以點選上方的 <strong>"輸入血壓資料"</strong> 進行血壓資訊輸入。
 	</div>
 	<br>
 </q:if>

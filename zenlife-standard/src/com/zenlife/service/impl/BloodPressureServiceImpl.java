@@ -21,6 +21,8 @@
  */
 package com.zenlife.service.impl;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -69,14 +71,46 @@ public class BloodPressureServiceImpl extends SimpleService<ZlBloodPressure, Str
 	protected IBaseDAO<ZlBloodPressure, String> getBaseDataAccessObject() {
 		return this.bloodPressureDAO;
 	}
-
+	
 	@Override
-	public DefaultResult<List<ZlBloodPressure>> findForLast7Record(String personId) throws ServiceException, Exception {
+	public DefaultResult<List<ZlBloodPressure>> findForLast7RecordAndSort(String personId) throws ServiceException, Exception {
 		if (StringUtils.isBlank(personId)) {
 			throw new ServiceException( SysMessageUtil.get(SysMsgConstants.PARAMS_BLANK) );
 		}
 		DefaultResult<List<ZlBloodPressure>> result = new DefaultResult<List<ZlBloodPressure>>();
 		List<ZlBloodPressure> bloodPressureList = this.bloodPressureDAO.findForLast7Record(personId);
+		if (null != bloodPressureList && bloodPressureList.size()>0) {
+			// 因為取出來的資料是倒序desc最後的7筆, 所以在把這7筆順排一次
+			Collections.sort(bloodPressureList, new Comparator<ZlBloodPressure>() {
+				
+				public int compare(ZlBloodPressure o1, ZlBloodPressure o2) {
+					String logDate1 = o1.getLogDate();
+					String logDate2 = o2.getLogDate();
+					int c1 = logDate1.compareTo(logDate2);
+					if (c1 != 0) {
+						return c1;
+					}
+					return o1.getTimePeriod().compareTo(o2.getTimePeriod());
+				}
+				
+			});
+			result.setValue(bloodPressureList);
+		} else {
+			result.setSystemMessage( new SystemMessage(SysMessageUtil.get(SysMsgConstants.SEARCH_NO_DATA)) );
+		}
+		return result;
+	}
+
+	@Override
+	public DefaultResult<List<ZlBloodPressure>> findForLastRecord(String personId, int sizeLimit) throws ServiceException, Exception {
+		if (StringUtils.isBlank(personId)) {
+			throw new ServiceException( SysMessageUtil.get(SysMsgConstants.PARAMS_BLANK) );
+		}
+		if (sizeLimit<1 || sizeLimit>500) {
+			throw new ServiceException( SysMessageUtil.get(SysMsgConstants.PARAMS_INCORRECT) );
+		}
+		DefaultResult<List<ZlBloodPressure>> result = new DefaultResult<List<ZlBloodPressure>>();
+		List<ZlBloodPressure> bloodPressureList = this.bloodPressureDAO.findForLastRecord(personId, sizeLimit);
 		if (null != bloodPressureList && bloodPressureList.size()>0) {
 			result.setValue(bloodPressureList);
 		} else {

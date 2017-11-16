@@ -39,9 +39,18 @@ public class BloodPressureDAOImpl extends BaseDAO<ZlBloodPressure, String> imple
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<ZlBloodPressure> findForLast7Record(String personId) throws Exception {
-		return this.getCurrentSession().createQuery("FROM ZlBloodPressure WHERE personId = :personId ORDER BY logDate, timePeriod ASC")
+		return this.getCurrentSession().createQuery("FROM ZlBloodPressure WHERE personId = :personId ORDER BY logDate DESC, timePeriod DESC")
 				.setString("personId", personId)
 				.setMaxResults(7)
+				.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ZlBloodPressure> findForLastRecord(String personId, int sizeLimit) throws Exception {
+		return this.getCurrentSession().createQuery("FROM ZlBloodPressure WHERE personId = :personId ORDER BY logDate DESC, timePeriod DESC")
+				.setString("personId", personId)
+				.setMaxResults(sizeLimit)
 				.list();
 	}
 	

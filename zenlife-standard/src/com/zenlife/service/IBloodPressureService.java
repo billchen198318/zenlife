@@ -30,6 +30,8 @@ import org.qifu.po.ZlBloodPressure;
 
 public interface IBloodPressureService<E extends java.io.Serializable, PK extends java.io.Serializable> extends ISimpleService<E, PK> {
 	
-	public DefaultResult<List<ZlBloodPressure>> findForLast7Record(String personId) throws ServiceException, Exception;
-
+	public DefaultResult<List<ZlBloodPressure>> findForLast7RecordAndSort(String personId) throws ServiceException, Exception;
+	
+	public DefaultResult<List<ZlBloodPressure>> findForLastRecord(String personId, int sizeLimit) throws ServiceException, Exception;
+	
 }

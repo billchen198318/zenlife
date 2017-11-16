@@ -64,9 +64,14 @@ public class BloodPressureAction extends BaseController {
 	}
 	
 	private List<ZlBloodPressure> findForLast7Record() throws ServiceException, Exception {
-		DefaultResult<List<ZlBloodPressure>> result = this.bloodPressureService.findForLast7Record(this.getAccountId());
+		DefaultResult<List<ZlBloodPressure>> result = this.bloodPressureService.findForLast7RecordAndSort(this.getAccountId());
 		return result.getValue();
 	}	
+	
+	private List<ZlBloodPressure> findForLastRecordView() throws ServiceException, Exception {
+		DefaultResult<List<ZlBloodPressure>> result = this.bloodPressureService.findForLastRecord(this.getAccountId(), 100);
+		return result.getValue();
+	}
 
 	@ControllerMethodAuthority(check = true, programId = "ZENLIFE_FE_0003Q")
 	@RequestMapping(value = "/bloodPressure.do", method = RequestMethod.GET)
@@ -114,6 +119,15 @@ public class BloodPressureAction extends BaseController {
 		result.setMessage( saveResult.getSystemMessage().getValue() );
 	}
 	
+	private void delete(DefaultControllerJsonResultObj<Boolean> result, ZlBloodPressure bloodPressure) throws AuthorityException, ControllerException, ServiceException, Exception {
+		DefaultResult<Boolean> dResult = this.bloodPressureService.deleteEntity(bloodPressure);
+		if ( dResult.getValue() != null && dResult.getValue() ) {
+			result.setValue( dResult.getValue() );
+			result.setSuccess( YES );
+		}
+		result.setMessage( dResult.getSystemMessage().getValue() );			
+	}
+	
 	@ControllerMethodAuthority(check = true, programId = "ZENLIFE_FE_0003Q")
 	@RequestMapping(value = "/bloodPressureSaveJson.do", produces = "application/json")
 	public @ResponseBody DefaultControllerJsonResultObj<ZlBloodPressure> doSave(HttpServletRequest request, ZlBloodPressure bloodPressure) {
@@ -155,5 +169,44 @@ public class BloodPressureAction extends BaseController {
 		mv.setViewName(viewName);
 		return mv;
 	}		
-
+	
+	@ControllerMethodAuthority(check = true, programId = "ZENLIFE_FE_0003Q")
+	@RequestMapping(value = "/bloodPressureDeleteJson.do", produces = "application/json")
+	public @ResponseBody DefaultControllerJsonResultObj<Boolean> doDelete(ZlBloodPressure bloodPressure) {
+		DefaultControllerJsonResultObj<Boolean> result = this.getDefaultJsonResult("ZENLIFE_FE_0003Q");
+		if (!this.isAuthorizeAndLoginFromControllerJsonResult(result)) {
+			return result;
+		}
+		try {
+			this.delete(result, bloodPressure);
+		} catch (AuthorityException | ServiceException | ControllerException e) {
+			result.setMessage( e.getMessage().toString() );			
+		} catch (Exception e) {
+			this.exceptionResult(result, e);
+		}
+		return result;
+	}	
+	
+	@ControllerMethodAuthority(check = true, programId = "ZENLIFE_FE_0003Q")
+	@RequestMapping(value = "/bloodPressureList.do", method = RequestMethod.GET)
+	public ModelAndView bloodPressureList(HttpServletRequest request) {
+		String viewName = PAGE_SYS_ERROR;
+		String c = "";
+		ModelAndView mv = this.getDefaultModelAndView();
+		try {
+			c = request.getParameter("c");
+			mv.addObject("bloodPressureList", this.findForLastRecordView());
+			viewName = "blood-pressure/blood-pressure-list";
+		} catch (AuthorityException e) {
+			viewName = this.getAuthorityExceptionPage(e, request);
+		} catch (ServiceException | ControllerException e) {
+			viewName = this.getServiceOrControllerExceptionPage(e, request);
+		} catch (Exception e) {
+			this.getExceptionPage(e, request);
+		}
+		mv.addObject("c", super.defaultString(c));
+		mv.setViewName(viewName);
+		return mv;
+	}	
+	
 }
