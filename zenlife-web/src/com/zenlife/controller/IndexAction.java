@@ -24,12 +24,19 @@ package com.zenlife.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.qifu.base.controller.BaseController;
+import org.qifu.base.exception.AuthorityException;
+import org.qifu.base.exception.ControllerException;
+import org.qifu.base.exception.ServiceException;
 import org.qifu.base.model.ControllerMethodAuthority;
+import org.qifu.base.model.DefaultControllerJsonResultObj;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+@EnableWebMvc
 @Controller
 public class IndexAction extends BaseController {
 	
@@ -49,5 +56,23 @@ public class IndexAction extends BaseController {
 		mv.setViewName(viewName);
 		return mv;
 	}
+	
+	@ControllerMethodAuthority(check = false, programId = "ZENLIFE_FE_0001Q")
+	@RequestMapping(value = "/doTestJson.do", produces = "application/json")
+	public @ResponseBody DefaultControllerJsonResultObj<Boolean> doTest() {
+		DefaultControllerJsonResultObj<Boolean> result = this.getDefaultJsonResult("ZENLIFE_FE_0003Q");
+		if (!this.isAuthorizeAndLoginFromControllerJsonResult(result)) {
+			return result;
+		}
+		try {
+			result.setSuccess( YES );
+			result.setMessage( System.currentTimeMillis()+"" );
+		} catch (AuthorityException | ServiceException | ControllerException e) {
+			result.setMessage( e.getMessage().toString() );			
+		} catch (Exception e) {
+			this.exceptionResult(result, e);
+		}
+		return result;
+	}	
 	
 }

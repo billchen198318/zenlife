@@ -59,3 +59,44 @@ String c = (String)request.getParameter("c");
   	</table>
   </a>   
 </nav>
+
+<script>
+var testConnFail = 0;
+var testConnFunc = function() {
+	$.ajax({
+		type : 'GET',
+	    url : './doTestJson.do',
+	    timeout: _qifu_jqXhrTimeout,
+	    dataType : 'json',
+	    data : {},
+	    cache: false,
+	    async: true,
+	    success : function(data, textStatus) {
+			if (data==null || (typeof data=='undefined') ) {
+				alert('Unexpected error!');
+				window.location = './index.do';
+				return;
+			}    			
+			if ( _qifu_success_flag != data.login ) {
+				alert("Please try login again!");
+				window.location = './index.do';
+				return;
+			}       
+			if ( _qifu_success_flag != data.isAuthorize ) {
+				alert("No permission!");
+				window.location = './index.do';
+				return;        				
+			}
+	    },
+	    error : function(jqXHR, textStatus, errorThrown) {
+	    	testConnFail++;
+	    	if (testConnFail>=3) {
+		    	alert('網路不穩定: '+textStatus);
+		    	window.location = './index.do';	    		
+	    	}
+	    }
+	});	
+};
+setInterval(testConnFunc, (1000*60*3));
+</script>
+
