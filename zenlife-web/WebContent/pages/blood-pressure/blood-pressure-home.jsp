@@ -90,7 +90,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        x: -20 //center
 	    },
 	    subtitle: {
-	        text: '最近7筆血壓記錄',
+	        text: '最近${bloodPressureList.size()}筆血壓記錄',
 	        x: -20
 	    },
         xAxis: {
@@ -151,11 +151,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script>
 	$('#bloodLineSBPChart').highcharts({
 	    title: {
-	        text: '血壓走勢',
+	        text: 'SBP走勢',
 	        x: -20 //center
 	    },
 	    subtitle: {
-	        text: '最近7筆血壓SBP記錄',
+	        text: '最近${bloodPressureList.size()}筆血壓SBP記錄',
 	        x: -20
 	    },
         xAxis: {
@@ -205,11 +205,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script>
 	$('#bloodLineDBPChart').highcharts({
 	    title: {
-	        text: '血壓走勢',
+	        text: 'DBP走勢',
 	        x: -20 //center
 	    },
 	    subtitle: {
-	        text: '最近7筆血壓DBP記錄',
+	        text: '最近${bloodPressureList.size()}筆血壓DBP記錄',
 	        x: -20
 	    },
         xAxis: {
@@ -259,11 +259,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script>
 	$('#bloodLinePULSEChart').highcharts({
 	    title: {
-	        text: '血壓走勢',
+	        text: 'PULSE走勢',
 	        x: -20 //center
 	    },
 	    subtitle: {
-	        text: '最近7筆血壓PULSE記錄',
+	        text: '最近${bloodPressureList.size()}筆血壓PULSE記錄',
 	        x: -20
 	    },
         xAxis: {
