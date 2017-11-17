@@ -2615,7 +2615,7 @@ CREATE TABLE `zl_chronic` (
   `ID` varchar(10) NOT NULL,
   `NAME` varchar(200) NOT NULL,
   `DESCRIPTION` varchar(500) NOT NULL,
-  `CUESRID` varchar(24) NOT NULL,
+  `CUSERID` varchar(24) NOT NULL,
   `CDATE` datetime NOT NULL,
   `UUSERID` varchar(24) DEFAULT NULL,
   `UDATE` datetime DEFAULT NULL,
@@ -2766,6 +2766,7 @@ CREATE TABLE `zl_person_chronic` (
 
 LOCK TABLES `zl_person_chronic` WRITE;
 /*!40000 ALTER TABLE `zl_person_chronic` DISABLE KEYS */;
+INSERT INTO `zl_person_chronic` VALUES ('2537b8db-71b6-4551-9471-2e5b938a70ff','A123456789','A0000001','admin','2017-11-17 15:16:10',NULL,NULL);
 /*!40000 ALTER TABLE `zl_person_chronic` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2846,4 +2847,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-17 14:01:35
+-- Dump completed on 2017-11-17 15:17:31
