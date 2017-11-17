@@ -145,6 +145,160 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    ]
 	});
 	</script>
+	
+	
+	<div id="bloodLineSBPChart"></div>
+	<script>
+	$('#bloodLineSBPChart').highcharts({
+	    title: {
+	        text: '血壓走勢',
+	        x: -20 //center
+	    },
+	    subtitle: {
+	        text: '最近7筆血壓SBP記錄',
+	        x: -20
+	    },
+        xAxis: {
+            categories: [
+				<c:forEach items="${bloodPressureList}" var="item" varStatus="myIndex">
+				'${item.logDate.substring(0,4)}/${item.logDate.substring(4,6)}/${item.logDate.substring(6,8)} (${item.timePeriod})'<q:if test=" ${myIndex.index+1} < bloodPressureList.size ">,</q:if>
+				</c:forEach>
+			]
+        },	    
+	    yAxis: {
+	        title: {
+	            text: '血壓 SBP'
+	        },
+	        plotLines: [{
+	            value: 0,
+	            width: 1,
+	            color: '#808080'
+	        }]
+	    },
+	    tooltip: {
+	        valueSuffix: ' 測量血壓質'
+	    },
+	    legend: {
+	        layout: 'vertical',
+	        align: 'right',
+	        verticalAlign: 'middle',
+	        borderWidth: 0
+	    },
+	    series: [
+			{
+		        name: 'SBP',
+		        data: [
+						<c:forEach items="${bloodPressureList}" var="item" varStatus="myIndex">
+						${item.sbp}<q:if test=" ${myIndex.index+1} < bloodPressureList.size ">,</q:if>
+						</c:forEach>
+				]
+		    }
+	    ]
+	});
+	</script>
+	
+	
+	<div id="bloodLineDBPChart"></div>
+	<script>
+	$('#bloodLineDBPChart').highcharts({
+	    title: {
+	        text: '血壓走勢',
+	        x: -20 //center
+	    },
+	    subtitle: {
+	        text: '最近7筆血壓DBP記錄',
+	        x: -20
+	    },
+        xAxis: {
+            categories: [
+				<c:forEach items="${bloodPressureList}" var="item" varStatus="myIndex">
+				'${item.logDate.substring(0,4)}/${item.logDate.substring(4,6)}/${item.logDate.substring(6,8)} (${item.timePeriod})'<q:if test=" ${myIndex.index+1} < bloodPressureList.size ">,</q:if>
+				</c:forEach>
+			]
+        },	    
+	    yAxis: {
+	        title: {
+	            text: '血壓 DBP'
+	        },
+	        plotLines: [{
+	            value: 0,
+	            width: 1,
+	            color: '#808080'
+	        }]
+	    },
+	    tooltip: {
+	        valueSuffix: ' 測量血壓質'
+	    },
+	    legend: {
+	        layout: 'vertical',
+	        align: 'right',
+	        verticalAlign: 'middle',
+	        borderWidth: 0
+	    },
+	    series: [
+			{
+		        name: 'DBP',
+		        data: [
+						<c:forEach items="${bloodPressureList}" var="item" varStatus="myIndex">
+						${item.dbp}<q:if test=" ${myIndex.index+1} < bloodPressureList.size ">,</q:if>
+						</c:forEach>
+				]
+		    }
+	    ]
+	});
+	</script>	
+	
+	
+	<div id="bloodLinePULSEChart"></div>
+	<script>
+	$('#bloodLinePULSEChart').highcharts({
+	    title: {
+	        text: '血壓走勢',
+	        x: -20 //center
+	    },
+	    subtitle: {
+	        text: '最近7筆血壓PULSE記錄',
+	        x: -20
+	    },
+        xAxis: {
+            categories: [
+				<c:forEach items="${bloodPressureList}" var="item" varStatus="myIndex">
+				'${item.logDate.substring(0,4)}/${item.logDate.substring(4,6)}/${item.logDate.substring(6,8)} (${item.timePeriod})'<q:if test=" ${myIndex.index+1} < bloodPressureList.size ">,</q:if>
+				</c:forEach>
+			]
+        },	    
+	    yAxis: {
+	        title: {
+	            text: '血壓 PULSE'
+	        },
+	        plotLines: [{
+	            value: 0,
+	            width: 1,
+	            color: '#808080'
+	        }]
+	    },
+	    tooltip: {
+	        valueSuffix: ' 測量血壓質'
+	    },
+	    legend: {
+	        layout: 'vertical',
+	        align: 'right',
+	        verticalAlign: 'middle',
+	        borderWidth: 0
+	    },
+	    series: [
+			{
+		        name: 'PULSE',
+		        data: [
+						<c:forEach items="${bloodPressureList}" var="item" varStatus="myIndex">
+						${item.pulse}<q:if test=" ${myIndex.index+1} < bloodPressureList.size ">,</q:if>
+						</c:forEach>	               
+				]
+		    }
+	    ]
+	});
+	</script>
+			
 </q:if>
 
 <q:if test=" null != bloodPressureList && bloodPressureList.size>0 ">
