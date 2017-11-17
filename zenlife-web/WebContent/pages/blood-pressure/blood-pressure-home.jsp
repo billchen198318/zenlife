@@ -166,13 +166,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			]
         },	    
 	    yAxis: {
+	    	minRange: 119,	    	
+			min:0,
 	        title: {
 	            text: '血壓 SBP'
 	        },
 	        plotLines: [{
-	            value: 0,
+	            value: 119,
 	            width: 1,
-	            color: '#808080'
+	            color: '#ff3300',
+	            dashStyle: 'Dash'
 	        }]
 	    },
 	    tooltip: {
@@ -217,13 +220,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			]
         },	    
 	    yAxis: {
+	    	minRange: 79,	    	
+			min:0,	    	
 	        title: {
 	            text: '血壓 DBP'
 	        },
 	        plotLines: [{
-	            value: 0,
+	            value: 79,
 	            width: 1,
-	            color: '#808080'
+	            color: '#ff3300',
+	            dashStyle: 'Dash'
 	        }]
 	    },
 	    tooltip: {
@@ -268,13 +274,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			]
         },	    
 	    yAxis: {
+	    	minRange: 72,	    	
+			min:0,	    	
 	        title: {
 	            text: '血壓 PULSE'
 	        },
 	        plotLines: [{
-	            value: 0,
+	            value: 72,
 	            width: 1,
-	            color: '#808080'
+	            color: '#ff3300',
+	            dashStyle: 'Dash'
 	        }]
 	    },
 	    tooltip: {
