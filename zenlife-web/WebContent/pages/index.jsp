@@ -72,13 +72,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <p class="card-text">購買說醫門保健商品，留下您的通訊方式，我們將為您提供服務.</p>
     </div>
   </div>
-  <div class="card mb-3 text-center">
+  <!--  
+  <div class="card mb-3 text-center" onclick="window.location='./personProfileEdit.do';">
     <img class="card-img-top" src="./images/005.png" alt="Card image cap">
     <div class="card-block">
       <h4 class="card-title">個人資料</h4>
       <p class="card-text">維護您的個人資料.</p>
     </div>
-  </div>    
+  </div>
+  -->    
 </div>
 </div>
 <br/>
