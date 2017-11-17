@@ -2599,6 +2599,7 @@ CREATE TABLE `zl_blood_pressure` (
 
 LOCK TABLES `zl_blood_pressure` WRITE;
 /*!40000 ALTER TABLE `zl_blood_pressure` DISABLE KEYS */;
+INSERT INTO `zl_blood_pressure` VALUES ('2ed4ad80-c9d0-11e7-bd5e-b79a4d8e3cd7','A123456789','20171115',105,85,79,'3','測試 test 123!!','A123456789','2017-11-15 14:42:43',NULL,NULL),('6a4a2910-ca7c-11e7-ac06-6921151c4dc5','A123456789','20171116',85,80,78,'3','','A123456789','2017-11-16 11:15:37',NULL,NULL),('e2598940-c9e2-11e7-946e-fd7c0f95cdaf','A123456789','20171116',75,70,72,'2','','A123456789','2017-11-15 16:56:36',NULL,NULL);
 /*!40000 ALTER TABLE `zl_blood_pressure` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2631,6 +2632,7 @@ CREATE TABLE `zl_chronic` (
 
 LOCK TABLES `zl_chronic` WRITE;
 /*!40000 ALTER TABLE `zl_chronic` DISABLE KEYS */;
+INSERT INTO `zl_chronic` VALUES ('0bad7cd4-181a-4b04-93b1-35bbf8b877b5','A0000001','高血壓','通 常 高 血 壓 是 沒 有 象 徵 ， 亦 沒 有 任 何 不 適 感 覺 。 大 多 數 高 血 壓 之 病 者 ， 祇 是 經 醫 生 量 血 壓 後 才 知 患 了 高 血 壓 。 故 此 不 可 因 為 自 己 無 任 何 病 徵 而 斷 定 自 己 無 高 血 壓 ， 因 而 忽 略 常 規 檢 查 。 有 些 頭 暈 ， 目 眩 ， 耳 嗚 者 自 以 為 有 高 血 壓 ， 其 實 這 些 症 狀 多 與 高 血 壓 無 直 接 關 係 ， 只 是 多 因 精 神 緊 張 引 起 。 不 過 如 果 血 壓 突 然 從 1 6 0 毫 米 跳 至 2 4 0 毫 米 以 上 ， 則 可 能 引 起 劇 烈 頭 痛 ， 噁 心 ， 視 覺 障 礙 等 。 但 由 於 長 期 高 血 壓 ， 併 發 症 的 病 徵 從 而 發 生 。','admin','2017-11-17 13:53:41',NULL,NULL),('46560f6f-fff3-4e90-97f6-ad51d4fcab79','A0000002','糖尿病','頻尿、容易口渴、容易飢餓,糖尿病酮症酸中毒、非酮症之超滲透壓的昏迷、心血管疾病、中風、慢性肾脏病、足部潰瘍','admin','2017-11-17 13:55:58',NULL,NULL),('951f45bc-e597-49b2-832c-2bfcfac73a33','A0000003','胃部慢性病','暫無說明','admin','2017-11-17 13:57:08',NULL,NULL);
 /*!40000 ALTER TABLE `zl_chronic` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2844,4 +2846,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-15 10:36:32
+-- Dump completed on 2017-11-17 14:01:35
