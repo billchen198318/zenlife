@@ -34,7 +34,7 @@ var msgFields = new Object();
 
 var formGroups = new Object();
 
-function saveSuccess(data) {
+function updateSuccess(data) {
 	clearWarningMessageField(formGroups, msgFields);
 	if ( _qifu_success_flag != data.success ) {
 		parent.toastrWarning( data.message );
@@ -50,12 +50,20 @@ function saveSuccess(data) {
 	});	
 }
 
-function clearSave() {
+function clearUpdate() {
 	$("#profileForm").trigger('reset');
 }
 
-function cancelSave() {
+function cancelUpdate() {
 	window.location = './index.do';
+}
+
+function getChronicAppendId() {
+	var apppendId = '';
+	$('input.custom-control-input:checkbox:checked').each(function() {
+		apppendId += $(this).val() + _qifu_delimiter;
+	});
+	return appendId;
 }
 
 </script>
@@ -145,7 +153,7 @@ function cancelSave() {
 		
 			<q:if test=" null != chronicList && chronicList.size > 0 ">
 			<c:forEach items="${chronicList}" var="item" varStatus="myIndex">
-			<q:checkbox name="chronic_${item.id}" id="_${item.id}" label="${item.name}" checkedTest=" @com.zenlife.util.ChronicUtils@isCheck('${item.id}', personChronicList) "></q:checkbox>
+			<q:checkbox name="chronic_${item.id}" id="chronic_${item.id}" label="${item.name}" checkedTest=" @com.zenlife.util.ChronicUtils@isCheck('${item.id}', personChronicList) "></q:checkbox>
 			</c:forEach>
 			</q:if>
 			
@@ -156,19 +164,27 @@ function cancelSave() {
 
 <div class="row">
 	<div class="col-xs-6 col-md-6 col-lg-6">
-		<q:button id="btnSave" label="確認"
-			xhrUrl="./personProfileSaveJson.do"
+		<q:button id="btnUpdate" label="確認"
+			xhrUrl="./personProfileUpdateJson.do"
 			xhrParameter="
 			{
-
+				'name'					:		$('#name').val(),
+				'phone'					:		$('#phone').val(),
+				'tel'					:		$('#tel').val(),
+				'birthday'				:		$('#birthday').val(),
+				'gender'				:		( $('#genderRadioBoy').is(':checked') ? '1' : '2' ),
+				'height'				:		$('#height').val(),
+				'weight'				:		$('#weight').val(),
+				'address'				:		$('#address').val(),
+				'chronicAppendId'		:		getChronicAppendId()
 			}
 			"
-			onclick="btnSave();"
-			loadFunction="saveSuccess(data);"
-			errorFunction="clearSave();">
+			onclick="btnUpdate();"
+			loadFunction="updateSuccess(data);"
+			errorFunction="clearUpdate();">
 		</q:button>
-		<q:button id="btnClear" label="清除" onclick="clearSave();" cssClass="btn btn-info"></q:button>
-		<q:button id="btnCancel" label="取消" onclick="cancelSave();" cssClass="btn btn-secondary"></q:button>
+		<q:button id="btnClear" label="清除" onclick="clearUpdate();" cssClass="btn btn-info"></q:button>
+		<q:button id="btnCancel" label="取消" onclick="cancelUpdate();" cssClass="btn btn-secondary"></q:button>
 	</div>
 </div>
 	

@@ -33,13 +33,16 @@ import org.qifu.base.exception.AuthorityException;
 import org.qifu.base.exception.ControllerException;
 import org.qifu.base.exception.ServiceException;
 import org.qifu.base.model.ControllerMethodAuthority;
+import org.qifu.base.model.DefaultControllerJsonResultObj;
 import org.qifu.po.ZlChronic;
 import org.qifu.po.ZlPersonChronic;
+import org.qifu.po.ZlPersonProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
@@ -103,5 +106,26 @@ public class PersonAction extends BaseController {
 		mv.setViewName(viewName);
 		return mv;
 	}		
+	
+	private void update(DefaultControllerJsonResultObj<ZlPersonProfile> result, HttpServletRequest request) throws AuthorityException, ControllerException, ServiceException, Exception {
+		
+	}
+	
+	@ControllerMethodAuthority(check = true, programId = "ZENLIFE_FE_0004Q")
+	@RequestMapping(value = "/personProfileUpdateJson.do", produces = "application/json")
+	public @ResponseBody DefaultControllerJsonResultObj<ZlPersonProfile> doUpdate(HttpServletRequest request) {
+		DefaultControllerJsonResultObj<ZlPersonProfile> result = this.getDefaultJsonResult("ZENLIFE_FE_0003Q");
+		if (!this.isAuthorizeAndLoginFromControllerJsonResult(result)) {
+			return result;
+		}
+		try {
+			this.update(result, request);
+		} catch (AuthorityException | ServiceException | ControllerException e) {
+			result.setMessage( e.getMessage().toString() );			
+		} catch (Exception e) {
+			this.exceptionResult(result, e);
+		}
+		return result;
+	}	
 
 }
