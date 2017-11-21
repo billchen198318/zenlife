@@ -61,7 +61,7 @@ function cancelUpdate() {
 function getChronicAppendId() {
 	var apppendId = '';
 	$('input.custom-control-input:checkbox:checked').each(function() {
-		apppendId += $(this).val() + _qifu_delimiter;
+		apppendId += this.id.split(':')[1] + _qifu_delimiter;
 	});
 	return appendId;
 }
@@ -153,7 +153,7 @@ function getChronicAppendId() {
 		
 			<q:if test=" null != chronicList && chronicList.size > 0 ">
 			<c:forEach items="${chronicList}" var="item" varStatus="myIndex">
-			<q:checkbox name="chronic_${item.id}" id="chronic_${item.id}" label="${item.name}" checkedTest=" @com.zenlife.util.ChronicUtils@isCheck('${item.id}', personChronicList) "></q:checkbox>
+			<q:checkbox name="chronic:${item.id}" id="chronic:${item.id}" label="${item.name}" checkedTest=" @com.zenlife.util.ChronicUtils@isCheck('${item.id}', personChronicList) "></q:checkbox>
 			</c:forEach>
 			</q:if>
 			
