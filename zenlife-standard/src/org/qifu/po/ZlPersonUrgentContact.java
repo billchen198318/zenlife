@@ -9,7 +9,6 @@ import javax.persistence.Table;
 
 import org.qifu.base.model.BaseEntity;
 import org.qifu.base.model.EntityPK;
-import org.qifu.base.model.EntityUK;
 
 @Entity
 @Table(
@@ -40,7 +39,6 @@ public class ZlPersonUrgentContact extends BaseEntity<String> implements java.io
 		this.oid = oid;
 	}
 	
-	@EntityUK(name="id")
 	@Column(name="ID")		
 	public String getId() {
 		return id;

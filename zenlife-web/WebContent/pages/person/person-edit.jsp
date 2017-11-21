@@ -31,8 +31,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript">
 
 var msgFields = new Object();
+msgFields['name'] 			= 'name';
+msgFields['phone'] 		= 'phone';
+msgFields['birthday'] 	= 'birthday';
 
 var formGroups = new Object();
+formGroups['name'] 			= 'form-group1';
+formGroups['phone'] 			= 'form-group1';
+formGroups['birthday'] 		= 'form-group2'
 
 function updateSuccess(data) {
 	clearWarningMessageField(formGroups, msgFields);
@@ -59,9 +65,9 @@ function cancelUpdate() {
 }
 
 function getChronicAppendId() {
-	var apppendId = '';
+	var appendId = '';
 	$('input.custom-control-input:checkbox:checked').each(function() {
-		apppendId += this.id.split(':')[1] + _qifu_delimiter;
+		appendId += this.id.split(':')[1] + _qifu_delimiter;
 	});
 	return appendId;
 }
@@ -81,11 +87,6 @@ function getChronicAppendId() {
 <div class="container">
 
 <form name="profileForm" id="profileForm" action="" method="post">
-<div class="row">
-	<div class="col">
-		<h5><span class="badge badge-primary" onclick=""><img alt="換密碼" src="./images/accessories-text-editor.png" border="0">&nbsp;更換密碼</span></h5>
-	</div>
-</div>
 
 <div class="form-group" id="form-group1">
 	<div class="row">
@@ -107,8 +108,8 @@ function getChronicAppendId() {
 <div class="form-group" id="form-group2">
 	<div class="row">
 		<div class="col-xs-6 col-md-6 col-lg-6">
-			<label for="logDate"> 生日</label>
-			<input  class="form-control" type="date" value="" id="birthday" name="birthday"/>
+			<label for="logDate"> 生日<font color='RED'>*</font></label>
+			<input  class="form-control" type="date" value="${birthdayStr}" id="birthday" name="birthday"/>
 			<div class="form-control-feedback" id="birthday-feedback"></div>			
 		</div>
 	</div>
@@ -118,12 +119,12 @@ function getChronicAppendId() {
 		性別 &nbsp;&nbsp;
 		
 <label class="custom-control custom-radio">
-  <input id="genderRadioBoy" name="genderRadio" type="radio" class="custom-control-input" checked="checked">
+  <input id="genderRadioBoy" name="genderRadio" type="radio" class="custom-control-input" <q:if test=" \"1\" == profile.gender "> checked="checked" </q:if> >
   <span class="custom-control-indicator"></span>
   <span class="custom-control-description">男</span>
 </label>
 <label class="custom-control custom-radio">
-  <input id="genderRadioGirl" name="genderRadio" type="radio" class="custom-control-input">
+  <input id="genderRadioGirl" name="genderRadio" type="radio" class="custom-control-input" <q:if test=" \"2\" == profile.gender "> checked="checked" </q:if> >
   <span class="custom-control-indicator"></span>
   <span class="custom-control-description">女</span>
 </label>		
@@ -132,17 +133,17 @@ function getChronicAppendId() {
 	</div>
 	<div class="row">
 		<div class="col-xs-6 col-md-6 col-lg-6">
-			<q:textbox name="height" value="" id="height" label="身高" requiredFlag="N" maxlength="3" placeholder="請輸入身高"></q:textbox>
+			<q:textbox name="height" value="profile.height" id="height" label="身高" requiredFlag="N" maxlength="3" placeholder="請輸入身高"></q:textbox>
 		</div>
 	</div>			
 	<div class="row">
 		<div class="col-xs-6 col-md-6 col-lg-6">
-			<q:textbox name="weight" value="" id="weight" label="體重" requiredFlag="N" maxlength="3" placeholder="請輸入體重"></q:textbox>
+			<q:textbox name="weight" value="profile.weight" id="weight" label="體重" requiredFlag="N" maxlength="3" placeholder="請輸入體重"></q:textbox>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-xs-6 col-md-6 col-lg-6">
-			<q:textbox name="address" value="" id="address" label="地址" requiredFlag="N" maxlength="500" placeholder="請輸入地址"></q:textbox>
+			<q:textbox name="address" value="profile.address" id="address" label="地址" requiredFlag="N" maxlength="500" placeholder="請輸入地址"></q:textbox>
 		</div>
 	</div>		
 </div>
@@ -168,6 +169,7 @@ function getChronicAppendId() {
 			xhrUrl="./personProfileUpdateJson.do"
 			xhrParameter="
 			{
+				'personOid'			:		'${person.oid}',
 				'name'					:		$('#name').val(),
 				'phone'					:		$('#phone').val(),
 				'tel'					:		$('#tel').val(),

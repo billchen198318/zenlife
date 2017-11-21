@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.qifu.base.model.BaseEntity;
 import org.qifu.base.model.EntityPK;
@@ -13,7 +14,10 @@ import org.qifu.base.model.EntityUK;
 
 @Entity
 @Table(
-		name="zl_person_chronic"
+		name="zl_person_chronic",
+		uniqueConstraints = { 
+				@UniqueConstraint( columnNames = {"ID", "CID"} ) 
+		} 		
 )
 public class ZlPersonChronic extends BaseEntity<String> implements java.io.Serializable {
 	private static final long serialVersionUID = 9062359788823694299L;
@@ -48,6 +52,7 @@ public class ZlPersonChronic extends BaseEntity<String> implements java.io.Seria
 		this.id = id;
 	}
 	
+	@EntityUK(name="cid")
 	@Column(name="CID")
 	public String getCid() {
 		return cid;

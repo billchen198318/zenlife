@@ -144,6 +144,7 @@ public class ProfileLogicServiceImpl extends CoreBaseLogicService implements IPr
 		mResult.getValue().setName( person.getName() );
 		mResult.getValue().setTel( person.getTel() );
 		this.personService.updateEntity( mResult.getValue() );
+		person = mResult.getValue();
 		
 		profile.setId( mResult.getValue().getId() );
 		
@@ -151,7 +152,14 @@ public class ProfileLogicServiceImpl extends CoreBaseLogicService implements IPr
 		if (result.getValue() == null) { // 之前沒有 profile
 			result = this.personProfileService.saveEntity(profile);
 		} else {
-			result = this.personProfileService.updateEntity(profile);
+			result.getValue().setBirthdayYear(profile.getBirthdayYear());
+			result.getValue().setBirthdayMonth(profile.getBirthdayMonth());
+			result.getValue().setBirthdayDay(profile.getBirthdayDay());
+			result.getValue().setHeight(profile.getHeight());
+			result.getValue().setWeight(profile.getWeight());
+			result.getValue().setGender(profile.getGender());
+			result.getValue().setAddress(profile.getAddress());
+			result = this.personProfileService.updateEntity(result.getValue());
 		}
 		this.deleteChronic(person);
 		this.createChronic(person, chronicList);
