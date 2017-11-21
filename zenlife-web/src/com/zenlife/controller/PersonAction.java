@@ -35,6 +35,7 @@ import org.qifu.base.exception.ServiceException;
 import org.qifu.base.model.ControllerMethodAuthority;
 import org.qifu.base.model.DefaultControllerJsonResultObj;
 import org.qifu.po.ZlChronic;
+import org.qifu.po.ZlPerson;
 import org.qifu.po.ZlPersonChronic;
 import org.qifu.po.ZlPersonProfile;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.zenlife.service.IChronicService;
 import com.zenlife.service.IPersonChronicService;
+import com.zenlife.service.logic.IProfileLogicService;
 
 @EnableWebMvc
 @Controller
@@ -55,6 +57,7 @@ public class PersonAction extends BaseController {
 	
 	private IChronicService<ZlChronic, String> chronicService;
 	private IPersonChronicService<ZlPersonChronic, String> personChronicService;
+	private IProfileLogicService profileLogicService; 
 	
 	public IChronicService<ZlChronic, String> getChronicService() {
 		return chronicService;
@@ -78,6 +81,17 @@ public class PersonAction extends BaseController {
 		this.personChronicService = personChronicService;
 	}
 	
+	public IProfileLogicService getProfileLogicService() {
+		return profileLogicService;
+	}
+
+	@Autowired
+	@Resource(name="zenlife.service.logic.ProfileLogicService")
+	@Required	
+	public void setProfileLogicService(IProfileLogicService profileLogicService) {
+		this.profileLogicService = profileLogicService;
+	}
+
 	private List<ZlPersonChronic> findPersonChronicList() throws ServiceException, Exception {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("id", this.getAccountId());
@@ -107,14 +121,24 @@ public class PersonAction extends BaseController {
 		return mv;
 	}		
 	
+	private void checkFieldsForParam(DefaultControllerJsonResultObj<ZlPersonProfile> result, ZlPerson person, ZlPersonProfile profile) throws ControllerException, Exception {
+		this.getCheckControllerFieldHandler(result)
+		.testField("name", person, "@org.apache.commons.lang3.StringUtils@isBlank(name)", "名稱必須填寫")
+		.testField("phone", person, "@org.apache.commons.lang3.StringUtils@isBlank(phone)", "手機號碼必須填寫")
+		
+		.throwMessage();
+	}
+	
 	private void update(DefaultControllerJsonResultObj<ZlPersonProfile> result, HttpServletRequest request) throws AuthorityException, ControllerException, ServiceException, Exception {
+		ZlPerson person = new ZlPerson();
+		ZlPersonProfile profile = new ZlPersonProfile();
 		
 	}
 	
 	@ControllerMethodAuthority(check = true, programId = "ZENLIFE_FE_0004Q")
 	@RequestMapping(value = "/personProfileUpdateJson.do", produces = "application/json")
 	public @ResponseBody DefaultControllerJsonResultObj<ZlPersonProfile> doUpdate(HttpServletRequest request) {
-		DefaultControllerJsonResultObj<ZlPersonProfile> result = this.getDefaultJsonResult("ZENLIFE_FE_0003Q");
+		DefaultControllerJsonResultObj<ZlPersonProfile> result = this.getDefaultJsonResult("ZENLIFE_FE_0004Q");
 		if (!this.isAuthorizeAndLoginFromControllerJsonResult(result)) {
 			return result;
 		}
