@@ -173,8 +173,8 @@ function getChronicAppendId() {
 				'tel'					:		$('#tel').val(),
 				'birthday'				:		$('#birthday').val(),
 				'gender'				:		( $('#genderRadioBoy').is(':checked') ? '1' : '2' ),
-				'height'				:		$('#height').val(),
-				'weight'				:		$('#weight').val(),
+				'heightStr'				:		$('#height').val(),
+				'weightStr'				:		$('#weight').val(),
 				'address'				:		$('#address').val(),
 				'chronicAppendId'		:		getChronicAppendId()
 			}

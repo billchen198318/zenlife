@@ -28,12 +28,14 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.math.NumberUtils;
 import org.qifu.base.controller.BaseController;
 import org.qifu.base.exception.AuthorityException;
 import org.qifu.base.exception.ControllerException;
 import org.qifu.base.exception.ServiceException;
 import org.qifu.base.model.ControllerMethodAuthority;
 import org.qifu.base.model.DefaultControllerJsonResultObj;
+import org.qifu.base.model.DefaultResult;
 import org.qifu.po.ZlChronic;
 import org.qifu.po.ZlPerson;
 import org.qifu.po.ZlPersonChronic;
@@ -125,14 +127,33 @@ public class PersonAction extends BaseController {
 		this.getCheckControllerFieldHandler(result)
 		.testField("name", person, "@org.apache.commons.lang3.StringUtils@isBlank(name)", "名稱必須填寫")
 		.testField("phone", person, "@org.apache.commons.lang3.StringUtils@isBlank(phone)", "手機號碼必須填寫")
-		
 		.throwMessage();
 	}
 	
 	private void update(DefaultControllerJsonResultObj<ZlPersonProfile> result, HttpServletRequest request) throws AuthorityException, ControllerException, ServiceException, Exception {
 		ZlPerson person = new ZlPerson();
 		ZlPersonProfile profile = new ZlPersonProfile();
-		
+		this.fillObjectFromRequest(request, person);
+		this.fillObjectFromRequest(request, profile);
+		profile.setHeight( NumberUtils.toInt(request.getParameter("heightStr"), 0)+"" );
+		profile.setWeight( NumberUtils.toInt(request.getParameter("weightStr"), 0)+"" );
+		String birthday = super.defaultString( request.getParameter("birthday") ).replaceAll("/", "").replaceAll("-", "");
+		if (birthday.length() == 8) {
+			profile.setBirthdayYear( birthday.substring(0, 4) );
+			profile.setBirthdayMonth( birthday.substring(4, 6) );
+			profile.setBirthdayDay( birthday.substring(6, 8) );
+		}
+		this.checkFieldsForParam(result, person, profile);
+		DefaultResult<ZlPersonProfile> uResult = this.profileLogicService.updateProfile(
+				person, 
+				profile, 
+				super.transformAppendKeyStringToList(request.getParameter("chronicAppendId")), 
+				null);
+		if (uResult.getValue() != null) {
+			result.setValue( uResult.getValue() );
+			result.setSuccess( YES );
+		}
+		result.setMessage( uResult.getSystemMessage().getValue() );		
 	}
 	
 	@ControllerMethodAuthority(check = true, programId = "ZENLIFE_FE_0004Q")
