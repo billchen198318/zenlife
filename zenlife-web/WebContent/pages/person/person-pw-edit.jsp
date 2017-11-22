@@ -58,6 +58,7 @@ function updateSuccess(data) {
 
 function clearUpdate() {
 	$("#profileForm").trigger('reset');
+	clearWarningMessageField(formGroups, msgFields);
 }
 
 function cancelUpdate() {

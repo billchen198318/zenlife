@@ -60,6 +60,7 @@ function saveSuccess(data) {
 
 function clearSave() {
 	$("#bloodPressureForm").trigger('reset');
+	clearWarningMessageField(formGroups, msgFields);
 }
 
 function cancelSave() {
