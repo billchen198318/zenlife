@@ -31,13 +31,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript">
 
 var msgFields = new Object();
-msgFields['name'] 			= 'name';
+msgFields['name'] 		= 'name';
 msgFields['phone'] 		= 'phone';
 msgFields['birthday'] 	= 'birthday';
 
 var formGroups = new Object();
 formGroups['name'] 			= 'form-group1';
-formGroups['phone'] 			= 'form-group1';
+formGroups['phone'] 		= 'form-group1';
 formGroups['birthday'] 		= 'form-group2'
 
 function updateSuccess(data) {
@@ -169,7 +169,7 @@ function getChronicAppendId() {
 			xhrUrl="./personProfileUpdateJson.do"
 			xhrParameter="
 			{
-				'personOid'			:		'${person.oid}',
+				'personOid'				:		'${person.oid}',
 				'name'					:		$('#name').val(),
 				'phone'					:		$('#phone').val(),
 				'tel'					:		$('#tel').val(),
