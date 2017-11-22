@@ -99,7 +99,7 @@ function cancelSave() {
 	</div>
 	<div class="row">
 		<div class="col-xs-6 col-md-6 col-lg-6">
-		    <label for="pwd1">密碼(驗證)</label>&nbsp;<font color="RED">*</font>
+		    <label for="pwd2">密碼(驗證)</label>&nbsp;<font color="RED">*</font>
 		    <input type="password" class="form-control" id="pwd2" name="pwd2" placeholder="請輸入密碼(驗證)">
 		    <div class="form-control-feedback" id="pwd2-feedback"></div>					
 		</div>

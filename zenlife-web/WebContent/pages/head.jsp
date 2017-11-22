@@ -51,7 +51,7 @@ String backUrl = (String) request.getParameter("backUrl");
             <a class="nav-link" href="./personProfileEdit.do" onclick=""><b>個人資料</b></a>
           </li>                        
           <li class="nav-item">
-            <a class="nav-link" href="./personProfileEdit.do" onclick=""><b>變更密碼</b></a>
+            <a class="nav-link" href="./changePwEdit.do" onclick=""><b>變更密碼</b></a>
           </li>               
           <li class="nav-item">
             <a class="nav-link" href="#" onclick=""><b>關於</b></a>

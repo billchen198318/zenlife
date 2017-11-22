@@ -231,5 +231,26 @@ public class PersonAction extends BaseController {
 		}
 		return result;
 	}	
+	
+	@ControllerMethodAuthority(check = true, programId = "ZENLIFE_FE_0004Q")
+	@RequestMapping(value = "/changePwEdit.do", method = RequestMethod.GET)
+	public ModelAndView changePasswordEdit(HttpServletRequest request) {
+		String viewName = PAGE_SYS_ERROR;
+		String c = "";
+		ModelAndView mv = this.getDefaultModelAndView();
+		try {
+			c = request.getParameter("c");
+			viewName = "person/person-pw-edit";
+		} catch (AuthorityException e) {
+			viewName = this.getAuthorityExceptionPage(e, request);
+		} catch (ServiceException | ControllerException e) {
+			viewName = this.getServiceOrControllerExceptionPage(e, request);
+		} catch (Exception e) {
+			this.getExceptionPage(e, request);
+		}
+		mv.addObject("c", super.defaultString(c));
+		mv.setViewName(viewName);
+		return mv;
+	}		
 
 }
