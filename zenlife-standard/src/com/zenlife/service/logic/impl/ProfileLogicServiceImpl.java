@@ -226,4 +226,26 @@ public class ProfileLogicServiceImpl extends CoreBaseLogicService implements IPr
 		}
 	}
 	
+	@ServiceMethodAuthority(type={ServiceMethodType.UPDATE})
+	@Transactional(
+			propagation=Propagation.REQUIRED, 
+			readOnly=false,
+			rollbackFor={RuntimeException.class, IOException.class, Exception.class} )		
+	@Override
+	public DefaultResult<ZlPerson> updatePassword(ZlPerson person, String oldPassword, String newPassword) throws ServiceException, Exception {
+		if (null == person || super.isBlank(person.getId()) || super.isBlank(oldPassword) || super.isBlank(newPassword)) {
+			throw new ServiceException(SysMessageUtil.get(SysMsgConstants.PARAMS_BLANK));
+		}		
+		DefaultResult<ZlPerson> mResult = this.personService.findEntityByUK(person);
+		if (mResult.getValue() == null) {
+			throw new ServiceException( mResult.getSystemMessage().getValue() );
+		}
+		person = mResult.getValue();
+		if (!this.getAccountService().tranPassword(oldPassword).equals(person.getPassword())) {
+			throw new ServiceException("原密碼不正確");
+		}
+		person.setPassword( this.getAccountService().tranPassword(newPassword) );
+		return this.personService.updateEntity(person);
+	}	
+	
 }

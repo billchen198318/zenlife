@@ -32,5 +32,7 @@ import org.qifu.po.ZlPersonUrgentContact;
 public interface IProfileLogicService {
 	
 	public DefaultResult<ZlPersonProfile> updateProfile(ZlPerson person, ZlPersonProfile profile, List<String> chronicList, List<ZlPersonUrgentContact> urgentContactList) throws ServiceException, Exception;
-
+	
+	public DefaultResult<ZlPerson> updatePassword(ZlPerson person, String oldPassword, String newPassword) throws ServiceException, Exception;
+	
 }

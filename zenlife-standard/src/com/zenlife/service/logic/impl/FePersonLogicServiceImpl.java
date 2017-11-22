@@ -132,7 +132,8 @@ public class FePersonLogicServiceImpl extends CoreBaseLogicService implements IF
 		logger.info("call createForFrontEnd Id:" + person.getId());
 		DefaultResult<ZlPerson> result=new DefaultResult<ZlPerson>();
 		if (this.personService.countByEntityUK(person) >0) {
-			throw new ServiceException(SysMessageUtil.get(SysMsgConstants.DATA_IS_EXIST));
+			//throw new ServiceException(SysMessageUtil.get(SysMsgConstants.DATA_IS_EXIST));
+			throw new ServiceException("已經有相同的帳戶注冊了，請更換帳戶!");
 		}
 		person.setOid( this.generateOid() );
 		person.setCuserid("admin");

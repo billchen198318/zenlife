@@ -50,7 +50,7 @@ function updateSuccess(data) {
 	parent.toastrInfo( data.message );
 	bootbox.alert({ 
 		  size: "small",
-		  title: "個人資料更新完成",
+		  title: "個人密碼更新完成",
 		  message: "返回首頁", 
 		  callback: function(){ window.location = "./index.do"; }
 	});	

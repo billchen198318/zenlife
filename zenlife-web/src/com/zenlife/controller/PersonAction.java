@@ -152,7 +152,7 @@ public class PersonAction extends BaseController {
 		mv.addObject("profile", profile);
 		if (!StringUtils.isBlank(profile.getBirthdayYear()) && !StringUtils.isBlank(profile.getBirthdayMonth()) 
 				&& !StringUtils.isBlank(profile.getBirthdayDay())) {
-			mv.addObject("birthdayStr", profile.getBirthdayYear()+"/"+profile.getBirthdayMonth()+"/"+profile.getBirthdayDay());
+			mv.addObject("birthdayStr", profile.getBirthdayYear()+"-"+profile.getBirthdayMonth()+"-"+profile.getBirthdayDay());
 		}
 	}
 
@@ -188,6 +188,15 @@ public class PersonAction extends BaseController {
 		.throwMessage();
 	}
 	
+	private void checkFieldsForParamForUpdatePwd(DefaultControllerJsonResultObj<ZlPerson> result, String pwd0, String pwd1, String pwd2) throws ControllerException, Exception {
+		this.getCheckControllerFieldHandler(result)
+		.testField("pwd0", StringUtils.isBlank(pwd0), "請輸入原密碼")
+		.testField("pwd1", StringUtils.isBlank(pwd1), "請輸入新密碼")
+		.testField("pwd2", StringUtils.isBlank(pwd2), "請輸入新密碼(驗證)")
+		.testField("pwd1", !pwd1.equals(pwd2), "新密碼與(驗證)需相同")
+		.throwMessage();
+	}	
+	
 	private void update(DefaultControllerJsonResultObj<ZlPersonProfile> result, HttpServletRequest request) throws AuthorityException, ControllerException, ServiceException, Exception {
 		ZlPerson person = new ZlPerson();
 		ZlPersonProfile profile = new ZlPersonProfile();
@@ -213,6 +222,22 @@ public class PersonAction extends BaseController {
 			result.setSuccess( YES );
 		}
 		result.setMessage( uResult.getSystemMessage().getValue() );		
+	}
+	
+	private void updatePwd(DefaultControllerJsonResultObj<ZlPerson> result, HttpServletRequest request) throws AuthorityException, ControllerException, ServiceException, Exception {
+		String pwd0 = this.defaultString(request.getParameter("pwd0")).trim();
+		String pwd1 = this.defaultString(request.getParameter("pwd1")).trim();
+		String pwd2 = this.defaultString(request.getParameter("pwd2")).trim();
+		this.checkFieldsForParamForUpdatePwd(result, pwd0, pwd1, pwd2);
+		ZlPerson person = new ZlPerson();
+		person.setId( this.getAccountId() );
+		DefaultResult<ZlPerson> uResult = this.profileLogicService.updatePassword(person, pwd0, pwd1);
+		if (uResult.getValue() != null) {
+			uResult.getValue().setPassword(" ");
+			result.setValue( uResult.getValue() );
+			result.setSuccess( YES );
+		}
+		result.setMessage( uResult.getSystemMessage().getValue() );
 	}
 	
 	@ControllerMethodAuthority(check = true, programId = "ZENLIFE_FE_0004Q")
@@ -251,6 +276,23 @@ public class PersonAction extends BaseController {
 		mv.addObject("c", super.defaultString(c));
 		mv.setViewName(viewName);
 		return mv;
+	}		
+	
+	@ControllerMethodAuthority(check = true, programId = "ZENLIFE_FE_0004Q")
+	@RequestMapping(value = "/personPwUpdateJson.do", produces = "application/json")
+	public @ResponseBody DefaultControllerJsonResultObj<ZlPerson> doUpdatePwd(HttpServletRequest request) {
+		DefaultControllerJsonResultObj<ZlPerson> result = this.getDefaultJsonResult("ZENLIFE_FE_0004Q");
+		if (!this.isAuthorizeAndLoginFromControllerJsonResult(result)) {
+			return result;
+		}
+		try {
+			this.updatePwd(result, request);
+		} catch (AuthorityException | ServiceException | ControllerException e) {
+			result.setMessage( e.getMessage().toString() );			
+		} catch (Exception e) {
+			this.exceptionResult(result, e);
+		}
+		return result;
 	}		
 
 }
