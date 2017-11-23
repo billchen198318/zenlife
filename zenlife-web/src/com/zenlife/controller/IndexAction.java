@@ -58,6 +58,23 @@ public class IndexAction extends BaseController {
 	}
 	
 	@ControllerMethodAuthority(check = false, programId = "ZENLIFE_FE_0001Q")
+	@RequestMapping(value = "/about.do", method = RequestMethod.GET)
+	public ModelAndView about(HttpServletRequest request) {
+		String viewName = PAGE_SYS_ERROR;
+		String c = "";
+		ModelAndView mv = this.getDefaultModelAndView();
+		try {
+			c = request.getParameter("c");
+			viewName = "about";
+		} catch (Exception e) {
+			this.getExceptionPage(e, request);
+		}
+		mv.addObject("c", super.defaultString(c));
+		mv.setViewName(viewName);
+		return mv;
+	}	
+	
+	@ControllerMethodAuthority(check = false, programId = "ZENLIFE_FE_0001Q")
 	@RequestMapping(value = "/doTestJson.do", produces = "application/json")
 	public @ResponseBody DefaultControllerJsonResultObj<Boolean> doTest() {
 		DefaultControllerJsonResultObj<Boolean> result = this.getDefaultJsonResult("ZENLIFE_FE_0003Q");
