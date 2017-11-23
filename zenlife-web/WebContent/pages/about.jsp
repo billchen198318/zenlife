@@ -48,17 +48,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <address>
   
     <strong>關於說醫門</strong><br />
+<br/>    
 (目前是亂寫的)aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<br/> 
 bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb<br/>
 cccccccccccccccccccccccccccccccccccccccccccc<br/>
 dddddddddddddddddddddddddddddddddddddddddddd<br/>
 eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee<br/>
   </address>
+<img alt="about" src="./images/about_bk1.jpg" border="0">
 
 </div>
 
 <br/>
-位置: 桃園市新屋區中山西路777號<br/>
+電話: 0800-956-956<br/>
+位置: <span class="badge badge-info">桃園市新屋區中山西路777號</span><br/>
 <div class="embed-responsive embed-responsive-4by3">
 	<iframe width="800" height="600" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" 
 		src=http://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q=桃園市新屋區中山西路777號&z=16&output=embed&t=></iframe>
