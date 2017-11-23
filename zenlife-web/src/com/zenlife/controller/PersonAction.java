@@ -37,6 +37,7 @@ import org.qifu.base.exception.ServiceException;
 import org.qifu.base.model.ControllerMethodAuthority;
 import org.qifu.base.model.DefaultControllerJsonResultObj;
 import org.qifu.base.model.DefaultResult;
+import org.qifu.po.ZlBloodPressure;
 import org.qifu.po.ZlChronic;
 import org.qifu.po.ZlPerson;
 import org.qifu.po.ZlPersonChronic;
@@ -50,6 +51,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import com.zenlife.service.IBloodPressureService;
 import com.zenlife.service.IChronicService;
 import com.zenlife.service.IPersonChronicService;
 import com.zenlife.service.IPersonProfileService;
@@ -64,6 +66,7 @@ public class PersonAction extends BaseController {
 	private IPersonProfileService<ZlPersonProfile, String> personProfileService;
 	private IChronicService<ZlChronic, String> chronicService;
 	private IPersonChronicService<ZlPersonChronic, String> personChronicService;
+	private IBloodPressureService<ZlBloodPressure, String> bloodPressureService;
 	private IProfileLogicService profileLogicService; 
 	
 	public IChronicService<ZlChronic, String> getChronicService() {
@@ -110,6 +113,17 @@ public class PersonAction extends BaseController {
 		this.personChronicService = personChronicService;
 	}
 	
+	public IBloodPressureService<ZlBloodPressure, String> getBloodPressureService() {
+		return bloodPressureService;
+	}
+
+	@Autowired
+	@Resource(name="zenlife.service.BloodPressureService")
+	@Required	
+	public void setBloodPressureService(IBloodPressureService<ZlBloodPressure, String> bloodPressureService) {
+		this.bloodPressureService = bloodPressureService;
+	}	
+	
 	public IProfileLogicService getProfileLogicService() {
 		return profileLogicService;
 	}
@@ -126,6 +140,11 @@ public class PersonAction extends BaseController {
 		paramMap.put("id", this.getAccountId());
 		return this.personChronicService.findListByParams(paramMap);
 	}
+	
+	private List<ZlBloodPressure> findForLastRecordView() throws ServiceException, Exception {
+		DefaultResult<List<ZlBloodPressure>> result = this.bloodPressureService.findForLastRecord(this.getAccountId(), 1);
+		return result.getValue();
+	}	
 	
 	private void fillBaseDataForPage(ModelAndView mv) throws ServiceException, Exception {
 		mv.addObject("birthdayStr", "");
@@ -294,5 +313,30 @@ public class PersonAction extends BaseController {
 		}
 		return result;
 	}		
-
+	
+	@ControllerMethodAuthority(check = true, programId = "ZENLIFE_FE_0004Q")
+	@RequestMapping(value = "/personProfileView.do", method = RequestMethod.GET)
+	public ModelAndView personProfileView(HttpServletRequest request) {
+		String viewName = PAGE_SYS_ERROR;
+		String c = "";
+		ModelAndView mv = this.getDefaultModelAndView();
+		try {
+			c = request.getParameter("c");
+			this.fillBaseDataForPage(mv);
+			mv.addObject("chronicList", this.chronicService.findListByParams(null));
+			mv.addObject("personChronicList", this.findPersonChronicList());
+			mv.addObject("bloodPressureList", this.findForLastRecordView());
+			viewName = "person/person-view";
+		} catch (AuthorityException e) {
+			viewName = this.getAuthorityExceptionPage(e, request);
+		} catch (ServiceException | ControllerException e) {
+			viewName = this.getServiceOrControllerExceptionPage(e, request);
+		} catch (Exception e) {
+			this.getExceptionPage(e, request);
+		}
+		mv.addObject("c", super.defaultString(c));
+		mv.setViewName(viewName);
+		return mv;
+	}	
+	
 }

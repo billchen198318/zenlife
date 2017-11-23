@@ -38,7 +38,7 @@ String c = (String)request.getParameter("c");
   		</tr>  		
   	</table>
   </a>  
-  <a class="navbar-brand" href="#">
+  <a class="navbar-brand" href="./personProfileView.do?c=4">
   	<table class="rounded">
   		<tr>
   			<td align="center" <% if ("4".equals(c)) { %> bgcolor="#717880" <% } %> class="rounded-top"><img src="./images/contact-new.png" border="0"></td>
