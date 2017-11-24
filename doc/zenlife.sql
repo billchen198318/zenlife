@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.27, for Win32 (x86)
+-- MySQL dump 10.13  Distrib 5.7.19, for FreeBSD11.0 (amd64)
 --
 -- Host: localhost    Database: zenlife
 -- ------------------------------------------------------
--- Server version	5.6.27
+-- Server version	5.7.19-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -1258,7 +1258,7 @@ CREATE TABLE `qrtz_scheduler_state` (
 
 LOCK TABLES `qrtz_scheduler_state` WRITE;
 /*!40000 ALTER TABLE `qrtz_scheduler_state` DISABLE KEYS */;
-INSERT INTO `qrtz_scheduler_state` VALUES ('scheduler','localX861496662023015',1496662249643,7500);
+INSERT INTO `qrtz_scheduler_state` VALUES ('scheduler','localX861511520988448',1511523160485,7500),('scheduler','localX861511521021419',1511523163464,7500);
 /*!40000 ALTER TABLE `qrtz_scheduler_state` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1373,7 +1373,7 @@ CREATE TABLE `qrtz_triggers` (
 
 LOCK TABLES `qrtz_triggers` WRITE;
 /*!40000 ALTER TABLE `qrtz_triggers` DISABLE KEYS */;
-INSERT INTO `qrtz_triggers` VALUES ('scheduler','core.job.ClearTempDataJobCronTrigger','DEFAULT','core.job.ClearTempDataJob','DEFAULT',NULL,1496691001000,-1,0,'WAITING','CRON',1496662022000,0,NULL,0,''),('scheduler','core.job.SendMailHelperJobCronTrigger','DEFAULT','core.job.SendMailHelperJob','DEFAULT',NULL,1496662320000,1496662200000,0,'WAITING','CRON',1496662022000,0,NULL,0,''),('scheduler','core.job.SysExpressionJobCronTrigger','DEFAULT','core.job.SysExpressionJob','DEFAULT',NULL,1496662260000,1496662200000,0,'WAITING','CRON',1496662022000,0,NULL,0,'');
+INSERT INTO `qrtz_triggers` VALUES ('scheduler','core.job.ClearTempDataJobCronTrigger','DEFAULT','core.job.ClearTempDataJob','DEFAULT',NULL,1511551801000,-1,0,'WAITING','CRON',1511521021000,0,NULL,0,''),('scheduler','core.job.SendMailHelperJobCronTrigger','DEFAULT','core.job.SendMailHelperJob','DEFAULT',NULL,1511523240000,1511523120000,0,'WAITING','CRON',1511521021000,0,NULL,0,''),('scheduler','core.job.SysExpressionJobCronTrigger','DEFAULT','core.job.SysExpressionJob','DEFAULT',NULL,1511523180000,1511523120000,0,'WAITING','CRON',1511521021000,0,NULL,0,'');
 /*!40000 ALTER TABLE `qrtz_triggers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2669,7 +2669,7 @@ CREATE TABLE `zl_course` (
 
 LOCK TABLES `zl_course` WRITE;
 /*!40000 ALTER TABLE `zl_course` DISABLE KEYS */;
-INSERT INTO `zl_course` VALUES ('37bcf152-f8e5-4166-bc93-56b763c4d5d0','T20171114002','讓你靠北到爽的一利一修','<b>【1112】卡提諾狂新聞 #090</b>\r\n<br/>\r\n1112】卡提諾狂新聞 #090 期<br/>\r\n<br/>\r\n※ 一直咧修來修去修來修去<br/>\r\n※ 狗臉也能開手機嗎？<br/>\r\n※ 夾夾夾夾你個大傻幣<br/>\r\n※ 唐納先生逛亞洲大觀園<br/>\r\n※ 小時不讀書長大當...<br/>\r\n<br/>\r\n按讚加入卡提諾狂新聞粉絲團 ！搶先收到第一手狂訊<br/>\r\nhttps://www.facebook.com/crazyck101/ <br/>\r\niPhone裝APP https://goo.gl/wbDRJp<br/>\r\nAndroid裝APP https://goo.gl/zJjCjU<br/>\r\n卡提諾狂新聞網站 https://goo.gl/VXz5v2<br/>\r\n卡提諾狂新聞Youtube https://goo.gl/2edkKf<br/>\r\n\r\n<div class=\"embed-responsive embed-responsive-4by3\">\r\n  <iframe class=\"embed-responsive-item\" src=\"https://www.youtube.com/embed/M3ovvCIN8ok?rel=0\" allowfullscreen></iframe>\r\n</div>\r\n','卡提諾狂新聞 #090<br>\r\n<img src=\"https://upload.wikimedia.org/wikipedia/commons/b/b0/Non_Non_Biyori_logo.png\" width=\"380\" height=\"120\">','Y','admin','2017-11-14 10:51:13',NULL,NULL),('f9021ed1-0da2-4eda-a20f-e69f70219b3c','T20171114001','測試用教學，看看風景!','2017年11月3日、紅葉が真っ盛りとなった小川村や大坊峠から見る雪化粧した北アルプスの絶景、\r\n11月2日に撮影した信仰と伝説の戸隠山など信州の里山の秋景色を作品にしました。\r\n音楽は＜甘茶の音楽工房＞さんの楽曲を使用させて頂きました。\r\n\r\n<div class=\"embed-responsive embed-responsive-4by3\">\r\n  <iframe class=\"embed-responsive-item\" src=\"https://www.youtube.com/embed/1C0ild-G4lA?rel=0\" allowfullscreen></iframe>\r\n</div>\r\n\r\n\r\n','紅葉が美しい小川村から戸隠山 大望峠に・4K撮影\r\n<br>\r\n<img src=\"http://blogimg.goo.ne.jp/user_image/0b/7d/5e26adfb4973df9420885dfd990d946f.jpg\" width=\"380\" heigh=\"240\">\r\n','Y','admin','2017-11-14 10:46:40',NULL,NULL);
+INSERT INTO `zl_course` VALUES ('37bcf152-f8e5-4166-bc93-56b763c4d5d0','T20171114002','讓你靠北到爽的一利一修','<b>【1112】卡提諾狂新聞 #090</b>\r\n<br/>\r\n1112】卡提諾狂新聞 #090 期<br/>\r\n<br/>\r\n※ 一直咧修來修去修來修去<br/>\r\n※ 狗臉也能開手機嗎？<br/>\r\n※ 夾夾夾夾你個大傻幣<br/>\r\n※ 唐納先生逛亞洲大觀園<br/>\r\n※ 小時不讀書長大當...<br/>\r\n<br/>\r\n按讚加入卡提諾狂新聞粉絲團 ！搶先收到第一手狂訊<br/>\r\nhttps://www.facebook.com/crazyck101/ <br/>\r\niPhone裝APP https://goo.gl/wbDRJp<br/>\r\nAndroid裝APP https://goo.gl/zJjCjU<br/>\r\n卡提諾狂新聞網站 https://goo.gl/VXz5v2<br/>\r\n卡提諾狂新聞Youtube https://goo.gl/2edkKf<br/>\r\n\r\n<div class=\"embed-responsive embed-responsive-4by3\">\r\n  <iframe class=\"embed-responsive-item\" src=\"https://www.youtube.com/embed/M3ovvCIN8ok?rel=0\" allowfullscreen></iframe>\r\n</div>\r\n','卡提諾狂新聞 #090<br>\r\n<img src=\"https://upload.wikimedia.org/wikipedia/commons/b/b0/Non_Non_Biyori_logo.png\" width=\"320\" height=\"120\">','Y','admin','2017-11-14 10:51:13',NULL,NULL),('f9021ed1-0da2-4eda-a20f-e69f70219b3c','T20171114001','測試用教學，看看風景!','2017年11月3日、紅葉が真っ盛りとなった小川村や大坊峠から見る雪化粧した北アルプスの絶景、\r\n11月2日に撮影した信仰と伝説の戸隠山など信州の里山の秋景色を作品にしました。\r\n音楽は＜甘茶の音楽工房＞さんの楽曲を使用させて頂きました。\r\n\r\n<div class=\"embed-responsive embed-responsive-4by3\">\r\n  <iframe class=\"embed-responsive-item\" src=\"https://www.youtube.com/embed/1C0ild-G4lA?rel=0\" allowfullscreen></iframe>\r\n</div>\r\n\r\n\r\n','紅葉が美しい小川村から戸隠山 大望峠に・4K撮影\r\n<br>\r\n<img src=\"http://blogimg.goo.ne.jp/user_image/0b/7d/5e26adfb4973df9420885dfd990d946f.jpg\" width=\"320\" heigh=\"240\">\r\n','Y','admin','2017-11-14 10:46:40',NULL,NULL);
 /*!40000 ALTER TABLE `zl_course` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2738,7 +2738,7 @@ CREATE TABLE `zl_person` (
 
 LOCK TABLES `zl_person` WRITE;
 /*!40000 ALTER TABLE `zl_person` DISABLE KEYS */;
-INSERT INTO `zl_person` VALUES ('0c50d200-c5c2-11e7-8b2e-058d906b7272','A123456789','ce353caa50000cd2b9a7c1853474fc2c','王永慶','0800555111','0800555111','aaa@aaa.org','Y','admin','2017-11-10 10:51:28','A123456789','2017-11-22 09:05:30');
+INSERT INTO `zl_person` VALUES ('0c50d200-c5c2-11e7-8b2e-058d906b7272','A123456789','ce353caa50000cd2b9a7c1853474fc2c','王永慶','0800555111','0800555111','chen.xin.nien@gmail.com','Y','admin','2017-11-10 10:51:28','A123456789','2017-11-24 19:23:24');
 /*!40000 ALTER TABLE `zl_person` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2768,7 +2768,7 @@ CREATE TABLE `zl_person_chronic` (
 
 LOCK TABLES `zl_person_chronic` WRITE;
 /*!40000 ALTER TABLE `zl_person_chronic` DISABLE KEYS */;
-INSERT INTO `zl_person_chronic` VALUES ('3bfa2890-cf21-11e7-82b9-e515979ce3ad','A123456789','A0000001','A123456789','2017-11-22 09:05:31',NULL,NULL),('3bfb12f0-cf21-11e7-82b9-e515979ce3ad','A123456789','A0000003','A123456789','2017-11-22 09:05:31',NULL,NULL);
+INSERT INTO `zl_person_chronic` VALUES ('e29d4d00-d109-11e7-8d54-5db8d5251697','A123456789','A0000001','A123456789','2017-11-24 19:23:24',NULL,NULL),('e29de940-d109-11e7-8d54-5db8d5251697','A123456789','A0000002','A123456789','2017-11-24 19:23:25',NULL,NULL),('e29eac90-d109-11e7-8d54-5db8d5251697','A123456789','A0000003','A123456789','2017-11-24 19:23:25',NULL,NULL);
 /*!40000 ALTER TABLE `zl_person_chronic` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2805,7 +2805,7 @@ CREATE TABLE `zl_person_profile` (
 
 LOCK TABLES `zl_person_profile` WRITE;
 /*!40000 ALTER TABLE `zl_person_profile` DISABLE KEYS */;
-INSERT INTO `zl_person_profile` VALUES ('3bd08080-cf21-11e7-82b9-e515979ce3ad','A123456789','1983','01','10','172','58','1','花蓮縣壽豐鄉111號','A123456789','2017-11-22 09:05:30',NULL,NULL);
+INSERT INTO `zl_person_profile` VALUES ('3bd08080-cf21-11e7-82b9-e515979ce3ad','A123456789','1983','01','10','172','58','1','花蓮縣壽豐鄉111號','A123456789','2017-11-22 09:05:30','A123456789','2017-11-24 19:23:24');
 /*!40000 ALTER TABLE `zl_person_profile` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2917,4 +2917,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-24 16:07:51
+-- Dump completed on 2017-11-24 19:33:57
