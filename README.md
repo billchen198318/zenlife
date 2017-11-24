@@ -1,5 +1,5 @@
 # zenlife 禪生活保健
-A demo APP inculde frontend and Backend Admin WEB. base on JAVA & Spring / Spring MVC & hibernate - MyBatis & Bootstrap v4.
+<b>A demo APP inculde Frontend and Backend Admin WEB. base on JAVA & Spring / Spring MVC & hibernate & Bootstrap v4</b>
 
 <br/>
 <br/>
