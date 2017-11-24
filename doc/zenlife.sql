@@ -2871,6 +2871,7 @@ CREATE TABLE `zl_product` (
 
 LOCK TABLES `zl_product` WRITE;
 /*!40000 ALTER TABLE `zl_product` DISABLE KEYS */;
+INSERT INTO `zl_product` VALUES ('90cbfe5c-5591-4f05-a307-95339c042ed0','P0001','葡萄王 益菌王60粒','葡萄王 益菌王60粒<br>\r\n幫助排便順暢 常保健康<br>\r\n<br>\r\n菌株配方再升級，7株好菌協同加級，使排便順暢，幫盼改變細菌叢生態，維持消化道機能，是常保全家人健康的最佳選擇<br>\r\n<br>\r\n經國際認證實驗室監控品質<br>\r\n<br>\r\n通過重金屬、微生物、塑化劑檢測<br>\r\n<br>\r\n通過ISO22000與HACCP食品安全衛生管理系統驗證廠<br>\r\n<br> \r\n成人每日晚餐飯後兩粒，配合300-500 C.C.開水食用。六歲以上兒童每日一粒，先打開膠囊，將粉末以45度C以下果汁或牛奶沖泡飲用<br>\r\n<br>\r\n商品簡述	含有五種人體腸道天然益菌 每粒有效菌數高達五百以上，健康認識，有助於增加腸內益生菌<br>\r\n品牌	GRAPEKING葡萄王<br>\r\n規格	60粒<br>\r\n原產地	台灣<br>\r\n深、寬、高	6.5x6.5x10.1cm<br>\r\n淨重	33 g<br>\r\n<br>\r\n<br>\r\n投保產品責任險	本產品投保5000萬產品責任險<br>\r\n製造日期	依包裝所示。保存期限2年<br>\r\n包裝份量	60粒/盒<br>\r\n<br>\r\n<img src=\"https://img3.momoshop.com.tw/goodsimg/0002/682/284/2682284_L.jpg?t=1510833014\" border=\"0\">','含有五種人體腸道天然益菌 每粒有效菌數高達五百以上，健康認識，有助於增加腸內益生菌<br>\r\n<img src=\"https://img3.momoshop.com.tw/goodsimg/0002/682/284/2682284_L.jpg?t=1510833014\" border=\"0\">','admin','2017-11-24 13:39:19',NULL,NULL);
 /*!40000 ALTER TABLE `zl_product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2916,4 +2917,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-24 11:07:37
+-- Dump completed on 2017-11-24 14:18:59
