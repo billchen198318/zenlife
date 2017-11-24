@@ -65,7 +65,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
   </div>
   -->
-  <div class="card mb-3 text-center">
+  <div class="card mb-3 text-center" onclick="window.location='./product.do';">
     <img class="card-img-top" src="./images/004.jpg" alt="Card image cap">
     <div class="card-block">
       <h4 class="card-title">保健商品</h4>

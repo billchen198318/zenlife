@@ -56,8 +56,12 @@ public class ZenLifeSettingConfigureUtils {
 		return sysCode;
 	}
 	
-	public static SysCodeVO getProductNoticeReciveMail() {
+	public static SysCodeVO getProductNoticeReciveCode() {
 		return getCode(_MAIL_PRODUCT_NOTICE_REVICE_CODE);
-	}	
-
+	}
+	
+	public static String getProductNoticeReciveMail() {
+		return getProductNoticeReciveCode().getParam1();
+	}		
+	
 }

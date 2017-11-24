@@ -47,6 +47,7 @@ import org.qifu.po.ZlPersonChronic;
 import org.qifu.po.ZlPersonProfile;
 import org.qifu.po.ZlPersonUrgentContact;
 import org.qifu.service.ISysMailHelperService;
+import org.qifu.util.SimpleUtils;
 import org.qifu.util.SystemSettingConfigureUtils;
 import org.qifu.util.TemplateUtils;
 import org.qifu.vo.SysMailHelperVO;
@@ -261,8 +262,9 @@ public class ProfileLogicServiceImpl extends CoreBaseLogicService implements IPr
 			mailHelper.setText( tplResult.getContent().getBytes(Constants.BASE_ENCODING) );
 			mailHelper.setMailFrom( SystemSettingConfigureUtils.getMailDefaultFromValue() );
 			mailHelper.setMailTo( person.getMail() );
-			mailHelper.setMailId( this.sysMailHelperService.findForMaxMailIdComplete("ZL-CPW") );
+			mailHelper.setMailId( this.sysMailHelperService.findForMaxMailIdComplete(SimpleUtils.getStrYMD("")) );
 			mailHelper.setRetainFlag( YesNo.NO );
+			mailHelper.setSuccessFlag( YesNo.NO );
 			this.sysMailHelperService.saveObject(mailHelper);
 		} catch (ServiceException e) {
 			e.printStackTrace();
