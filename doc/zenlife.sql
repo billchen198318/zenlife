@@ -2838,6 +2838,72 @@ LOCK TABLES `zl_person_urgent_contact` WRITE;
 /*!40000 ALTER TABLE `zl_person_urgent_contact` DISABLE KEYS */;
 /*!40000 ALTER TABLE `zl_person_urgent_contact` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `zl_product`
+--
+
+DROP TABLE IF EXISTS `zl_product`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `zl_product` (
+  `OID` char(36) NOT NULL,
+  `PROD_ID` varchar(20) NOT NULL,
+  `NAME` varchar(100) NOT NULL,
+  `CONTENT` text,
+  `DESCRIPTION` varchar(500) NOT NULL,
+  `CUSERID` varchar(24) NOT NULL,
+  `CDATE` datetime NOT NULL,
+  `UUSERID` varchar(24) DEFAULT NULL,
+  `UDATE` datetime DEFAULT NULL,
+  PRIMARY KEY (`OID`),
+  UNIQUE KEY `UK_1` (`PROD_ID`,`NAME`),
+  KEY `IDX_1` (`PROD_ID`),
+  KEY `IDX_2` (`NAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `zl_product`
+--
+
+LOCK TABLES `zl_product` WRITE;
+/*!40000 ALTER TABLE `zl_product` DISABLE KEYS */;
+/*!40000 ALTER TABLE `zl_product` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `zl_product_notice`
+--
+
+DROP TABLE IF EXISTS `zl_product_notice`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `zl_product_notice` (
+  `OID` char(36) NOT NULL,
+  `PROD_ID` varchar(20) NOT NULL,
+  `PERSON_ID` varchar(24) NOT NULL,
+  `ADDRESS` varchar(500) NOT NULL,
+  `PHONE` varchar(10) NOT NULL,
+  `MESSAGE` varchar(500) NOT NULL,
+  `CUSERID` varchar(24) NOT NULL,
+  `CDATE` datetime NOT NULL,
+  `UUSERID` varchar(24) DEFAULT NULL,
+  `UDATE` datetime DEFAULT NULL,
+  PRIMARY KEY (`OID`),
+  KEY `IDX_1` (`PROD_ID`),
+  KEY `IDX_2` (`PERSON_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `zl_product_notice`
+--
+
+LOCK TABLES `zl_product_notice` WRITE;
+/*!40000 ALTER TABLE `zl_product_notice` DISABLE KEYS */;
+/*!40000 ALTER TABLE `zl_product_notice` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -2848,4 +2914,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-22 11:52:23
+-- Dump completed on 2017-11-24 10:34:11
