@@ -30,6 +30,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <script type="text/javascript">
 
+$( document ).ready(function() {
+	
+	$("#sbp").ForceNumericOnly();
+	$("#dbp").ForceNumericOnly();
+	$("#pulse").ForceNumericOnly();
+	
+});
+
 var msgFields = new Object();
 msgFields['sbp'] 			= 'sbp';
 msgFields['dbp'] 			= 'dbp';

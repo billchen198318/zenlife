@@ -28,6 +28,17 @@ String uuidStr = SimpleUtils.getRandomUUIDStr();
 
 <script type="text/javascript">
 
+$( document ).ready(function() {
+	
+	$('#id').keyup(function(){
+	    this.value = this.value.toUpperCase();
+	});
+	
+	$("#phone").ForceNumericOnly();
+	$("#tel").ForceNumericOnly();	
+	
+});
+
 var msgFields = new Object();
 msgFields['id'] 			= 'id';
 msgFields['password'] 		= 'pwd1';
@@ -93,14 +104,14 @@ function cancelSave() {
 	<div class="row">
 		<div class="col-xs-6 col-md-6 col-lg-6">
 		    <label for="pwd1">密碼</label>&nbsp;<font color="RED">*</font>
-		    <input type="password" class="form-control" id="pwd1" name="pwd1" placeholder="請輸入密碼">			
+		    <input type="password" class="form-control" id="pwd1" name="pwd1" placeholder="請輸入密碼" maxlength="12">			
 		    <div class="form-control-feedback" id="pwd1-feedback"></div>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-xs-6 col-md-6 col-lg-6">
 		    <label for="pwd2">密碼(驗證)</label>&nbsp;<font color="RED">*</font>
-		    <input type="password" class="form-control" id="pwd2" name="pwd2" placeholder="請輸入密碼(驗證)">
+		    <input type="password" class="form-control" id="pwd2" name="pwd2" placeholder="請輸入密碼(驗證)" maxlength="12">
 		    <div class="form-control-feedback" id="pwd2-feedback"></div>					
 		</div>
 	</div>
@@ -119,7 +130,7 @@ function cancelSave() {
 <div class="form-group" id="form-group2">
 	<div class="row">
 		<div class="col-xs-6 col-md-6 col-lg-6">
-			<q:textbox name="mail" value="" id="mail" label="電子信箱email" requiredFlag="Y" maxlength="24" placeholder="請輸入電子信箱email"></q:textbox>
+			<q:textbox name="mail" value="" id="mail" label="電子信箱email" requiredFlag="Y" maxlength="200" placeholder="請輸入電子信箱email"></q:textbox>
 		</div>
 	</div>
 </div>

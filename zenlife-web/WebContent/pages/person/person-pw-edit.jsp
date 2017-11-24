@@ -85,21 +85,21 @@ function cancelUpdate() {
 	<div class="row">
 		<div class="col-xs-6 col-md-6 col-lg-6">
 		    <label for="pwd0">原密碼</label>&nbsp;<font color="RED">*</font>
-		    <input type="password" class="form-control" id="pwd0" name="pwd0" placeholder="請輸入原密碼">			
+		    <input type="password" class="form-control" id="pwd0" name="pwd0" placeholder="請輸入原密碼" maxlength="12">			
 		    <div class="form-control-feedback" id="pwd0-feedback"></div>			
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-xs-6 col-md-6 col-lg-6">
 		    <label for="pwd1">新密碼</label>&nbsp;<font color="RED">*</font>
-		    <input type="password" class="form-control" id="pwd1" name="pwd1" placeholder="請輸入密碼">			
+		    <input type="password" class="form-control" id="pwd1" name="pwd1" placeholder="請輸入密碼" maxlength="12">			
 		    <div class="form-control-feedback" id="pwd1-feedback"></div>			
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-xs-6 col-md-6 col-lg-6">
 		    <label for="pwd2">新密碼(驗證)</label>&nbsp;<font color="RED">*</font>
-		    <input type="password" class="form-control" id="pwd2" name="pwd2" placeholder="請輸入密碼(驗證)">
+		    <input type="password" class="form-control" id="pwd2" name="pwd2" placeholder="請輸入密碼(驗證)" maxlength="12">
 		    <div class="form-control-feedback" id="pwd2-feedback"></div>			
 		</div>
 	</div>	

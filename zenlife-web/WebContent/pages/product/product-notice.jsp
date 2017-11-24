@@ -30,6 +30,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <script type="text/javascript">
 
+$( document ).ready(function() {
+	
+	$("#phone").ForceNumericOnly();
+	
+});
+
 var msgFields = new Object();
 msgFields['phone'] 			= 'phone';
 

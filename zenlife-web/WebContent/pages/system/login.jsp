@@ -58,6 +58,14 @@ body {
 
 <script type="text/javascript">
 
+$( document ).ready(function() {
+	
+	$('#username').keyup(function(){
+	    this.value = this.value.toUpperCase();
+	});
+	
+});
+
 function submitLoginForm() {	
 	document.loginForm.submit();
 	$('#myPleaseWait').modal('show');	
