@@ -29,6 +29,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.qifu.base.Constants;
 import org.qifu.base.SysMessageUtil;
 import org.qifu.base.SysMsgConstants;
 import org.qifu.base.exception.ServiceException;
@@ -36,12 +37,19 @@ import org.qifu.base.model.DefaultResult;
 import org.qifu.base.model.ServiceAuthority;
 import org.qifu.base.model.ServiceMethodAuthority;
 import org.qifu.base.model.ServiceMethodType;
+import org.qifu.base.model.YesNo;
 import org.qifu.base.service.logic.CoreBaseLogicService;
+import org.qifu.model.TemplateResultObj;
+import org.qifu.po.TbSysMailHelper;
 import org.qifu.po.ZlChronic;
 import org.qifu.po.ZlPerson;
 import org.qifu.po.ZlPersonChronic;
 import org.qifu.po.ZlPersonProfile;
 import org.qifu.po.ZlPersonUrgentContact;
+import org.qifu.service.ISysMailHelperService;
+import org.qifu.util.SystemSettingConfigureUtils;
+import org.qifu.util.TemplateUtils;
+import org.qifu.vo.SysMailHelperVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Service;
@@ -66,6 +74,7 @@ public class ProfileLogicServiceImpl extends CoreBaseLogicService implements IPr
 	private IPersonChronicService<ZlPersonChronic, String> personChronicService;
 	private IPersonUrgentContactService<ZlPersonUrgentContact, String> personUrgentContactService;
 	private IChronicService<ZlChronic, String> chronicService;
+	private ISysMailHelperService<SysMailHelperVO, TbSysMailHelper, String> sysMailHelperService;
 	
 	public ProfileLogicServiceImpl() {
 		super();
@@ -125,6 +134,17 @@ public class ProfileLogicServiceImpl extends CoreBaseLogicService implements IPr
 	public void setChronicService(IChronicService<ZlChronic, String> chronicService) {
 		this.chronicService = chronicService;
 	}
+	
+	public ISysMailHelperService<SysMailHelperVO, TbSysMailHelper, String> getSysMailHelperService() {
+		return sysMailHelperService;
+	}
+
+	@Autowired
+	@Resource(name="core.service.SysMailHelperService")
+	@Required	
+	public void setSysMailHelperService(ISysMailHelperService<SysMailHelperVO, TbSysMailHelper, String> sysMailHelperService) {
+		this.sysMailHelperService = sysMailHelperService;
+	}	
 
 	@ServiceMethodAuthority(type={ServiceMethodType.UPDATE})
 	@Transactional(
@@ -226,6 +246,32 @@ public class ProfileLogicServiceImpl extends CoreBaseLogicService implements IPr
 		}
 	}
 	
+	private void noticeChangePwMail(ZlPerson person, String pwd) {
+		
+		if (super.isBlank(person.getMail())) {
+			return;
+		}
+		Map<String, Object> tplParamMap = new HashMap<String, Object>();
+		tplParamMap.put("personId", person.getId());
+		tplParamMap.put("password", pwd);
+		try {
+			TemplateResultObj tplResult = TemplateUtils.getResult("ZL-TPL-002", tplParamMap);
+			SysMailHelperVO mailHelper = new SysMailHelperVO();
+			mailHelper.setSubject(tplResult.getTitle());
+			mailHelper.setText( tplResult.getContent().getBytes(Constants.BASE_ENCODING) );
+			mailHelper.setMailFrom( SystemSettingConfigureUtils.getMailDefaultFromValue() );
+			mailHelper.setMailTo( person.getMail() );
+			mailHelper.setMailId( this.sysMailHelperService.findForMaxMailIdComplete("ZL-CPW") );
+			mailHelper.setRetainFlag( YesNo.NO );
+			this.sysMailHelperService.saveObject(mailHelper);
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}	
+	
 	@ServiceMethodAuthority(type={ServiceMethodType.UPDATE})
 	@Transactional(
 			propagation=Propagation.REQUIRED, 
@@ -245,7 +291,11 @@ public class ProfileLogicServiceImpl extends CoreBaseLogicService implements IPr
 			throw new ServiceException("原密碼不正確");
 		}
 		person.setPassword( this.getAccountService().tranPassword(newPassword) );
-		return this.personService.updateEntity(person);
+		DefaultResult<ZlPerson> result = this.personService.updateEntity(person);
+		if (result.getValue() != null) {
+			this.noticeChangePwMail(result.getValue(), newPassword);
+		}
+		return result;
 	}	
 	
 }

@@ -23,10 +23,13 @@ package com.zenlife.service.logic.impl;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.qifu.base.Constants;
 import org.qifu.base.SysMessageUtil;
 import org.qifu.base.SysMsgConstants;
 import org.qifu.base.exception.ServiceException;
@@ -37,10 +40,16 @@ import org.qifu.base.model.ServiceMethodType;
 import org.qifu.base.model.SystemMessage;
 import org.qifu.base.model.YesNo;
 import org.qifu.base.service.logic.CoreBaseLogicService;
+import org.qifu.model.TemplateResultObj;
+import org.qifu.po.TbSysMailHelper;
 import org.qifu.po.ZlPerson;
 import org.qifu.po.ZlPersonChronic;
 import org.qifu.po.ZlPersonProfile;
 import org.qifu.po.ZlPersonUrgentContact;
+import org.qifu.service.ISysMailHelperService;
+import org.qifu.util.SystemSettingConfigureUtils;
+import org.qifu.util.TemplateUtils;
+import org.qifu.vo.SysMailHelperVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Service;
@@ -65,6 +74,7 @@ public class FePersonLogicServiceImpl extends CoreBaseLogicService implements IF
 	private IPersonService<ZlPerson, String> personService;
 	private IPersonProfileService<ZlPersonProfile, String> personProfileService;
 	private IPersonChronicService<ZlPersonChronic, String> personChronicService;
+	private ISysMailHelperService<SysMailHelperVO, TbSysMailHelper, String> sysMailHelperService;
 	private IPersonUrgentContactService<ZlPersonUrgentContact, String> personUrgentContactService;
 	
 	public FePersonLogicServiceImpl() {
@@ -97,6 +107,17 @@ public class FePersonLogicServiceImpl extends CoreBaseLogicService implements IF
 		return personChronicService;
 	}
 	
+	public ISysMailHelperService<SysMailHelperVO, TbSysMailHelper, String> getSysMailHelperService() {
+		return sysMailHelperService;
+	}
+
+	@Autowired
+	@Resource(name="core.service.SysMailHelperService")
+	@Required	
+	public void setSysMailHelperService(ISysMailHelperService<SysMailHelperVO, TbSysMailHelper, String> sysMailHelperService) {
+		this.sysMailHelperService = sysMailHelperService;
+	}
+
 	@Autowired
 	@Resource(name="zenlife.service.PersonChronicService")
 	@Required	
@@ -115,8 +136,30 @@ public class FePersonLogicServiceImpl extends CoreBaseLogicService implements IF
 		this.personUrgentContactService = personUrgentContactService;
 	}
 	
-	private void noticeValidMail(ZlPerson person) {
-		//FIXME: send mail content for valid person
+	private void noticeValidMail(ZlPerson person, String pwd) {
+		
+		if (super.isBlank(person.getMail())) {
+			return;
+		}
+		Map<String, Object> tplParamMap = new HashMap<String, Object>();
+		tplParamMap.put("personId", person.getId());
+		tplParamMap.put("password", pwd);
+		try {
+			TemplateResultObj tplResult = TemplateUtils.getResult("ZL-TPL-001", tplParamMap);
+			SysMailHelperVO mailHelper = new SysMailHelperVO();
+			mailHelper.setSubject(tplResult.getTitle());
+			mailHelper.setText( tplResult.getContent().getBytes(Constants.BASE_ENCODING) );
+			mailHelper.setMailFrom( SystemSettingConfigureUtils.getMailDefaultFromValue() );
+			mailHelper.setMailTo( person.getMail() );
+			mailHelper.setMailId( this.sysMailHelperService.findForMaxMailIdComplete("ZL-REG") );
+			mailHelper.setRetainFlag( YesNo.NO );
+			this.sysMailHelperService.saveObject(mailHelper);
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	@ServiceMethodAuthority(type={ServiceMethodType.INSERT})
@@ -135,6 +178,7 @@ public class FePersonLogicServiceImpl extends CoreBaseLogicService implements IF
 			//throw new ServiceException(SysMessageUtil.get(SysMsgConstants.DATA_IS_EXIST));
 			throw new ServiceException("已經有相同的帳戶注冊了，請更換帳戶!");
 		}
+		String befPwd = person.getPassword();
 		person.setOid( this.generateOid() );
 		person.setCuserid("admin");
 		person.setCdate(new Date());
@@ -144,7 +188,7 @@ public class FePersonLogicServiceImpl extends CoreBaseLogicService implements IF
 		if (insertEntity!=null && insertEntity.getOid()!=null ) {
 			result.setValue(insertEntity);
 			result.setSystemMessage(new SystemMessage(SysMessageUtil.get(SysMsgConstants.INSERT_SUCCESS)));
-			this.noticeValidMail(insertEntity);
+			this.noticeValidMail(insertEntity, befPwd);
 		} else {
 			result.setSystemMessage(new SystemMessage(SysMessageUtil.get(SysMsgConstants.INSERT_FAIL)));
 		}
