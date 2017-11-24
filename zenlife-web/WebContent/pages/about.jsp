@@ -49,11 +49,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
     <strong>關於說醫門</strong><br />
 <br/>    
-(目前是亂寫的)aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<br/> 
-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb<br/>
-cccccccccccccccccccccccccccccccccccccccccccc<br/>
-dddddddddddddddddddddddddddddddddddddddddddd<br/>
-eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee<br/>
+(目前是亂寫的)<br/>
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<br/> 
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb<br/>
+cccccccccccccccccccccccccccccccccc<br/>
+dddddddddddddddddddddddddddddddddd<br/>
+eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee<br/>
   </address>
 <img alt="about" src="./images/about_bk1.jpg" border="0">
 

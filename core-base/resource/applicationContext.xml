@@ -68,10 +68,8 @@
     
     <!-- Quartz -->  
     <!-- 先rem掉, 目前暫時沒有要用 -->
-    <!--  
     <import resource="classpath*:applicationContext/applicationContext-STANDARD-QUARTZ-JOB.xml" />
     <import resource="classpath*:applicationContext/applicationContext-STANDARD-QUARTZ.xml" />
-    -->
 
 
 </beans>
