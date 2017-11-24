@@ -53,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 生日:&nbsp;${profile.birthdayYear}/${profile.birthdayMonth}/${profile.birthdayDay}<br />
 <abbr title="Phone">電話(P):</abbr> ${person.phone}<br />
 <abbr title="Phone">電話(T):</abbr> ${person.tel}<br />
-生高/體重:&nbsp;${height.height}&nbsp;/&nbsp;${profile.weight}<br />
+生高/體重:&nbsp;${profile.height}&nbsp;/&nbsp;${profile.weight}<br />
 性別:&nbsp;<q:if test=" \"1\" == profile.gender ">男</q:if><q:elseif test=" \"2\" == profile.gender ">女</q:elseif><q:else>&nbsp;</q:else><br />
 ${profile.address}
   </address>
