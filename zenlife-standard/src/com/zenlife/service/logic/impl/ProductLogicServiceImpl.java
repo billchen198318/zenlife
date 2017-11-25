@@ -120,7 +120,7 @@ public class ProductLogicServiceImpl extends CoreBaseLogicService implements IPr
 		this.sysMailHelperService = sysMailHelperService;
 	}
 	
-	private void noticeProductToReceive(ZlProduct product, ZlProductNotice productNotice, ZlPerson person) {
+	private void noticeProductToReceive(ZlProduct product, ZlProductNotice productNotice, ZlPerson person) throws ServiceException, Exception {
 		Map<String, Object> tplParamMap = new HashMap<String, Object>();
 		tplParamMap.put("personId", person.getId());
 		tplParamMap.put("name", person.getName());
@@ -130,22 +130,16 @@ public class ProductLogicServiceImpl extends CoreBaseLogicService implements IPr
 		tplParamMap.put("noticePhone", productNotice.getPhone());
 		tplParamMap.put("noticeAddress", super.defaultString(productNotice.getAddress()));
 		tplParamMap.put("message", super.defaultString(productNotice.getMessage()));
-		try {
-			TemplateResultObj tplResult = TemplateUtils.getResult("ZL-TPL-003", tplParamMap);
-			SysMailHelperVO mailHelper = new SysMailHelperVO();
-			mailHelper.setSubject(tplResult.getTitle());
-			mailHelper.setText( tplResult.getContent().getBytes(Constants.BASE_ENCODING) );
-			mailHelper.setMailFrom( SystemSettingConfigureUtils.getMailDefaultFromValue() );
-			mailHelper.setMailTo( ZenLifeSettingConfigureUtils.getProductNoticeReciveMail() );
-			mailHelper.setMailId( this.sysMailHelperService.findForMaxMailIdComplete(SimpleUtils.getStrYMD("")) );
-			mailHelper.setRetainFlag( YesNo.NO );
-			mailHelper.setSuccessFlag( YesNo.NO );
-			this.sysMailHelperService.saveObject(mailHelper);
-		} catch (ServiceException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		TemplateResultObj tplResult = TemplateUtils.getResult("ZL-TPL-003", tplParamMap);
+		SysMailHelperVO mailHelper = new SysMailHelperVO();
+		mailHelper.setSubject(tplResult.getTitle());
+		mailHelper.setText( tplResult.getContent().getBytes(Constants.BASE_ENCODING) );
+		mailHelper.setMailFrom( SystemSettingConfigureUtils.getMailDefaultFromValue() );
+		mailHelper.setMailTo( ZenLifeSettingConfigureUtils.getProductNoticeReciveMail() );
+		mailHelper.setMailId( this.sysMailHelperService.findForMaxMailIdComplete(SimpleUtils.getStrYMD("")) );
+		mailHelper.setRetainFlag( YesNo.NO );
+		mailHelper.setSuccessFlag( YesNo.NO );
+		this.sysMailHelperService.saveObject(mailHelper);
 	}
 
 	@ServiceMethodAuthority(type={ServiceMethodType.INSERT})

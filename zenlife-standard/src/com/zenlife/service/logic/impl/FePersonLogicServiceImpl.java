@@ -137,7 +137,7 @@ public class FePersonLogicServiceImpl extends CoreBaseLogicService implements IF
 		this.personUrgentContactService = personUrgentContactService;
 	}
 	
-	private void noticeValidMail(ZlPerson person, String pwd) {
+	private void noticeValidMail(ZlPerson person, String pwd) throws ServiceException, Exception {
 		
 		if (super.isBlank(person.getMail())) {
 			return;
@@ -145,22 +145,16 @@ public class FePersonLogicServiceImpl extends CoreBaseLogicService implements IF
 		Map<String, Object> tplParamMap = new HashMap<String, Object>();
 		tplParamMap.put("personId", person.getId());
 		tplParamMap.put("password", pwd);
-		try {
-			TemplateResultObj tplResult = TemplateUtils.getResult("ZL-TPL-001", tplParamMap);
-			SysMailHelperVO mailHelper = new SysMailHelperVO();
-			mailHelper.setSubject(tplResult.getTitle());
-			mailHelper.setText( tplResult.getContent().getBytes(Constants.BASE_ENCODING) );
-			mailHelper.setMailFrom( SystemSettingConfigureUtils.getMailDefaultFromValue() );
-			mailHelper.setMailTo( person.getMail() );
-			mailHelper.setMailId( this.sysMailHelperService.findForMaxMailIdComplete(SimpleUtils.getStrYMD("")) );
-			mailHelper.setRetainFlag( YesNo.NO );
-			mailHelper.setSuccessFlag( YesNo.NO );
-			this.sysMailHelperService.saveObject(mailHelper);
-		} catch (ServiceException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		TemplateResultObj tplResult = TemplateUtils.getResult("ZL-TPL-001", tplParamMap);
+		SysMailHelperVO mailHelper = new SysMailHelperVO();
+		mailHelper.setSubject(tplResult.getTitle());
+		mailHelper.setText( tplResult.getContent().getBytes(Constants.BASE_ENCODING) );
+		mailHelper.setMailFrom( SystemSettingConfigureUtils.getMailDefaultFromValue() );
+		mailHelper.setMailTo( person.getMail() );
+		mailHelper.setMailId( this.sysMailHelperService.findForMaxMailIdComplete(SimpleUtils.getStrYMD("")) );
+		mailHelper.setRetainFlag( YesNo.NO );
+		mailHelper.setSuccessFlag( YesNo.NO );
+		this.sysMailHelperService.saveObject(mailHelper);
 		
 	}
 	
