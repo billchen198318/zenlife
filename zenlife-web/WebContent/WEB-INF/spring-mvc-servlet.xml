@@ -49,6 +49,8 @@
         	<mvc:exclude-mapping path="/register.do"/>
         	<mvc:exclude-mapping path="/registerSaveJson.do"/>
         	<mvc:exclude-mapping path="/doTestJson.do"/>
+        	<mvc:exclude-mapping path="/renewpwd.do"/>
+        	<mvc:exclude-mapping path="/renewpwdUpdateJson.do"/>
         	<mvc:exclude-mapping path="/bootbox*"/>
         	<mvc:exclude-mapping path="/bootstrap-4.0.0-alpha.6*"/>
         	<mvc:exclude-mapping path="/bootstrap-4*"/>
@@ -75,6 +77,8 @@
         	<mvc:exclude-mapping path="/register.do"/>
         	<mvc:exclude-mapping path="/registerSaveJson.do"/>
         	<mvc:exclude-mapping path="/doTestJson.do"/>
+        	<mvc:exclude-mapping path="/renewpwd.do"/>
+        	<mvc:exclude-mapping path="/renewpwdUpdateJson.do"/>        	
         	<mvc:exclude-mapping path="/bootbox*"/>
         	<mvc:exclude-mapping path="/bootstrap-4.0.0-alpha.6*"/>
         	<mvc:exclude-mapping path="/bootstrap-4*"/>

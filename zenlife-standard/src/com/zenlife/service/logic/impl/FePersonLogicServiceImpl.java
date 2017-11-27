@@ -137,7 +137,7 @@ public class FePersonLogicServiceImpl extends CoreBaseLogicService implements IF
 		this.personUrgentContactService = personUrgentContactService;
 	}
 	
-	private void noticeValidMail(ZlPerson person, String pwd) throws ServiceException, Exception {
+	private void noticeValidMail(ZlPerson person, String pwd, String addSubject) throws ServiceException, Exception {
 		
 		if (super.isBlank(person.getMail())) {
 			return;
@@ -147,7 +147,7 @@ public class FePersonLogicServiceImpl extends CoreBaseLogicService implements IF
 		tplParamMap.put("password", pwd);
 		TemplateResultObj tplResult = TemplateUtils.getResult("ZL-TPL-001", tplParamMap);
 		SysMailHelperVO mailHelper = new SysMailHelperVO();
-		mailHelper.setSubject(tplResult.getTitle());
+		mailHelper.setSubject(tplResult.getTitle()+addSubject);
 		mailHelper.setText( tplResult.getContent().getBytes(Constants.BASE_ENCODING) );
 		mailHelper.setMailFrom( SystemSettingConfigureUtils.getMailDefaultFromValue() );
 		mailHelper.setMailTo( person.getMail() );
@@ -184,11 +184,37 @@ public class FePersonLogicServiceImpl extends CoreBaseLogicService implements IF
 		if (insertEntity!=null && insertEntity.getOid()!=null ) {
 			result.setValue(insertEntity);
 			result.setSystemMessage(new SystemMessage(SysMessageUtil.get(SysMsgConstants.INSERT_SUCCESS)));
-			this.noticeValidMail(insertEntity, befPwd);
+			this.noticeValidMail(insertEntity, befPwd, "");
 		} else {
 			result.setSystemMessage(new SystemMessage(SysMessageUtil.get(SysMsgConstants.INSERT_FAIL)));
 		}
 		return result;				
+	}
+
+	@ServiceMethodAuthority(type={ServiceMethodType.UPDATE})
+	@Transactional(
+			propagation=Propagation.REQUIRED, 
+			readOnly=false,
+			rollbackFor={RuntimeException.class, IOException.class, Exception.class} )		
+	@Override
+	public DefaultResult<ZlPerson> renewPassword(String id) throws ServiceException, Exception {
+		if (super.isBlank(id)) {
+			throw new ServiceException(SysMessageUtil.get(SysMsgConstants.PARAMS_BLANK));
+		}
+		logger.warn("renew password Id: " + id);
+		ZlPerson person = new ZlPerson();
+		person.setId(id);
+		DefaultResult<ZlPerson> pResult = this.personService.findEntityByUK(person);
+		if (pResult.getValue() == null) {
+			throw new ServiceException( pResult.getSystemMessage().getValue() );
+		}
+		String newPwd = SimpleUtils.createRandomString(5).toLowerCase();
+		person = pResult.getValue();
+		person.setPassword( this.getAccountService().tranPassword(newPwd) );
+		pResult = this.personService.updateEntity(person);	
+		person = pResult.getValue();
+		this.noticeValidMail(person, newPwd, " ~ 密碼重設通知!");
+		return pResult;
 	}
 	
 }

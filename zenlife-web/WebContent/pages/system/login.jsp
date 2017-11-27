@@ -29,6 +29,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <style type="text/css">
 
+.faq .section p.quetn a, .faq .section p.quetn a:hover {
+    text-decoration:underline;
+    font-weight:bold
+}
+
 body {
   padding-top: 40px;
   padding-bottom: 40px;
@@ -226,7 +231,9 @@ function confirmAcceptLaw() {
     <button type="button" class="btn btn-lg btn-info btn-block" name="btnRegedit" onclick="showRegedit()">加入會員</button>
    
     <br/>
-    
+    <a href="./renewpwd.do">忘了密碼</a>
+    <br/>
+    <br/>
     <label>ZenLife 0.1 version</label>
 
 </form>

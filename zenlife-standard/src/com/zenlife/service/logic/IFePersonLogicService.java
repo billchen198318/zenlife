@@ -28,5 +28,7 @@ import org.qifu.po.ZlPerson;
 public interface IFePersonLogicService {
 	
 	public DefaultResult<ZlPerson> create(ZlPerson person) throws ServiceException, Exception;
+	
+	public DefaultResult<ZlPerson> renewPassword(String id) throws ServiceException, Exception;
 
 }

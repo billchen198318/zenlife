@@ -95,7 +95,16 @@ public class RegisterAction extends BaseController {
 		.testField("name", person, "@org.apache.commons.lang3.StringUtils@isBlank(name)", "名稱必須填寫")
 		.testField("phone", person, "@org.apache.commons.lang3.StringUtils@isBlank(phone)", "手機號碼必須填寫")
 		.throwMessage();
-	}	
+	}
+	
+	private void checkFieldsForParamForRenewPwd(DefaultControllerJsonResultObj<Boolean> result, String id, String sessVCode, String vcode) throws ControllerException, Exception {
+		this.getCheckControllerFieldHandler(result)
+		.testField("vcode", StringUtils.isBlank(vcode), "驗證碼必須填寫")
+		.testField("vcode", !super.defaultString(sessVCode).equals(vcode), "驗證碼錯誤")		
+		.testField("id", StringUtils.isBlank(id), "身份證字號或自然人號必須填寫")
+		.testField("id", !org.qifu.util.SimpleUtils.checkBeTrueOf_azAZ09(id), "身份證字號或自然人號必須是一般字元A~Z,a~z,0~9")		
+		.throwMessage();
+	}
 	
 	private void save(DefaultControllerJsonResultObj<ZlPerson> result, HttpServletRequest request, HttpServletResponse response, ZlPerson person, String sessVCode, String vcode, String retyPwd) throws AuthorityException, ControllerException, ServiceException, Exception {
 		this.checkFieldsForParam(result, person, sessVCode, vcode, retyPwd);
@@ -115,6 +124,17 @@ public class RegisterAction extends BaseController {
 			loginSupport.forceCreateLoginSubject(request, response, cResult.getValue().getId(), "1111");
 		}
 		result.setMessage( cResult.getSystemMessage().getValue() );		
+	}
+	
+	private void updatePwd(DefaultControllerJsonResultObj<Boolean> result, String id, String sessVCode, String vcode) throws AuthorityException, ControllerException, ServiceException, Exception {
+		this.checkFieldsForParamForRenewPwd(result, id, sessVCode, vcode);
+		DefaultResult<ZlPerson> uResult = this.fePersonLogicService.renewPassword(id);
+		result.setValue( Boolean.FALSE );
+		if (uResult.getValue() != null) {
+			result.setSuccess( YES );
+			result.setValue( Boolean.TRUE );
+		}
+		result.setMessage( uResult.getSystemMessage().getValue() );
 	}
 	
 	@ControllerMethodAuthority(check = false, programId = "ZENLIFE_FE_9997Q")
@@ -147,5 +167,41 @@ public class RegisterAction extends BaseController {
 		}
 		return result;
 	}		
+	
+	@ControllerMethodAuthority(check = false, programId = "ZENLIFE_FE_9997Q")
+	@RequestMapping(value = "/renewpwd.do", method = RequestMethod.GET)
+	public ModelAndView renewPassword(HttpServletRequest request) {
+		String viewName = PAGE_SYS_ERROR;
+		ModelAndView mv = this.getDefaultModelAndView();
+		try {
+			
+			viewName = "lpwd";
+		} catch (Exception e) {
+			this.getExceptionPage(e, request);
+		}
+		mv.setViewName(viewName);
+		return mv;
+	}
+	
+	@ControllerMethodAuthority(check = false, programId = "ZENLIFE_FE_9997Q")
+	@RequestMapping(value = "/renewpwdUpdateJson.do", produces = "application/json")	
+	public @ResponseBody DefaultControllerJsonResultObj<Boolean> doSave(HttpServletRequest request, HttpServletResponse response) {
+		DefaultControllerJsonResultObj<Boolean> result = this.getDefaultJsonResult("ZENLIFE_FE_9997Q");
+		result.setLogin( YesNo.YES );
+		result.setIsAuthorize( YesNo.YES );
+		result.setMessage("請重新操作");
+		try {
+			this.updatePwd(
+					result, 
+					request.getParameter("id"), 
+					(String)request.getSession().getAttribute( ZenLifeConstants.SESS_VCODE ), 
+					request.getParameter("vcode"));
+		} catch (AuthorityException | ServiceException | ControllerException e) {
+			result.setMessage( e.getMessage().toString() );			
+		} catch (Exception e) {
+			this.exceptionResult(result, e);
+		}
+		return result;
+	}
 	
 }
