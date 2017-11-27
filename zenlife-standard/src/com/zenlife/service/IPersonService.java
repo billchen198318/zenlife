@@ -21,8 +21,17 @@
  */
 package com.zenlife.service;
 
+import java.util.List;
+
+import org.qifu.base.exception.ServiceException;
+import org.qifu.base.model.PageOf;
+import org.qifu.base.model.QueryResult;
+import org.qifu.base.model.SearchValue;
 import org.qifu.base.service.ISimpleService;
+import org.qifu.po.ZlPerson;
 
 public interface IPersonService<E extends java.io.Serializable, PK extends java.io.Serializable> extends ISimpleService<E, PK> {
-
+	
+	public QueryResult<List<ZlPerson>> findGridResult(SearchValue searchValue, PageOf pageOf) throws ServiceException, Exception;
+	
 }

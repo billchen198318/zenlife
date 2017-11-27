@@ -21,10 +21,19 @@
  */
 package com.zenlife.service.impl;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.qifu.base.SysMessageUtil;
+import org.qifu.base.SysMsgConstants;
 import org.qifu.base.dao.IBaseDAO;
+import org.qifu.base.exception.ServiceException;
+import org.qifu.base.model.PageOf;
+import org.qifu.base.model.QueryResult;
+import org.qifu.base.model.SearchValue;
 import org.qifu.base.service.SimpleService;
 import org.qifu.po.ZlPerson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +69,27 @@ public class PersonServiceImpl extends SimpleService<ZlPerson, String> implement
 	@Override
 	protected IBaseDAO<ZlPerson, String> getBaseDataAccessObject() {
 		return this.personDAO;
+	}
+	
+	private Map<String, Object> getQueryGridParameter(SearchValue searchValue) throws Exception {
+		return super.getQueryParamHandler(searchValue)
+				.fullEquals4TextField("id")
+				.containingLike("name")
+				.getValue();
+	}
+
+	@Override
+	public QueryResult<List<ZlPerson>> findGridResult(SearchValue searchValue, PageOf pageOf) throws ServiceException, Exception {
+		if (searchValue==null || pageOf==null) {
+			throw new ServiceException(SysMessageUtil.get(SysMsgConstants.SEARCH_NO_DATA));
+		}
+		Map<String, Object> params=this.getQueryGridParameter(searchValue);	
+		int limit=Integer.parseInt(pageOf.getShowRow());
+		int offset=(Integer.parseInt(pageOf.getSelect())-1)*limit;
+		QueryResult<List<ZlPerson>> result=this.personDAO.findPageQueryResultByQueryName("findPersonPageGrid", params, offset, limit);
+		pageOf.setCountSize(String.valueOf(result.getRowCount()));
+		pageOf.toCalculateSize();
+		return result;
 	}
 
 }

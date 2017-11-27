@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dynamic-hql>
+
+	<query name="findPersonPageGrid-select">	
+	<![CDATA[
+		SELECT
+			new org.qifu.po.ZlPerson(m.oid, m.id, m.name, m.phone, m.tel, m.mail, m.validFlag)
+		FROM ZlPerson m
+		WHERE 1=1
+		
+		<#if id??>
+		and m.id = :id
+		</#if>
+		<#if name??>
+		and m.name like :name
+		</#if>
+				
+		ORDER BY m.id ASC
+	]]>
+	</query>
+	
+	<query name="findPersonPageGrid-count">
+	<![CDATA[
+		SELECT
+			count(*)
+		FROM ZlPerson m
+		WHERE 1=1
+		
+		<#if id??>
+		and m.id = :id
+		</#if>
+		<#if name??>
+		and m.name like :name
+		</#if>			
+	]]>		
+	</query>
+
+</dynamic-hql>

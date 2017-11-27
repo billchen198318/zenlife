@@ -35,6 +35,51 @@ public class ZlPerson extends BaseEntity<String> implements java.io.Serializable
 	private String uuserid;
 	private Date udate;		
 	
+	public ZlPerson() {
+		super();
+	}
+
+	public ZlPerson(String oid, String id, String name, String phone, String tel, String mail, String validFlag) {
+		super();
+		this.oid = oid;
+		this.id = id;
+		this.name = name;
+		this.phone = phone;
+		this.tel = tel;
+		this.mail = mail;
+		this.validFlag = validFlag;
+	}
+
+	public ZlPerson(String oid, String id, String password, String name, String phone, String tel, String mail,
+			String validFlag) {
+		super();
+		this.oid = oid;
+		this.id = id;
+		this.password = password;
+		this.name = name;
+		this.phone = phone;
+		this.tel = tel;
+		this.mail = mail;
+		this.validFlag = validFlag;
+	}
+	
+	public ZlPerson(String oid, String id, String password, String name, String phone, String tel, String mail,
+			String validFlag, String cuserid, Date cdate, String uuserid, Date udate) {
+		super();
+		this.oid = oid;
+		this.id = id;
+		this.password = password;
+		this.name = name;
+		this.phone = phone;
+		this.tel = tel;
+		this.mail = mail;
+		this.validFlag = validFlag;
+		this.cuserid = cuserid;
+		this.cdate = cdate;
+		this.uuserid = uuserid;
+		this.udate = udate;
+	}
+	
 	@Override
 	@Id
 	@EntityPK(name="oid")
