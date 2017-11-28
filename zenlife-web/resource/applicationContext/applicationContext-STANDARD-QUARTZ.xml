@@ -23,8 +23,10 @@
     2016-10-03
     為了在個系統 core-web, gsbsc-web, qcharts-web 增加 SysExpressionJob , 所以每個系統都開啟Quartz了
      -->
-     
+    
+    <!-- 先 rem 掉  --> 
 	<!-- Scheduler -->		
+	<!--  
    	<bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" destroy-method="destroy">
     	<property name="applicationContextSchedulerContextKey" value="applicationContext" />    	     
     	<property name="dataSource" ref="dataSource"/> 
@@ -39,7 +41,8 @@
 	    	</list>
 		</property>
     	<property name="quartzProperties">            
-    		<props>
+    		<props> 
+	-->
     			<!-- 
     			如果開啟 instanceName 設定, 就不需要設定不同的 tablePrefix 給 GSBSC, QCHARTS, 
     			但是考慮系統會再多台Server上佈署, 所以會有多個 CORE, GSBSC, QCHARTS 同時執行的可能,
@@ -48,6 +51,7 @@
     			<!-- 
     			<prop key="org.quartz.scheduler.instanceName">QuartzSchedulerCORE</prop>
     			-->
+	<!--     			
     			<prop key="org.quartz.scheduler.instanceId">AUTO</prop>                
     			<prop key="org.quartz.jobStore.misfireThreshold">60000</prop>                
     			<prop key="org.quartz.jobStore.class">org.quartz.impl.jdbcjobstore.JobStoreTX</prop>		               
@@ -60,5 +64,6 @@
     		</props>      
     	</property> 			
    	</bean>    
+	-->
 	     		
 </beans>
