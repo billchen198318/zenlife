@@ -81,3 +81,4 @@ eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee<br/>
 	
 	<jsp:include page="./foot.jsp"></jsp:include>
 </body>
+</html>

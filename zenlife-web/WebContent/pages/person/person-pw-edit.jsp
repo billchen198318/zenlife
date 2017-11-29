@@ -140,3 +140,4 @@ function cancelUpdate() {
 	
 	<jsp:include page="../foot.jsp"></jsp:include>
 </body>
+</html>

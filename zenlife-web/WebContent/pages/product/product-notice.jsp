@@ -163,3 +163,4 @@ function cancelSave() {
 	
 	<jsp:include page="../foot.jsp"></jsp:include>
 </body>
+</html>
