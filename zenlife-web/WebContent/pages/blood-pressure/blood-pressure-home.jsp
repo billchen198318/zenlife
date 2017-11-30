@@ -30,10 +30,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <style type="text/css">
 
-.faq .section p.quetn a, .faq .section p.quetn a:hover {
-    text-decoration:underline;
-    font-weight:bold
-}
 
 </style>
 

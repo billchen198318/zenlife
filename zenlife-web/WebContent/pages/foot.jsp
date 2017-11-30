@@ -7,6 +7,13 @@ String c = (String)request.getParameter("c");
 
 %>
 
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
 <nav class="navbar fixed-bottom navbar-light bg-faded bg-dark">
   <a class="navbar-brand" href="./index.do?c=1">
   	<table class="rounded">
