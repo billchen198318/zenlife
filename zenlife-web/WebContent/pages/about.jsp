@@ -45,9 +45,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
     <strong>關於說醫門</strong><br />
     
+    <!-- 
     <img alt="about" src="./images/about_bk1.jpg" border="0">
+    <br/>    
+     -->
     
-	<br/>    
 	以禪修方式，啟發生活智慧，協助國人身心健康，增進家庭幸福美滿，推動社會祥和進步為宗旨。
 	<br/>
 	<br/>
