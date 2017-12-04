@@ -39,8 +39,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div class="card mb-3 text-center" onclick="window.location='./course-sm.do';">
     <img class="card-img-top" src="./images/001.jpg" alt="Card image cap">
     <div class="card-block">
-      <h4 class="card-title">生活課堂</h4>
-      <p class="card-text">提供您生活保健知識，與說醫門生活課程內容.</p>
+      <h4 class="card-title">生活禪堂</h4>
+      <p class="card-text">提供您生活保健知識，與說醫門生活禪堂內容.</p>
     </div>
   </div>
 </div>

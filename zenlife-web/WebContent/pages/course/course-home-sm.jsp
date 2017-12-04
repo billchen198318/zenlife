@@ -44,7 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  <div class="card-block">
 		    <h4 class="card-title">${item.course.title}</h4>
 		    <p class="card-text">${item.course.description}</p>
-		    <a href="./courseRead-sm.do?oid=${item.course.oid}" class="btn btn-primary">進入課程</a>
+		    <a href="./courseRead-sm.do?oid=${item.course.oid}" class="btn btn-primary">進入生活禪堂內容</a>
 		  </div>
 		  <div class="card-footer text-muted">
 		    發佈時間:&nbsp;${item.course.cdate}
