@@ -29,6 +29,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.qifu.base.controller.BaseController;
 import org.qifu.base.exception.AuthorityException;
 import org.qifu.base.exception.ControllerException;
@@ -119,6 +120,14 @@ public class CourseAction extends BaseController {
 		DefaultResult<ZlCourse> result = this.courseLogicService.createReadLogAndGetCourse(course.getOid());
 		return result.getValue();
 	}
+	
+	private ZlCourse fetchCourseForSimpleMode(ZlCourse course) throws ServiceException, Exception {
+		course = this.courseService.findByPK(course);
+		if (null == course || StringUtils.isBlank(course.getOid())) {
+			return null;
+		}
+		return course;
+	}
 
 	@ControllerMethodAuthority(check = true, programId = "ZENLIFE_FE_0002Q")
 	@RequestMapping(value = "/course.do", method = RequestMethod.GET)
@@ -194,7 +203,7 @@ public class CourseAction extends BaseController {
 		ModelAndView mv = this.getDefaultModelAndView();
 		try {
 			c = request.getParameter("c");
-			mv.addObject("course", this.fetchCourse(course));
+			mv.addObject("course", this.fetchCourseForSimpleMode(course));
 			viewName = "course/course-read-sm";
 		} catch (AuthorityException e) {
 			viewName = this.getAuthorityExceptionPage(e, request);

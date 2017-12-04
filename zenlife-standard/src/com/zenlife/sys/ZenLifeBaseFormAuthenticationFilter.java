@@ -171,7 +171,12 @@ public class ZenLifeBaseFormAuthenticationFilter extends FormAuthenticationFilte
     		ZenLifeShiroLoginSupport loginSupport = new ZenLifeShiroLoginSupport();
     		try {
 				loginSupport.forceCreateLoginSubject((HttpServletRequest)request, (HttpServletResponse)response, (String)subject.getPrincipal(), "1111");
-				WebUtils.issueRedirect(request, response, "/index.do");
+				StringBuffer requestUrl = ((HttpServletRequest)request).getRequestURL();
+				if (null == requestUrl || requestUrl.indexOf("-sm") == -1) { // old default version
+					WebUtils.issueRedirect(request, response, "/index.do");
+				} else { // simple mode version
+					WebUtils.issueRedirect(request, response, requestUrl.toString());
+				}
 				return;
 			} catch (Exception e) {
 				e.printStackTrace();
