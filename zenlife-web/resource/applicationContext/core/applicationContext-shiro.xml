@@ -87,6 +87,7 @@
          		/register.do*=anon
          		/registerSaveJson.do*=anon
          		/doTestJson.do*=anon
+         		/index-sm.do*=anon
          		/renewpwd.do*=anon
          		/renewpwdUpdateJson.do*=anon
          		/*.do=authc         		

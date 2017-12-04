@@ -164,4 +164,48 @@ public class CourseAction extends BaseController {
 		return mv;
 	}	
 	
+	@ControllerMethodAuthority(check = true, programId = "ZENLIFE_FE_0002Q")
+	@RequestMapping(value = "/course-sm.do", method = RequestMethod.GET)
+	public ModelAndView courseHomeSimpleMode(HttpServletRequest request) {
+		String viewName = PAGE_SYS_ERROR;
+		String c = "";
+		ModelAndView mv = this.getDefaultModelAndView();
+		try {
+			c = request.getParameter("c");
+			mv.addObject("courseList", this.findCourseList());
+			viewName = "course/course-home-sm";
+		} catch (AuthorityException e) {
+			viewName = this.getAuthorityExceptionPage(e, request);
+		} catch (ServiceException | ControllerException e) {
+			viewName = this.getServiceOrControllerExceptionPage(e, request);
+		} catch (Exception e) {
+			this.getExceptionPage(e, request);
+		}
+		mv.addObject("c", super.defaultString(c));
+		mv.setViewName(viewName);
+		return mv;
+	}	
+	
+	@ControllerMethodAuthority(check = true, programId = "ZENLIFE_FE_0002Q")
+	@RequestMapping(value = "/courseRead-sm.do", method = RequestMethod.GET)
+	public ModelAndView courseReadSimpleMode(HttpServletRequest request, ZlCourse course) {
+		String viewName = PAGE_SYS_ERROR;
+		String c = "";
+		ModelAndView mv = this.getDefaultModelAndView();
+		try {
+			c = request.getParameter("c");
+			mv.addObject("course", this.fetchCourse(course));
+			viewName = "course/course-read-sm";
+		} catch (AuthorityException e) {
+			viewName = this.getAuthorityExceptionPage(e, request);
+		} catch (ServiceException | ControllerException e) {
+			viewName = this.getServiceOrControllerExceptionPage(e, request);
+		} catch (Exception e) {
+			this.getExceptionPage(e, request);
+		}
+		mv.addObject("c", super.defaultString(c));
+		mv.setViewName(viewName);
+		return mv;
+	}		
+	
 }
