@@ -43,7 +43,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div class="bd-example">
   <address>
   
-    <strong>關於說醫門</strong><br />
+    <strong>關於禪生活保健</strong><br />
     
     <!-- 
     <img alt="about" src="./images/about_bk1.jpg" border="0">
@@ -59,7 +59,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 </div>
 
-<!--  
+  
 <br/>
 電話: 0800-956-956<br/>
 位置: <span class="badge badge-info">桃園市新屋區中山西路777號</span><br/>
@@ -67,7 +67,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<iframe width="800" height="600" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" 
 		src=http://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q=桃園市新屋區中山西路777號&z=16&output=embed&t=></iframe>
 </div>
--->
+
 
 </div>
 
