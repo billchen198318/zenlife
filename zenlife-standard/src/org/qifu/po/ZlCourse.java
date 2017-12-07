@@ -37,6 +37,14 @@ public class ZlCourse extends BaseEntity<String> implements java.io.Serializable
 		super();
 	}		
 	
+	public ZlCourse(String oid, String id, String title, String showFlag) {
+		super();
+		this.oid = oid;
+		this.id = id;
+		this.title = title;
+		this.showFlag = showFlag;
+	}
+
 	public ZlCourse(String oid, String id, String title, String description, String showFlag, String cuserid,
 			Date cdate) {
 		super();

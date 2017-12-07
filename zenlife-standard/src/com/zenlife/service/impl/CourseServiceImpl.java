@@ -22,6 +22,7 @@
 package com.zenlife.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -31,6 +32,9 @@ import org.qifu.base.SysMsgConstants;
 import org.qifu.base.dao.IBaseDAO;
 import org.qifu.base.exception.ServiceException;
 import org.qifu.base.model.DefaultResult;
+import org.qifu.base.model.PageOf;
+import org.qifu.base.model.QueryResult;
+import org.qifu.base.model.SearchValue;
 import org.qifu.base.model.SystemMessage;
 import org.qifu.base.service.SimpleService;
 import org.qifu.po.ZlCourse;
@@ -78,6 +82,27 @@ public class CourseServiceImpl extends SimpleService<ZlCourse, String> implement
 		} else {
 			result.setSystemMessage( new SystemMessage(SysMessageUtil.get(SysMsgConstants.SEARCH_NO_DATA)) );
 		}
+		return result;
+	}
+	
+	private Map<String, Object> getQueryGridParameter(SearchValue searchValue) throws Exception {
+		return super.getQueryParamHandler(searchValue)
+				.fullEquals4TextField("id")
+				.containingLike("title")
+				.getValue();
+	}	
+
+	@Override
+	public QueryResult<List<ZlCourse>> findGridResult(SearchValue searchValue, PageOf pageOf) throws ServiceException, Exception {
+		if (searchValue==null || pageOf==null) {
+			throw new ServiceException(SysMessageUtil.get(SysMsgConstants.SEARCH_NO_DATA));
+		}
+		Map<String, Object> params=this.getQueryGridParameter(searchValue);	
+		int limit=Integer.parseInt(pageOf.getShowRow());
+		int offset=(Integer.parseInt(pageOf.getSelect())-1)*limit;
+		QueryResult<List<ZlCourse>> result=this.courseDAO.findPageQueryResultByQueryName("findCoursePageGrid", params, offset, limit);
+		pageOf.setCountSize(String.valueOf(result.getRowCount()));
+		pageOf.toCalculateSize();
 		return result;
 	}
 	

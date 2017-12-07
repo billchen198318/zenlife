@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dynamic-hql>
+
+	<query name="findCoursePageGrid-select">	
+	<![CDATA[
+		SELECT
+			new org.qifu.po.ZlCourse(m.oid, m.id, m.title, m.showFlag)
+		FROM ZlCourse m
+		WHERE 1=1
+		
+		<#if id??>
+		and m.id = :id
+		</#if>
+		<#if title??>
+		and m.title like :title
+		</#if>
+				
+		ORDER BY m.id DESC
+	]]>
+	</query>
+	
+	<query name="findCoursePageGrid-count">
+	<![CDATA[
+		SELECT
+			count(*)
+		FROM ZlCourse m
+		WHERE 1=1
+		
+		<#if id??>
+		and m.id = :id
+		</#if>
+		<#if title??>
+		and m.title like :title
+		</#if>			
+	]]>		
+	</query>
+
+</dynamic-hql>
