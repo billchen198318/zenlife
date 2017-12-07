@@ -1,5 +1,5 @@
 /* 
- * Copyright 2012-2017 qifu of copyright Chen Xin Nien
+ * Copyright 2012-2017 ZenLife of copyright Chen Xin Nien
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,6 +31,8 @@ import org.qifu.base.exception.AuthorityException;
 import org.qifu.base.exception.ControllerException;
 import org.qifu.base.exception.ServiceException;
 import org.qifu.base.model.ControllerMethodAuthority;
+import org.qifu.base.model.DefaultControllerJsonResultObj;
+import org.qifu.base.model.DefaultResult;
 import org.qifu.base.model.PageOf;
 import org.qifu.base.model.QueryControllerJsonResultObj;
 import org.qifu.base.model.QueryResult;
@@ -45,12 +47,14 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.zenlife.service.IPersonService;
+import com.zenlife.service.logic.IPersonLogicService;
 
 @EnableWebMvc
 @Controller
 public class PersonAction extends BaseController {
 	
 	private IPersonService<ZlPerson, String> personService;
+	private IPersonLogicService personLogicService;
 	
 	public IPersonService<ZlPerson, String> getPersonService() {
 		return personService;
@@ -61,6 +65,17 @@ public class PersonAction extends BaseController {
 	@Required	
 	public void setPersonService(IPersonService<ZlPerson, String> personService) {
 		this.personService = personService;
+	}
+	
+	public IPersonLogicService getPersonLogicService() {
+		return personLogicService;
+	}
+
+	@Autowired
+	@Resource(name="zenlife.service.logic.PersonLogicService")
+	@Required	
+	public void setPersonLogicService(IPersonLogicService personLogicService) {
+		this.personLogicService = personLogicService;
 	}
 
 	private void init(String type, HttpServletRequest request, ModelAndView mv) throws ServiceException, ControllerException, Exception {
@@ -103,5 +118,57 @@ public class PersonAction extends BaseController {
 		}
 		return result;
 	}		
+	
+	private void delete(DefaultControllerJsonResultObj<Boolean> result, ZlPerson person) throws AuthorityException, ControllerException, ServiceException, Exception {
+		DefaultResult<Boolean> dResult = this.personLogicService.delete(person);
+		if ( dResult.getValue() != null && dResult.getValue() ) {
+			result.setValue( Boolean.TRUE );
+			result.setSuccess( YES );
+		}
+		result.setMessage( dResult.getSystemMessage().getValue() );
+	}	
+	
+	private void updateCancelFlag(DefaultControllerJsonResultObj<Boolean> result, ZlPerson person) throws AuthorityException, ControllerException, ServiceException, Exception {
+		DefaultResult<Boolean> dResult = this.personLogicService.changeValidFlag(person);
+		if ( dResult.getValue() != null && dResult.getValue() ) {
+			result.setValue( Boolean.TRUE );
+			result.setSuccess( YES );
+		}
+		result.setMessage( dResult.getSystemMessage().getValue() );		
+	}
+	
+	@ControllerMethodAuthority(check = true, programId = "ZENLIFE_PROG001D0001Q")
+	@RequestMapping(value = "/zenlife.personDeleteJson.do", produces = "application/json")		
+	public @ResponseBody DefaultControllerJsonResultObj<Boolean> doDelete(ZlPerson person) {
+		DefaultControllerJsonResultObj<Boolean> result = this.getDefaultJsonResult("ZENLIFE_PROG001D0001Q");
+		if (!this.isAuthorizeAndLoginFromControllerJsonResult(result)) {
+			return result;
+		}
+		try {
+			this.delete(result, person);
+		} catch (AuthorityException | ServiceException | ControllerException e) {
+			result.setMessage( e.getMessage().toString() );			
+		} catch (Exception e) {
+			this.exceptionResult(result, e);
+		}
+		return result;
+	}	
+	
+	@ControllerMethodAuthority(check = true, programId = "ZENLIFE_PROG001D0001Q")
+	@RequestMapping(value = "/zenlife.personUpdateCancelFlagJson.do", produces = "application/json")		
+	public @ResponseBody DefaultControllerJsonResultObj<Boolean> doUpdateCancelFlag(ZlPerson person) {
+		DefaultControllerJsonResultObj<Boolean> result = this.getDefaultJsonResult("ZENLIFE_PROG001D0001Q");
+		if (!this.isAuthorizeAndLoginFromControllerJsonResult(result)) {
+			return result;
+		}
+		try {
+			this.updateCancelFlag(result, person);
+		} catch (AuthorityException | ServiceException | ControllerException e) {
+			result.setMessage( e.getMessage().toString() );			
+		} catch (Exception e) {
+			this.exceptionResult(result, e);
+		}
+		return result;
+	}	
 	
 }

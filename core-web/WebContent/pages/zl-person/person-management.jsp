@@ -27,8 +27,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 function getQueryGridFormatter(value) {
 	var str = '';
-	str += '<img alt="edit" title="Edit" src="./images/edit.png" onclick="editPage(\'' + value + '\');"/>';
-	str += '&nbsp;&nbsp;';
 	str += '<img alt="delete" title="Delete" src="./images/delete.png" onclick="deleteRecord(\'' + value + '\');"/>';
 	return str;
 }
@@ -58,13 +56,13 @@ function editPage(oid) {
 
 function deleteRecord(oid) {
 	parent.bootbox.confirm(
-			"Delete?", 
+			"變更這位用戶使用註記?", 
 			function(result) { 
 				if (!result) {
 					return;
 				}
 				xhrSendParameter(
-						'./zenlife.personDeleteJson.do', 
+						'./zenlife.personUpdateCancelFlagJson.do', 
 						{ 'oid' : oid }, 
 						function(data) {
 							if ( _qifu_success_flag != data.success ) {
@@ -94,8 +92,8 @@ function deleteRecord(oid) {
 	id="ZENLIFE_PROG001D0001Q_toolbar" 
 	refreshEnable="Y"
 	refreshJsMethod="window.location=parent.getProgUrl('ZENLIFE_PROG001D0001Q');" 
-	createNewEnable="Y"
-	createNewJsMethod="parent.addTab('ZENLIFE_PROG001D0001A', null);"
+	createNewEnable="N"
+	createNewJsMethod=""
 	saveEnabel="N" 
 	saveJsMethod="" 	
 	cancelEnable="Y" 

@@ -14,5 +14,6 @@
     
 	<bean id="zenlife.service.logic.FePersonLogicService" class="com.zenlife.service.logic.impl.FePersonLogicServiceImpl" />
 	<bean id="zenlife.service.logic.ProfileLogicService" class="com.zenlife.service.logic.impl.ProfileLogicServiceImpl" />
+	<bean id="zenlife.service.logic.PersonLogicService" class="com.zenlife.service.logic.impl.PersonLogicServiceImpl" />
 		     		
 </beans>
